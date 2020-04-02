@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CargoProjects">
+    <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ee39ad96-1580-4219-b6be-5b7b87080dc6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/system/basic/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/system/basic/strings.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/system/defaults/file_extensions.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/system/defaults/output_filenames.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/defaults/cli/filters_params.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/defaults/cli/filters_params.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/defaults/messages/errors.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/defaults/messages/errors.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/defaults/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/defaults/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/io/argument_executor.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/io/argument_executor.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/io/parser/_basic_parser.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/io/parser/_basic_parser.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/io/plotter/histogram_creator.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/io/plotter/histogram_creator.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/mod.rs" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="filter" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Rust File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="DDIOnGVS" />
+  </component>
+  <component name="ProjectId" id="1YzkLT2tZXLWUgtJcp1GqkRVXF8" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
+    <property name="org.rust.hideDetachedFileNotifications/home/alex/Repositories/filter/src/logic/histogram.rs" value="true" />
+    <property name="org.rust.hideDetachedFileNotifications/home/alex/Repositories/filter/src/system/io/data/color.rs" value="true" />
+    <property name="org.rust.hideDetachedFileNotifications/home/alex/Repositories/filter/src/system/io/data/elementary/input.rs" value="true" />
+    <property name="org.rust.hideDetachedFileNotifications/home/alex/Repositories/filter/src/system/io/data/histogram_input.rs" value="true" />
+    <property name="org.rust.hideDetachedFileNotifications/home/alex/Repositories/image-manipulation/src/system/defaults/mod.rs" value="true" />
+    <property name="org.rust.hideDetachedFileNotifications/home/alex/Repositories/image-manipulation/src/system/io/extracted_arguments.rs" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/system/io" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/system/defaults" />
+      <recent name="$PROJECT_DIR$/src/system/io/data" />
+      <recent name="$PROJECT_DIR$/src/system/io/data/composed" />
+      <recent name="$PROJECT_DIR$/src/system/io/data/elementary" />
+      <recent name="$PROJECT_DIR$/src/system/defaults/colors" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Run image-manipulation" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="channel" value="DEFAULT" />
+      <option name="command" value="run --package image-manipulation --bin image-manipulation -- --input &quot;$USER_HOME$/Pictures/Alex.jpg&quot; --filter &quot;histogram&quot; --params &quot;channels=rgbl; logarithmic=true&quot; --output &quot;$USER_HOME$/Pictures/&quot;" />
+      <option name="allFeatures" value="false" />
+      <option name="nocapture" value="false" />
+      <option name="emulateTerminal" value="false" />
+      <option name="backtrace" value="SHORT" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Run image-manipulation" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="channel" value="DEFAULT" />
+      <option name="command" value="run --path &quot;$USER_HOME$/Pictures/test.png&quot; " />
+      <option name="allFeatures" value="false" />
+      <option name="nocapture" value="false" />
+      <option name="emulateTerminal" value="false" />
+      <option name="backtrace" value="SHORT" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Cargo Command.Run image-manipulation" />
+        <item itemvalue="Cargo Command.Run image-manipulation" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="RustProjectSettings">
+    <option name="toolchainHomeDirectory" value="$USER_HOME$/.cargo/bin" />
+    <option name="version" value="2" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ee39ad96-1580-4219-b6be-5b7b87080dc6" name="Default Changelist" comment="" />
+      <created>1583952753272</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1583952753272</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="0" y="183" width="802" height="671" key="#Project_Structure" timestamp="1584187088106">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="0" y="183" width="802" height="671" key="#Project_Structure/0.0.1600.860@0.0.1600.860" timestamp="1584187088106" />
+    <state x="8" y="130" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585848301940">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="8" y="130" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860@0.0.1600.860" timestamp="1585848301940" />
+    <state x="515" y="236" width="561" height="382" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1585498652005">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="515" y="236" width="561" height="382" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1600.860@0.0.1600.860" timestamp="1585498652005" />
+    <state x="608" y="149" width="376" height="556" key="#com.intellij.ide.util.MemberChooser" timestamp="1585289186864">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="608" y="149" width="376" height="556" key="#com.intellij.ide.util.MemberChooser/0.0.1600.860@0.0.1600.860" timestamp="1585289186864" />
+    <state x="483" y="161" width="626" height="532" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1585845754885">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="483" y="161" width="626" height="532" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1600.860@0.0.1600.860" timestamp="1585845754885" />
+    <state width="1558" height="221" key="GridCell.Tab.0.bottom" timestamp="1585851318381">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1558" height="221" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1585851318381" />
+    <state width="1558" height="221" key="GridCell.Tab.0.center" timestamp="1585851318380">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1558" height="221" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1585851318380" />
+    <state width="1558" height="221" key="GridCell.Tab.0.left" timestamp="1585851318380">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1558" height="221" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1585851318380" />
+    <state width="1558" height="221" key="GridCell.Tab.0.right" timestamp="1585851318381">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1558" height="221" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1585851318381" />
+    <state x="304" y="15" width="1026" height="839" key="SettingsEditor" timestamp="1585502401360">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="304" y="15" width="1026" height="839" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1585502401360" />
+    <state x="476" y="163" width="647" height="534" key="find.popup" timestamp="1585846675599">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="476" y="163" width="647" height="534" key="find.popup/0.0.1600.860@0.0.1600.860" timestamp="1585846675599" />
+    <state x="463" y="193" key="run.anything.popup" timestamp="1585674933093">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="463" y="193" key="run.anything.popup/0.0.1600.860@0.0.1600.860" timestamp="1585674933093" />
+  </component>
+</project>

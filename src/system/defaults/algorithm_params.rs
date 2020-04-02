@@ -1,0 +1,1 @@
+pub const NUMBER_OF_HISTOGRAM_BINS: usize = 256;

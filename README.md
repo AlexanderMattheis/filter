@@ -1,1 +1,2 @@
-image-manipulation
+# Filter
+Program for applying filters to images.

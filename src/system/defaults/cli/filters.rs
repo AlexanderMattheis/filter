@@ -1,0 +1,1 @@
+pub const HISTOGRAM: &'static str = "histogram";

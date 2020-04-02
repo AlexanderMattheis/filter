@@ -1,0 +1,1 @@
+pub const QUITTED_PROGRAM: &'static str = "The program has been quitted.";

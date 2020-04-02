@@ -1,0 +1,1 @@
+pub const HISTOGRAMS: &'static str = ".html";
