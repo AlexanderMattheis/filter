@@ -1,29 +1,37 @@
+use std::path::Path;
+
 use clap::ArgMatches;
 use image::DynamicImage;
 
 use crate::logic::histogram;
+use crate::system::defaults::algorithm_params::NUMBER_OF_HISTOGRAM_BINS;
 use crate::system::defaults::cli::filters;
 use crate::system::defaults::messages::errors;
-use crate::system::io::{argument_extractor};
+use crate::system::defaults::messages::errors::print_error_and_quit;
+use crate::system::defaults::output_filenames;
+use crate::system::io::argument_extractor;
 use crate::system::io::data::composed::histogram_output::HistogramOutput;
 use crate::system::io::parser::histogram_parser;
 use crate::system::io::plotter::histogram_creator;
-use crate::system::defaults::algorithm_params::NUMBER_OF_HISTOGRAM_BINS;
 
 pub fn execute(matches: &ArgMatches) {
     let arguments = argument_extractor::extract(matches);
 
-    let loaded_image = image::open(arguments.input_path).unwrap();
+    let loaded_image = image::open(&arguments.input_path).unwrap();
 
-    // TODO: validate input and look that output's last character is "/" and add the input filename to the string
+    if !Path::new(&arguments.input_path).exists() || !Path::new(&arguments.output_path).exists() {
+        print_error_and_quit(errors::NOT_EXISTENT_PATH, &arguments.output_path);
+    }
+
+    let output_filepath_prefix = output_filenames::create_prefix(&arguments.input_path, &arguments.output_path);
 
     match arguments.filter.as_str() {
-        filters::HISTOGRAM => create_histogram(&loaded_image, &arguments.params, &arguments.output_path),
+        filters::HISTOGRAM => create_histogram(&loaded_image, &arguments.params, &output_filepath_prefix),
         _ => errors::print_error_and_quit(errors::NOT_EXISTENT_FILTER, arguments.filter.as_str())
     }
 }
 
-fn create_histogram(image: &DynamicImage, params: &String, output_path: &String) {
+fn create_histogram(image: &DynamicImage, params: &String, output_filepath_prefix: &String) {
     let input_params = histogram_parser::parse_params(params);
 
     let mut histogram_output: HistogramOutput = HistogramOutput {
@@ -35,6 +43,6 @@ fn create_histogram(image: &DynamicImage, params: &String, output_path: &String)
     };
 
     histogram::run(image, &input_params, &mut histogram_output);
-    histogram_creator::create_histograms(&input_params, &histogram_output, &output_path);
+    histogram_creator::create_histograms(&input_params, &histogram_output, &output_filepath_prefix);
 }
 

@@ -7,38 +7,32 @@ use crate::system::defaults::{colors, file_extensions, output_filenames::Channel
 use crate::system::defaults::algorithm_params::NUMBER_OF_HISTOGRAM_BINS;
 use crate::system::io::data::composed::{{histogram_input::HistogramInput, histogram_output::HistogramOutput}};
 
-pub fn create_histograms(input_params: &HistogramInput, histogram_output: &HistogramOutput, output_path: &String) {
+pub fn create_histograms(input_params: &HistogramInput, histogram_output: &HistogramOutput, output_filepath_prefix: &String) {
     let y_max = compute_maximum(input_params, histogram_output);
 
     if input_params.channels.red {
         create_and_save_histogram(&histogram_output.red_data, y_max, input_params.logarithmic, colors::RED,
-                                  &strings::concat(output_path, ChannelOutputFilenames::RED));
+                                  &strings::concat_with_static(output_filepath_prefix, ChannelOutputFilenames::RED));
     }
 
     if input_params.channels.green {
         create_and_save_histogram(&histogram_output.green_data, y_max, input_params.logarithmic, colors::GREEN,
-                                  &strings::concat(output_path, ChannelOutputFilenames::GREEN));
+                                  &strings::concat_with_static(output_filepath_prefix, ChannelOutputFilenames::GREEN));
     }
 
     if input_params.channels.blue {
-        let mut filepath = String::from(output_path);
-        filepath.push_str(ChannelOutputFilenames::BLUE);
         create_and_save_histogram(&histogram_output.blue_data, y_max, input_params.logarithmic, colors::BLUE,
-                                  &strings::concat(output_path, ChannelOutputFilenames::BLUE));
+                                  &strings::concat_with_static(output_filepath_prefix, ChannelOutputFilenames::BLUE));
     }
 
     if input_params.channels.alpha {
-        let mut filepath = String::from(output_path);
-        filepath.push_str(ChannelOutputFilenames::RED);
         create_and_save_histogram(&histogram_output.alpha_data, y_max, input_params.logarithmic, colors::VIOLET,
-                                  &strings::concat(output_path, ChannelOutputFilenames::ALPHA));
+                                  &strings::concat_with_static(output_filepath_prefix, ChannelOutputFilenames::ALPHA));
     }
 
     if input_params.channels.luminance {
-        let mut filepath = String::from(output_path);
-        filepath.push_str(ChannelOutputFilenames::RED);
         create_and_save_histogram(&histogram_output.luminance_data, y_max, input_params.logarithmic, colors::ORANGE,
-                                  &strings::concat(output_path, ChannelOutputFilenames::LUMINANCE));
+                                  &strings::concat_with_static(output_filepath_prefix, ChannelOutputFilenames::LUMINANCE));
     }
 }
 
@@ -76,7 +70,7 @@ fn compute_maximum(input_params: &HistogramInput, histogram_output: &HistogramOu
     return maximum;
 }
 
-fn create_and_save_histogram(histogram_data: &[f64; NUMBER_OF_HISTOGRAM_BINS], y_range_max: f64, logarithmic: bool, color: &str, output_path: &String) {
+fn create_and_save_histogram(histogram_data: &[f64; NUMBER_OF_HISTOGRAM_BINS], y_range_max: f64, logarithmic: bool, color: &str, output_filepath_prefix: &String) {
     let trace = Bar::new(
         (0..NUMBER_OF_HISTOGRAM_BINS).collect(),
         histogram_data.to_vec(),
@@ -89,7 +83,7 @@ fn create_and_save_histogram(histogram_data: &[f64; NUMBER_OF_HISTOGRAM_BINS], y
     let mut plot: Plot = Plot::new();
     plot.add_trace(trace);
     plot.set_layout(layout);
-    plot.to_html(strings::concat(&output_path, file_extensions::HISTOGRAMS));
+    plot.to_html(strings::concat_with_static(&output_filepath_prefix, file_extensions::HISTOGRAMS));
 }
 
 fn create_layout(y_range_max: f64, logarithmic: bool) -> Layout {

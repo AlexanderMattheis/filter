@@ -4,6 +4,7 @@ use std::process;
 pub const NOT_EXISTENT_BOOLEAN: &'static str = "Not existent boolean: ";
 pub const NOT_EXISTENT_CHANNEL: &'static str = "Not existent channel: ";
 pub const NOT_EXISTENT_FILTER: &'static str = "Not existent filter: ";
+pub const NOT_EXISTENT_PATH: &'static str = "Not existent path: ";
 
 pub const PARAMETER_WRONG_FORMAT: &'static str = "Wrong format of parameter: ";
 
