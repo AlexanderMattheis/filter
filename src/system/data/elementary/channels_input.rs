@@ -3,5 +3,5 @@ pub struct ChannelsInput {
     pub green: bool,
     pub blue: bool,
     pub alpha: bool,
-    pub luminance: bool
+    pub luminance: bool,
 }

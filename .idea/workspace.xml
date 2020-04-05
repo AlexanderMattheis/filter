@@ -5,14 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee39ad96-1580-4219-b6be-5b7b87080dc6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/system/basic/paths.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/system/basic/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/basic/mod.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/system/basic/strings.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/basic/strings.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/statistics.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/statistics.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/defaults/file_extensions.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/defaults/file_extensions.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/system/defaults/messages/errors.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/defaults/messages/errors.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/system/defaults/output_filenames.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/defaults/output_filenames.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/system/io/argument_executor.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/io/argument_executor.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/system/io/plotter/histogram_creator.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/io/plotter/histogram_creator.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/io/output/statistics_builder.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/io/output/statistics_builder.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,27 +54,29 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/system/io" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/system" />
       <recent name="$PROJECT_DIR$/src/system/defaults" />
       <recent name="$PROJECT_DIR$/src/system/io/data" />
       <recent name="$PROJECT_DIR$/src/system/io/data/composed" />
       <recent name="$PROJECT_DIR$/src/system/io/data/elementary" />
-      <recent name="$PROJECT_DIR$/src/system/defaults/colors" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/system/io" />
     </key>
   </component>
   <component name="RunManager">
     <configuration name="Run image-manipulation" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
       <option name="channel" value="DEFAULT" />
-      <option name="command" value="run --package image-manipulation --bin image-manipulation -- --input &quot;$USER_HOME$/Pictures/Alex.jpg&quot; --filter &quot;histogram&quot; --params &quot;channels=rgbl; logarithmic=true&quot; --output &quot;$USER_HOME$/Pictures" />
+      <option name="command" value="run --package image-manipulation --bin image-manipulation -- --input &quot;$USER_HOME$/Pictures/Alex.jpg&quot; --filter &quot;statistics&quot; --params &quot;channels=rgbl&quot; --output &quot;$USER_HOME$/Pictures" />
       <option name="allFeatures" value="false" />
       <option name="nocapture" value="false" />
       <option name="emulateTerminal" value="false" />
       <option name="backtrace" value="SHORT" />
       <option name="workingDirectory" value="file://$PROJECT_DIR$" />
-      <envs />
+      <envs>
+        <env name="RUST_BACKTRACE" value="full" />
+      </envs>
       <method v="2">
         <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
       </method>
@@ -121,10 +120,10 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="0" y="183" width="802" height="671" key="#Project_Structure/0.0.1600.860@0.0.1600.860" timestamp="1584187088106" />
-    <state x="8" y="130" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586002337844">
+    <state x="0" y="47" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586087506819">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="8" y="130" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860@0.0.1600.860" timestamp="1586002337844" />
+    <state x="0" y="47" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860@0.0.1600.860" timestamp="1586087506819" />
     <state x="515" y="236" width="561" height="382" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1585498652005">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -137,30 +136,34 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="483" y="161" width="626" height="532" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1600.860@0.0.1600.860" timestamp="1585845754885" />
-    <state width="1558" height="221" key="GridCell.Tab.0.bottom" timestamp="1586007409496">
+    <state width="1558" height="221" key="GridCell.Tab.0.bottom" timestamp="1586109708671">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="221" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1586007409496" />
-    <state width="1558" height="221" key="GridCell.Tab.0.center" timestamp="1586007409496">
+    <state width="1558" height="221" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1586109708671" />
+    <state width="1558" height="221" key="GridCell.Tab.0.center" timestamp="1586109708670">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="221" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1586007409496" />
-    <state width="1558" height="221" key="GridCell.Tab.0.left" timestamp="1586007409496">
+    <state width="1558" height="221" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1586109708670" />
+    <state width="1558" height="221" key="GridCell.Tab.0.left" timestamp="1586109708670">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="221" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1586007409496" />
-    <state width="1558" height="221" key="GridCell.Tab.0.right" timestamp="1586007409496">
+    <state width="1558" height="221" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1586109708670" />
+    <state width="1558" height="221" key="GridCell.Tab.0.right" timestamp="1586109708670">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="221" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1586007409496" />
-    <state x="304" y="15" width="1026" height="839" key="SettingsEditor" timestamp="1585502401360">
+    <state width="1558" height="221" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1586109708670" />
+    <state x="304" y="15" width="1026" height="839" key="SettingsEditor" timestamp="1586087206736">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="304" y="15" width="1026" height="839" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1585502401360" />
-    <state x="476" y="163" width="647" height="534" key="find.popup" timestamp="1586002510659">
+    <state x="304" y="15" width="1026" height="839" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1586087206736" />
+    <state x="800" y="0" width="801" height="860" key="dock-window-1" timestamp="1586109790687">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="476" y="163" width="647" height="534" key="find.popup/0.0.1600.860@0.0.1600.860" timestamp="1586002510659" />
+    <state x="800" y="0" width="801" height="860" key="dock-window-1/0.0.1600.860@0.0.1600.860" timestamp="1586109790687" />
+    <state x="476" y="163" width="647" height="534" key="find.popup" timestamp="1586094431429">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="476" y="163" width="647" height="534" key="find.popup/0.0.1600.860@0.0.1600.860" timestamp="1586094431429" />
     <state x="463" y="193" key="run.anything.popup" timestamp="1585674933093">
       <screen x="0" y="0" width="1600" height="860" />
     </state>

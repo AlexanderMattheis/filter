@@ -1,4 +1,4 @@
-use crate::system::io::data::elementary::channels_input::ChannelsInput;
+use crate::system::data::elementary::channels_input::ChannelsInput;
 
 pub struct HistogramDefaults;
 
@@ -11,5 +11,6 @@ impl HistogramDefaults {
         luminance: true
     };
     pub const LOGARITHMIC: bool = false;
+    pub const CUMULATIVE: bool = false;
 }
 

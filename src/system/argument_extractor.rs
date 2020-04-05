@@ -1,7 +1,7 @@
 use clap::ArgMatches;
 
-use crate::system::io::extracted_arguments::ExtractedArguments;
 use crate::system::defaults::cli::commands;
+use crate::system::extracted_arguments::ExtractedArguments;
 
 pub fn extract(matches: &ArgMatches) -> ExtractedArguments {
     let input_path = match matches.value_of(commands::INPUT) {

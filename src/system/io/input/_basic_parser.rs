@@ -1,16 +1,15 @@
 use crate::system::defaults::cli::filters_params;
 use crate::system::defaults::cli::filters_params_values::ChannelTypes;
 use crate::system::defaults::messages::errors;
-use crate::system::io::data::elementary::channels_input;
-use crate::system::io::data::elementary::channels_input::ChannelsInput;
-use crate::system::io::data::elementary::input::Input;
+use crate::system::data::elementary::input::Input;
+use crate::system::data::elementary::channels_input::ChannelsInput;
 
 const PARAMS_SEPARATOR: &str = ";";
 const PARAM_NAME_VALUE_SEPARATOR: &str = "=";
 
 pub fn parse_params(params: &String) -> Input {
     let splitted_params: Vec<&str> = params.split(PARAMS_SEPARATOR).collect();
-    let mut input = Input { channels: None, logarithmic: None };
+    let mut input = Input { channels: None, logarithmic: None, cumulative: None };
 
     for param in splitted_params {
         parse_param(param, &mut input);
@@ -23,7 +22,7 @@ fn parse_param(param: &str, input: &mut Input) {
     let splitted_param: Vec<&str> = param.split(PARAM_NAME_VALUE_SEPARATOR).collect();
 
     if splitted_param.len() != 2 {
-        errors::print_error_and_quit(errors::PARAMETER_WRONG_FORMAT, param);
+        errors::print_error_and_quit(errors::PARAMETER_WRONG_FORMAT, Some(param));
     }
 
     let param_name = match splitted_param.get(0) {
@@ -38,7 +37,8 @@ fn parse_param(param: &str, input: &mut Input) {
 
     match param_name {
         filters_params::CHANNELS => input.channels = Some(parse_channels_value(param_value)),
-        filters_params::LOGARITHMIC => input.logarithmic = Some(parse_logarithmic_value(param_value)),
+        filters_params::LOGARITHMIC => input.logarithmic = Some(parse_boolean_value(param_value)),
+        filters_params::CUMULATIVE => input.cumulative = Some(parse_boolean_value(param_value)),
         _ => {}
     };
 }
@@ -60,20 +60,20 @@ fn parse_channels_value(channels_value: &str) -> ChannelsInput {
             ChannelTypes::ALPHA => alpha = true,
             ChannelTypes::LUMINANCE => luminance = true,
             _ => {
-                errors::print_error_and_quit(errors::NOT_EXISTENT_CHANNEL, char.encode_utf8(&mut tmp));
+                errors::print_error_and_quit(errors::NOT_EXISTENT_CHANNEL, Some(char.encode_utf8(&mut tmp)));
             }
         }
     }
 
-    return channels_input::ChannelsInput { red, green, blue, alpha, luminance };
+    return ChannelsInput { red, green, blue, alpha, luminance };
 }
 
-fn parse_logarithmic_value(logarithmic_value: &str) -> bool {
+fn parse_boolean_value(logarithmic_value: &str) -> bool {
     if logarithmic_value == "true" {
         return true;
     } else if logarithmic_value == "false" {
         return false;
     }
 
-    errors::print_error_and_quit(errors::NOT_EXISTENT_BOOLEAN, logarithmic_value);
+    errors::print_error_and_quit(errors::NOT_EXISTENT_BOOLEAN, Some(logarithmic_value));
 }
