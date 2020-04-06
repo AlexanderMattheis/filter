@@ -3,7 +3,7 @@ use plotly::common::{Marker, Title};
 use plotly::layout::Axis;
 
 use crate::system::basic::strings;
-use crate::system::defaults::{colors, file_extensions, output_filenames::ChannelOutputFilenames};
+use crate::system::defaults::{colors, file_extensions, output_filenames::ChannelOutputNames};
 use crate::system::defaults::algorithm_params::NUMBER_OF_HISTOGRAM_BINS;
 use crate::system::data::composed::histogram_input::HistogramInput;
 use crate::system::data::composed::histogram_output::HistogramOutput;
@@ -13,27 +13,27 @@ pub fn create_histograms(input_params: &HistogramInput, histogram_output: &Histo
 
     if input_params.channels.red {
         create_and_save_histogram(&histogram_output.red_data, y_max, input_params.logarithmic, colors::RED,
-                                  &strings::concat_with_static(output_filepath_prefix, ChannelOutputFilenames::RED));
+                                  &strings::concat_with_static(output_filepath_prefix, ChannelOutputNames::RED));
     }
 
     if input_params.channels.green {
         create_and_save_histogram(&histogram_output.green_data, y_max, input_params.logarithmic, colors::GREEN,
-                                  &strings::concat_with_static(output_filepath_prefix, ChannelOutputFilenames::GREEN));
+                                  &strings::concat_with_static(output_filepath_prefix, ChannelOutputNames::GREEN));
     }
 
     if input_params.channels.blue {
         create_and_save_histogram(&histogram_output.blue_data, y_max, input_params.logarithmic, colors::BLUE,
-                                  &strings::concat_with_static(output_filepath_prefix, ChannelOutputFilenames::BLUE));
+                                  &strings::concat_with_static(output_filepath_prefix, ChannelOutputNames::BLUE));
     }
 
     if input_params.channels.alpha {
         create_and_save_histogram(&histogram_output.alpha_data, y_max, input_params.logarithmic, colors::VIOLET,
-                                  &strings::concat_with_static(output_filepath_prefix, ChannelOutputFilenames::ALPHA));
+                                  &strings::concat_with_static(output_filepath_prefix, ChannelOutputNames::ALPHA));
     }
 
     if input_params.channels.luminance {
         create_and_save_histogram(&histogram_output.luminance_data, y_max, input_params.logarithmic, colors::ORANGE,
-                                  &strings::concat_with_static(output_filepath_prefix, ChannelOutputFilenames::LUMINANCE));
+                                  &strings::concat_with_static(output_filepath_prefix, ChannelOutputNames::LUMINANCE));
     }
 }
 

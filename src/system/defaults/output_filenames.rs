@@ -1,10 +1,10 @@
 use crate::system::basic::{strings, paths};
 
-pub struct ChannelOutputFilenames;
+pub struct ChannelOutputNames;
 
 pub const SEPARATOR: &'static str = "_";
 
-impl ChannelOutputFilenames {
+impl ChannelOutputNames {
     pub const RED: &'static str = "red";
     pub const GREEN: &'static str = "green";
     pub const BLUE: &'static str = "blue";

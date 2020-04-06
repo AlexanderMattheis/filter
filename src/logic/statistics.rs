@@ -37,7 +37,9 @@ pub fn run(image: &DynamicImage, input_params: &StatisticsInput, output_data: &m
     }
 }
 
-fn compute_statistics(histogram: &[u32; NUMBER_OF_HISTOGRAM_BINS], output_data: &mut [StatisticsOutput; NUMBER_OF_HISTOGRAM_CHANNELS], channel: Channel, count_pixels: f64) {
+fn compute_statistics(histogram: &[u32; NUMBER_OF_HISTOGRAM_BINS],
+                      output_data: &mut [StatisticsOutput; NUMBER_OF_HISTOGRAM_CHANNELS],
+                      channel: Channel, count_pixels: f64) {
     let min = get_lowest_pixel_value(histogram);
     let max = get_highest_pixel_value(histogram);
 
@@ -96,7 +98,7 @@ fn get_first_non_zero(histogram: &[u32; NUMBER_OF_HISTOGRAM_BINS], range: Vec<u3
 }
 
 fn get_highest_pixel_value(histogram: &[u32; NUMBER_OF_HISTOGRAM_BINS]) -> u8 {
-    return get_first_non_zero(histogram, (0..NUMBER_OF_HISTOGRAM_BINS as u32).collect());
+    return get_first_non_zero(histogram, (0..NUMBER_OF_HISTOGRAM_BINS as u32).rev().collect());
 }
 
 fn get_distribution_parameters(histogram: &[u32; NUMBER_OF_HISTOGRAM_BINS], num_pixels: f64) -> HistogramDistribution {
