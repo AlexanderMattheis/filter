@@ -29,6 +29,17 @@ pub fn execute(matches: &ArgMatches) {
     match arguments.filter.as_str() {
         filters::HISTOGRAM => create_histogram(&loaded_image, &arguments.params, &output_filepath_prefix),
         filters::STATISTICS => create_statistics(&loaded_image, &arguments.params, &output_filepath_prefix),
+
+        // point operations
+        filters::AUTO_CONTRAST => compute_auto_contrast(&loaded_image, &arguments.params, &output_filepath_prefix),
+        filters::BRIGHTNESS => compute_brightness(&loaded_image, &arguments.params, &output_filepath_prefix),
+        filters::CONTRAST => compute_contrast(&loaded_image, &arguments.params, &output_filepath_prefix),
+        filters::GAMMA => compute_gamma(&loaded_image, &arguments.params, &output_filepath_prefix),
+        filters::HISTOGRAM_EQUALIZATION => compute_histogram_equalization(&loaded_image, &arguments.params, &output_filepath_prefix),
+        filters::HISTOGRAM_SPECIFICATION => compute_histogram_specification(&loaded_image, &arguments.params, &output_filepath_prefix),
+        filters::INVERSION => compute_inversion(&loaded_image, &arguments.params, &output_filepath_prefix),
+        filters::LINEAR_BLENDING => compute_linear_blending(&loaded_image, &arguments.params, &output_filepath_prefix),
+        filters::THRESHOLD => compute_threshold(&loaded_image, &arguments.params, &output_filepath_prefix),
         _ => errors::print_error_and_quit(errors::NOT_EXISTENT_FILTER, Some(arguments.filter.as_str()))
     }
 }
@@ -49,3 +60,21 @@ fn create_statistics(image: &DynamicImage, params: &String, output_filepath_pref
     statistics_builder::create_statistics(&input_params, &statistics_output, &output_filepath_prefix);
 }
 
+// point operations
+fn compute_auto_contrast(image: &DynamicImage, params: &String, output_filepath_prefix: &String) {}
+
+fn compute_brightness(image: &DynamicImage, params: &String, output_filepath_prefix: &String) {}
+
+fn compute_contrast(image: &DynamicImage, params: &String, output_filepath_prefix: &String) {}
+
+fn compute_gamma(image: &DynamicImage, params: &String, output_filepath_prefix: &String) {}
+
+fn compute_histogram_equalization(image: &DynamicImage, params: &String, output_filepath_prefix: &String) {}
+
+fn compute_histogram_specification(image: &DynamicImage, params: &String, output_filepath_prefix: &String) {}
+
+fn compute_inversion(image: &DynamicImage, params: &String, output_filepath_prefix: &String) {}
+
+fn compute_linear_blending(image: &DynamicImage, params: &String, output_filepath_prefix: &String) {}
+
+fn compute_threshold(image: &DynamicImage, params: &String, output_filepath_prefix: &String) {} 
