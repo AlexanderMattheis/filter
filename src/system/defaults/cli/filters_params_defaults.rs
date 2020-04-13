@@ -7,6 +7,7 @@ pub struct StatisticsDefaults;
 pub struct BrightnessDefauls;
 pub struct ContrastDefaults;
 pub struct InversionDefaults;
+pub struct ThresholdDefaults;
 
 impl HistogramDefaults {
     pub const CHANNELS_INPUT: ChannelsInput = ChannelsInput {
@@ -56,9 +57,15 @@ impl ContrastDefaults {
 
 impl InversionDefaults {
     pub const CHANNELS_INPUT: RgbaChannelsInput = RgbaChannelsInput {
-        red: true,
-        green: true,
-        blue: true,
+        red: false,
+        green: false,
+        blue: false,
         alpha: false
     };
+}
+
+impl ThresholdDefaults {
+    pub const THRESHOLD: u8 = 127;
+    pub const MINIMUM: u8 = 0;
+    pub const MAXIMUM: u8 = 255;
 }
