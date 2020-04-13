@@ -10,14 +10,12 @@ const PARAMS_SEPARATOR: &str = ";";
 const PARAM_NAME_VALUE_SEPARATOR: &str = "=";
 
 pub fn parse_params(params: &String) -> Input {
+    if params.is_empty() {
+        return Input::new();
+    }
+
     let splitted_params: Vec<&str> = params.split(PARAMS_SEPARATOR).collect();
-    let mut input = Input {
-        value: None,
-        channels: None,
-        logarithmic: None,
-        cumulative: None,
-        division: None,
-    };
+    let mut input = Input::new();
 
     for param in splitted_params {
         parse_param(param, &mut input);

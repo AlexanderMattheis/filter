@@ -30,7 +30,7 @@ fn main() {
             .short("p")
             .long(commands::PARAMS)
             .takes_value(true)
-            .required(true)
+            .required(false)
             .help("The data for the filter you want to apply"))
         .arg(Arg::with_name(commands::OUTPUT)
             .short("o")

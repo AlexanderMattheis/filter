@@ -4,7 +4,9 @@ use clap::ArgMatches;
 use image::DynamicImage;
 
 use crate::logic::{histogram, statistics};
+use crate::logic::point_operations::{brightness, contrast, inversion};
 use crate::system::argument_extractor;
+use crate::system::basic::strings;
 use crate::system::data::composed::histogram_output::HistogramOutput;
 use crate::system::data::composed::statistics_output::StatisticsOutput;
 use crate::system::defaults::algorithm_params::NUMBER_OF_INPUT_CHANNELS;
@@ -13,10 +15,8 @@ use crate::system::defaults::messages::errors;
 use crate::system::defaults::messages::errors::print_error_and_quit;
 use crate::system::defaults::output_filenames;
 use crate::system::io::input::{histogram_parser, statistics_parser};
+use crate::system::io::input::point_operations::{brightness_parser, contrast_parser, inversion_parser};
 use crate::system::io::output::{histogram_builder, statistics_builder};
-use crate::system::io::input::point_operations::{brightness_parser, contrast_parser};
-use crate::logic::point_operations::{brightness, contrast};
-use crate::system::basic::strings;
 
 pub fn execute(matches: &ArgMatches) {
     let arguments = argument_extractor::extract(matches);
@@ -85,7 +85,11 @@ fn compute_histogram_equalization(image: &mut DynamicImage, params: &String, out
 
 fn compute_histogram_specification(image: &mut DynamicImage, params: &String, output_file_name_path: &String) {}
 
-fn compute_inversion(image: &mut DynamicImage, params: &String, output_file_name_path: &String) {}
+fn compute_inversion(image: &mut DynamicImage, params: &String, output_file_name_path: &String) {
+    let input_params = inversion_parser::parse_params(params);
+    inversion::run(image, &input_params);
+    image.save(output_file_name_path);
+}
 
 fn compute_linear_blending(image: &mut DynamicImage, params: &String, output_file_name_path: &String) {}
 

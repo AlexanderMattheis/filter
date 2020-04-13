@@ -6,6 +6,7 @@ pub struct StatisticsDefaults;
 // point-operations
 pub struct BrightnessDefauls;
 pub struct ContrastDefaults;
+pub struct InversionDefaults;
 
 impl HistogramDefaults {
     pub const CHANNELS_INPUT: ChannelsInput = ChannelsInput {
@@ -51,4 +52,13 @@ impl ContrastDefaults {
     };
 
     pub const VALUE: f64 = 1.0;
+}
+
+impl InversionDefaults {
+    pub const CHANNELS_INPUT: RgbaChannelsInput = RgbaChannelsInput {
+        red: true,
+        green: true,
+        blue: true,
+        alpha: false
+    };
 }

@@ -7,3 +7,15 @@ pub struct Input {
     pub value: Option<f64>,
     pub division: Option<bool>  // tells if should be divided by value
 }
+
+impl Input {
+    pub fn new() -> Input {
+        return Input {
+            channels: None,
+            logarithmic: None,
+            cumulative: None,
+            value: None,
+            division: None
+        }
+    }
+}
