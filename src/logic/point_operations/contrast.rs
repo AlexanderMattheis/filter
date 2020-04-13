@@ -37,9 +37,7 @@ fn create_lookup_table(input_params: &ContrastInput, lookup_table: &mut [u8; NUM
     for i in 0..NUMBER_OF_COLOR_VALUES {
         let new_value = (i as f64) * input_params.value;
 
-        if new_value < 0.0 {
-            lookup_table[i] = 0;
-        } else if new_value >= NUMBER_OF_COLOR_VALUES as f64 {
+        if new_value > (NUMBER_OF_COLOR_VALUES - 1) as f64 {
             lookup_table[i] = 255;
         } else {
             lookup_table[i] = new_value.round() as u8;

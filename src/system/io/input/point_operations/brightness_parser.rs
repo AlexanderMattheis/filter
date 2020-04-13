@@ -3,6 +3,7 @@ use crate::system::data::elementary::channels_input::RgbaChannelsInput;
 use crate::system::data::elementary::input::Input;
 use crate::system::defaults::cli::filters_params_defaults::BrightnessDefauls;
 use crate::system::io::input::_basic_parser;
+use crate::system::defaults::messages::errors;
 
 pub fn parse_params(params: &String) -> BrightnessInput {
     let input: Input = _basic_parser::parse_params(params);
@@ -17,5 +18,14 @@ pub fn parse_params(params: &String) -> BrightnessInput {
         _ => BrightnessDefauls::VALUE
     };
 
+    validate_input(value);
     return BrightnessInput { channels, value };
+}
+
+fn validate_input(value: i16) {
+    if value < -255 {
+        errors::print_error_and_quit(errors::SHOULD_BE_HIGHER_EQ_MINUS_255, None);
+    } else if value > 255 {
+        errors::print_error_and_quit(errors::SHOULD_BE_LOWER_EQ_255, None);
+    }
 }

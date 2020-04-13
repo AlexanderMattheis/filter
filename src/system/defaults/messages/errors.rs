@@ -3,6 +3,7 @@ use std::process;
 
 pub const COULD_NOT_CREATE_FILE: &'static str = "Couldn't create the file!";
 pub const COULD_NOT_WRITE_FILE: &'static str = "Couldn't write the file!";
+
 pub const HISTOGRAM_IS_EMPTY: &'static str = "Histogram is empty!";
 pub const NOT_COMPUTABLE_MEDIAN: &'static str = "Not computable median!";
 
@@ -15,6 +16,11 @@ pub const NOT_VALID_OPERATION: &'static str = "Not valid operation: ";
 pub const NOT_VALID_PATH: &'static str = "Not valid path: ";
 
 pub const PARAMETER_WRONG_FORMAT: &'static str = "Wrong format of parameter: ";
+
+pub const SHOULD_BE_POSITIVE: &'static str = "The input value should be positive.";
+pub const SHOULD_BE_LOWER_EQ_255: &'static str = "The input value should be less than or equal to +255.";
+pub const SHOULD_BE_HIGHER_EQ_255: &'static str = "The input value should be higher than or equal to 1/255.";
+pub const SHOULD_BE_HIGHER_EQ_MINUS_255: &'static str = "The input value should be higher than or equal to -255.";
 
 pub fn print_error_and_quit(error: &'static str, error_value: Option<&str>) -> ! {
     print_error(error, error_value.unwrap_or(""));

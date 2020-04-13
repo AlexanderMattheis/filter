@@ -39,7 +39,7 @@ fn create_lookup_table(input_params: &BrightnessInput, lookup_table: &mut [u8; N
 
         if new_value < 0 {
             lookup_table[i] = 0;
-        } else if new_value >= NUMBER_OF_COLOR_VALUES as i16 {
+        } else if new_value > (NUMBER_OF_COLOR_VALUES - 1) as i16 {
             lookup_table[i] = 255;
         } else {
             lookup_table[i] = new_value as u8;
