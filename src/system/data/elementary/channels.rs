@@ -3,5 +3,5 @@ pub enum Channel {
     GREEN,
     BLUE,
     ALPHA,
-    LUMINANCE,
+    LUMINANCE
 }

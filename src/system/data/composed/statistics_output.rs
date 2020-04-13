@@ -1,4 +1,4 @@
-use crate::system::defaults::algorithm_params::{NUMBER_OF_HISTOGRAM_BINS, NUMBER_OF_HISTOGRAM_CHANNELS};
+use crate::system::defaults::algorithm_params::{NUMBER_OF_COLOR_VALUES, NUMBER_OF_INPUT_CHANNELS};
 
 #[derive(Copy, Clone)]
 pub struct StatisticsOutput {
@@ -14,7 +14,7 @@ pub struct StatisticsOutput {
 }
 
 impl StatisticsOutput {
-    pub fn new() -> [StatisticsOutput; NUMBER_OF_HISTOGRAM_CHANNELS] {
+    pub fn new() -> [StatisticsOutput; NUMBER_OF_INPUT_CHANNELS] {
         return [StatisticsOutput {
             min: 255,
             max: 0,
@@ -23,26 +23,26 @@ impl StatisticsOutput {
             median: 0,
             contrast: 0,
             dynamics: 0
-        }; NUMBER_OF_HISTOGRAM_CHANNELS];
+        }; NUMBER_OF_INPUT_CHANNELS];
     }
 }
 
 pub struct StatisticsHistogramOutput {
-    pub red_data: [u32; NUMBER_OF_HISTOGRAM_BINS],
-    pub green_data: [u32; NUMBER_OF_HISTOGRAM_BINS],
-    pub blue_data: [u32; NUMBER_OF_HISTOGRAM_BINS],
-    pub alpha_data: [u32; NUMBER_OF_HISTOGRAM_BINS],
-    pub luminance_data: [u32; NUMBER_OF_HISTOGRAM_BINS]
+    pub red_data: [u32; NUMBER_OF_COLOR_VALUES],
+    pub green_data: [u32; NUMBER_OF_COLOR_VALUES],
+    pub blue_data: [u32; NUMBER_OF_COLOR_VALUES],
+    pub alpha_data: [u32; NUMBER_OF_COLOR_VALUES],
+    pub luminance_data: [u32; NUMBER_OF_COLOR_VALUES]
 }
 
 impl StatisticsHistogramOutput {
     pub fn new() -> StatisticsHistogramOutput {
         return StatisticsHistogramOutput {
-            red_data: [0; NUMBER_OF_HISTOGRAM_BINS],
-            green_data: [0; NUMBER_OF_HISTOGRAM_BINS],
-            blue_data: [0; NUMBER_OF_HISTOGRAM_BINS],
-            alpha_data: [0; NUMBER_OF_HISTOGRAM_BINS],
-            luminance_data: [0; NUMBER_OF_HISTOGRAM_BINS],
+            red_data: [0; NUMBER_OF_COLOR_VALUES],
+            green_data: [0; NUMBER_OF_COLOR_VALUES],
+            blue_data: [0; NUMBER_OF_COLOR_VALUES],
+            alpha_data: [0; NUMBER_OF_COLOR_VALUES],
+            luminance_data: [0; NUMBER_OF_COLOR_VALUES],
         };
     }
 }

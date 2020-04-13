@@ -3,7 +3,7 @@ use image::{DynamicImage, GenericImageView};
 use crate::system::defaults::algorithm_params::LUMINANCE_BLUE;
 use crate::system::defaults::algorithm_params::LUMINANCE_GREEN;
 use crate::system::defaults::algorithm_params::LUMINANCE_RED;
-use crate::system::defaults::algorithm_params::NUMBER_OF_HISTOGRAM_BINS;
+use crate::system::defaults::algorithm_params::NUMBER_OF_COLOR_VALUES;
 use crate::system::data::composed::{{histogram_input::HistogramInput, histogram_output::HistogramOutput}};
 
 pub fn run(image: &DynamicImage, input_params: &HistogramInput, output_data: &mut HistogramOutput) {
@@ -17,7 +17,6 @@ pub fn run(image: &DynamicImage, input_params: &HistogramInput, output_data: &mu
             let blue_value = pixel_value[2] as usize;
             let alpha_value = pixel_value[3] as usize;
             let luminance_value = ((red_value as f64) * LUMINANCE_RED + (green_value as f64) * LUMINANCE_GREEN + (blue_value as f64) * LUMINANCE_BLUE) as usize;
-
 
             output_data.red_data[red_value] += 1.0;
             output_data.green_data[green_value] += 1.0;
@@ -37,7 +36,7 @@ pub fn run(image: &DynamicImage, input_params: &HistogramInput, output_data: &mu
 }
 
 fn compute_cumulative(output_data: &mut HistogramOutput) {
-    for i in 1..NUMBER_OF_HISTOGRAM_BINS {
+    for i in 1..NUMBER_OF_COLOR_VALUES {
         // computing cumulative histograms out of non-cumulative histograms
         output_data.red_data[i] += output_data.red_data[i - 1];
         output_data.green_data[i] += output_data.green_data[i - 1];
@@ -48,7 +47,7 @@ fn compute_cumulative(output_data: &mut HistogramOutput) {
 }
 
 fn compute_logarithms(output_data: &mut HistogramOutput) {
-    for i in 0..NUMBER_OF_HISTOGRAM_BINS {
+    for i in 0..NUMBER_OF_COLOR_VALUES {
         // HINT: f64::log10(0.0) = -inf, that is why it works
         output_data.red_data[i] = f64::log10(output_data.red_data[i]);
         output_data.green_data[i] = f64::log10(output_data.green_data[i]);

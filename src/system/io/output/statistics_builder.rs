@@ -5,12 +5,12 @@ use crate::system::basic::strings;
 use crate::system::data::composed::statistics_input::StatisticsInput;
 use crate::system::data::composed::statistics_output::StatisticsOutput;
 use crate::system::data::elementary::channels::Channel;
-use crate::system::defaults::algorithm_params::NUMBER_OF_HISTOGRAM_CHANNELS;
+use crate::system::defaults::algorithm_params::NUMBER_OF_INPUT_CHANNELS;
 use crate::system::defaults::file_extensions;
 use crate::system::defaults::messages::errors;
 use crate::system::defaults::output_filenames::ChannelOutputNames;
 
-pub fn create_statistics(input_params: &StatisticsInput, statistics_output: &[StatisticsOutput; NUMBER_OF_HISTOGRAM_CHANNELS], output_filepath_prefix: &String) {
+pub fn create_statistics(input_params: &StatisticsInput, statistics_output: &[StatisticsOutput; NUMBER_OF_INPUT_CHANNELS], output_filepath_prefix: &String) {
     if input_params.channels.red {
         create_and_save_statistics(&statistics_output[Channel::RED as usize],
                                    output_filepath_prefix, ChannelOutputNames::RED);

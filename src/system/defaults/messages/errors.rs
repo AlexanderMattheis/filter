@@ -11,6 +11,8 @@ pub const NOT_EXISTENT_CHANNEL: &'static str = "Not existent channel: ";
 pub const NOT_EXISTENT_FILTER: &'static str = "Not existent filter: ";
 pub const NOT_EXISTENT_PATH: &'static str = "Not existent path: ";
 
+pub const NOT_VALID_INTEGER: &'static str = "Not valid integer: ";
+
 pub const PARAMETER_WRONG_FORMAT: &'static str = "Wrong format of parameter: ";
 
 pub fn print_error_and_quit(error: &'static str, error_value: Option<&str>) -> ! {

@@ -3,7 +3,7 @@ use image::{DynamicImage, GenericImageView};
 use crate::system::data::composed::statistics_input::StatisticsInput;
 use crate::system::data::composed::statistics_output::{StatisticsHistogramOutput, StatisticsOutput};
 use crate::system::data::elementary::channels::Channel;
-use crate::system::defaults::algorithm_params::{LUMINANCE_BLUE, LUMINANCE_GREEN, LUMINANCE_RED, NUMBER_OF_HISTOGRAM_BINS, NUMBER_OF_HISTOGRAM_CHANNELS};
+use crate::system::defaults::algorithm_params::{LUMINANCE_BLUE, LUMINANCE_GREEN, LUMINANCE_RED, NUMBER_OF_COLOR_VALUES, NUMBER_OF_INPUT_CHANNELS};
 use crate::system::defaults::messages::errors::{HISTOGRAM_IS_EMPTY, NOT_COMPUTABLE_MEDIAN, print_error_and_quit};
 
 struct HistogramDistribution {
@@ -11,7 +11,7 @@ struct HistogramDistribution {
     variance: f64,
 }
 
-pub fn run(image: &DynamicImage, input_params: &StatisticsInput, output_data: &mut [StatisticsOutput; NUMBER_OF_HISTOGRAM_CHANNELS]) {
+pub fn run(image: &DynamicImage, input_params: &StatisticsInput, output_data: &mut [StatisticsOutput; NUMBER_OF_INPUT_CHANNELS]) {
     let mut statistics_histogram_output = StatisticsHistogramOutput::new();
     compute_histograms(image, &mut statistics_histogram_output);
     let count_pixels = image.pixels().count() as f64;
@@ -37,8 +37,8 @@ pub fn run(image: &DynamicImage, input_params: &StatisticsInput, output_data: &m
     }
 }
 
-fn compute_statistics(histogram: &[u32; NUMBER_OF_HISTOGRAM_BINS],
-                      output_data: &mut [StatisticsOutput; NUMBER_OF_HISTOGRAM_CHANNELS],
+fn compute_statistics(histogram: &[u32; NUMBER_OF_COLOR_VALUES],
+                      output_data: &mut [StatisticsOutput; NUMBER_OF_INPUT_CHANNELS],
                       channel: Channel, count_pixels: f64) {
     let min = get_lowest_pixel_value(histogram);
     let max = get_highest_pixel_value(histogram);
@@ -83,11 +83,11 @@ fn compute_histograms(image: &DynamicImage, output_data: &mut StatisticsHistogra
     }
 }
 
-fn get_lowest_pixel_value(histogram: &[u32; NUMBER_OF_HISTOGRAM_BINS]) -> u8 {
-    return get_first_non_zero(histogram, (0..NUMBER_OF_HISTOGRAM_BINS as u32).collect());
+fn get_lowest_pixel_value(histogram: &[u32; NUMBER_OF_COLOR_VALUES]) -> u8 {
+    return get_first_non_zero(histogram, (0..NUMBER_OF_COLOR_VALUES as u32).collect());
 }
 
-fn get_first_non_zero(histogram: &[u32; NUMBER_OF_HISTOGRAM_BINS], range: Vec<u32>) -> u8 {
+fn get_first_non_zero(histogram: &[u32; NUMBER_OF_COLOR_VALUES], range: Vec<u32>) -> u8 {
     for i in range {
         if histogram[i as usize] > 0 {
             return i as u8;
@@ -97,15 +97,15 @@ fn get_first_non_zero(histogram: &[u32; NUMBER_OF_HISTOGRAM_BINS], range: Vec<u3
     print_error_and_quit(HISTOGRAM_IS_EMPTY, None);
 }
 
-fn get_highest_pixel_value(histogram: &[u32; NUMBER_OF_HISTOGRAM_BINS]) -> u8 {
-    return get_first_non_zero(histogram, (0..NUMBER_OF_HISTOGRAM_BINS as u32).rev().collect());
+fn get_highest_pixel_value(histogram: &[u32; NUMBER_OF_COLOR_VALUES]) -> u8 {
+    return get_first_non_zero(histogram, (0..NUMBER_OF_COLOR_VALUES as u32).rev().collect());
 }
 
-fn get_distribution_parameters(histogram: &[u32; NUMBER_OF_HISTOGRAM_BINS], num_pixels: f64) -> HistogramDistribution {
+fn get_distribution_parameters(histogram: &[u32; NUMBER_OF_COLOR_VALUES], num_pixels: f64) -> HistogramDistribution {
     let mut sum_a = 0;
     let mut sum_b = 0;
 
-    for i in 0..NUMBER_OF_HISTOGRAM_BINS {
+    for i in 0..NUMBER_OF_COLOR_VALUES {
         let value = (i as u64) * (histogram[i] as u64);
 
         sum_a += value;
@@ -122,14 +122,14 @@ fn get_distribution_parameters(histogram: &[u32; NUMBER_OF_HISTOGRAM_BINS], num_
     };
 }
 
-fn get_median_pixel_value(histogram: &[u32; NUMBER_OF_HISTOGRAM_BINS], num_pixels: f64) -> u8 {
+fn get_median_pixel_value(histogram: &[u32; NUMBER_OF_COLOR_VALUES], num_pixels: f64) -> u8 {
     let mut h = histogram.clone();
 
     if (h[0] as f64) >= num_pixels / 2.0 {
         return 0;
     }
 
-    for i in 1..NUMBER_OF_HISTOGRAM_BINS {
+    for i in 1..NUMBER_OF_COLOR_VALUES {
         h[i] += h[i - 1];
 
         if (h[i] as f64) >= num_pixels / 2.0 {
@@ -140,10 +140,10 @@ fn get_median_pixel_value(histogram: &[u32; NUMBER_OF_HISTOGRAM_BINS], num_pixel
     print_error_and_quit(NOT_COMPUTABLE_MEDIAN, None);
 }
 
-fn get_dynamics(histogram: &[u32; NUMBER_OF_HISTOGRAM_BINS]) -> u16 {
+fn get_dynamics(histogram: &[u32; NUMBER_OF_COLOR_VALUES]) -> u16 {
     let mut count: u16 = 0;
 
-    for i in 0..NUMBER_OF_HISTOGRAM_BINS {
+    for i in 0..NUMBER_OF_COLOR_VALUES {
         // each bin stands for a pixel value, and pixel values that have occurred are counted
         if histogram[i] > 0 {
             count += 1;

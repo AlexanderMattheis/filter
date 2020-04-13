@@ -5,9 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee39ad96-1580-4219-b6be-5b7b87080dc6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/logic/point_operations/brightness.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/point_operations/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/system/data/composed/point_operations/brightness_input.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/system/data/composed/point_operations/contrast_input.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/system/data/composed/point_operations/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/system/io/input/point_operations/brightness_parser.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/system/io/input/point_operations/contrast_parser.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/system/io/input/point_operations/mod.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/histogram.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/histogram.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/statistics.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/statistics.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/system/argument_executor.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/argument_executor.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/system/defaults/cli/filters.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/defaults/cli/filters.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/basic/paths.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/basic/paths.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/data/composed/histogram_output.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/data/composed/histogram_output.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/data/composed/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/data/composed/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/data/composed/statistics_output.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/data/composed/statistics_output.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/data/elementary/channels.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/data/elementary/channels.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/data/elementary/channels_input.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/data/elementary/channels_input.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/data/elementary/input.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/data/elementary/input.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/defaults/algorithm_params.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/defaults/algorithm_params.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/defaults/cli/filters_params.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/defaults/cli/filters_params.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/defaults/cli/filters_params_defaults.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/defaults/cli/filters_params_defaults.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/defaults/messages/errors.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/defaults/messages/errors.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/defaults/messages/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/defaults/messages/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/defaults/output_filenames.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/defaults/output_filenames.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/io/input/_basic_parser.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/io/input/_basic_parser.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/io/input/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/io/input/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/io/input/statistics_parser.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/io/input/statistics_parser.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/io/output/histogram_builder.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/io/output/histogram_builder.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/io/output/statistics_builder.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/io/output/statistics_builder.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +66,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/system/data/composed" />
     <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
     <property name="org.rust.hideDetachedFileNotifications/home/alex/Repositories/filter/src/logic/histogram.rs" value="true" />
     <property name="org.rust.hideDetachedFileNotifications/home/alex/Repositories/filter/src/system/io/data/color.rs" value="true" />
@@ -52,21 +80,37 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/system" />
-      <recent name="$PROJECT_DIR$/src/system/defaults" />
-      <recent name="$PROJECT_DIR$/src/system/io/data" />
-      <recent name="$PROJECT_DIR$/src/system/io/data/composed" />
-      <recent name="$PROJECT_DIR$/src/system/io/data/elementary" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/system/data/composed" />
       <recent name="$PROJECT_DIR$/src/system/io" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/logic/point_operations" />
+      <recent name="$PROJECT_DIR$/src/system/io/input/point_operations" />
+      <recent name="$PROJECT_DIR$/src/system/data/composed/point_operations" />
+      <recent name="$PROJECT_DIR$/src/system" />
+      <recent name="$PROJECT_DIR$/src/system/defaults" />
+    </key>
   </component>
-  <component name="RunManager">
-    <configuration name="Run image-manipulation" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+  <component name="RunManager" selected="Cargo Command.Run Debug-Build">
+    <configuration name="Run Debug-Build" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
       <option name="channel" value="DEFAULT" />
-      <option name="command" value="run --package image-manipulation --bin image-manipulation -- --input &quot;$USER_HOME$/Pictures/Alex.jpg&quot; --filter &quot;statistics&quot; --params &quot;channels=rgbl&quot; --output &quot;$USER_HOME$/Pictures" />
+      <option name="command" value="run  --package image-manipulation --bin image-manipulation -- --input &quot;$USER_HOME$/Pictures/Alex.jpg&quot; --filter &quot;brightness&quot; --params &quot;value=-80; channels=r&quot; --output &quot;$USER_HOME$/&quot;" />
+      <option name="allFeatures" value="false" />
+      <option name="nocapture" value="false" />
+      <option name="emulateTerminal" value="false" />
+      <option name="backtrace" value="FULL" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs>
+        <env name="RUST_BACKTRACE" value="full" />
+      </envs>
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Run Release-Build" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
+      <option name="channel" value="DEFAULT" />
+      <option name="command" value="run --release --package image-manipulation --bin image-manipulation -- --input &quot;$USER_HOME$/Pictures/Alex.jpg&quot; --filter &quot;brightness&quot; --params &quot;value=+40&quot; --output &quot;$USER_HOME$/&quot;" />
       <option name="allFeatures" value="false" />
       <option name="nocapture" value="false" />
       <option name="emulateTerminal" value="false" />
@@ -92,10 +136,14 @@
         <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Cargo Command.Run Debug-Build" />
+      <item itemvalue="Cargo Command.Run Release-Build" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Cargo Command.Run image-manipulation" />
-        <item itemvalue="Cargo Command.Run image-manipulation" />
+        <item itemvalue="Cargo Command.Run Debug-Build" />
+        <item itemvalue="Cargo Command.Run Debug-Build" />
       </list>
     </recent_temporary>
   </component>
@@ -114,14 +162,18 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="395" y="91" width="802" height="671" key="#Notifications" timestamp="1586767020673">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="395" y="91" width="802" height="671" key="#Notifications/0.0.1600.860@0.0.1600.860" timestamp="1586767020673" />
     <state x="0" y="183" width="802" height="671" key="#Project_Structure" timestamp="1584187088106">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="0" y="183" width="802" height="671" key="#Project_Structure/0.0.1600.860@0.0.1600.860" timestamp="1584187088106" />
-    <state x="0" y="47" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586087506819">
+    <state x="0" y="86" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586770769915">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="0" y="47" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860@0.0.1600.860" timestamp="1586087506819" />
+    <state x="0" y="86" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860@0.0.1600.860" timestamp="1586770769915" />
     <state x="515" y="236" width="561" height="382" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1585498652005">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -134,26 +186,30 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="483" y="161" width="626" height="532" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1600.860@0.0.1600.860" timestamp="1585845754885" />
-    <state width="1558" height="221" key="GridCell.Tab.0.bottom" timestamp="1586279472611">
+    <state x="576" y="174" width="440" height="505" key="FileChooserDialogImpl" timestamp="1586766529416">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="221" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1586279472611" />
-    <state width="1558" height="221" key="GridCell.Tab.0.center" timestamp="1586279472611">
+    <state x="576" y="174" width="440" height="505" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1586766529416" />
+    <state width="757" height="221" key="GridCell.Tab.0.bottom" timestamp="1586771882724">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="221" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1586279472611" />
-    <state width="1558" height="221" key="GridCell.Tab.0.left" timestamp="1586279472611">
+    <state width="757" height="221" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1586771882724" />
+    <state width="757" height="221" key="GridCell.Tab.0.center" timestamp="1586771882724">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="221" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1586279472611" />
-    <state width="1558" height="221" key="GridCell.Tab.0.right" timestamp="1586279472611">
+    <state width="757" height="221" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1586771882724" />
+    <state width="757" height="221" key="GridCell.Tab.0.left" timestamp="1586771882724">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="221" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1586279472611" />
-    <state x="304" y="15" width="1026" height="839" key="SettingsEditor" timestamp="1586087206736">
+    <state width="757" height="221" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1586771882724" />
+    <state width="757" height="221" key="GridCell.Tab.0.right" timestamp="1586771882724">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="304" y="15" width="1026" height="839" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1586087206736" />
+    <state width="757" height="221" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1586771882724" />
+    <state x="304" y="15" width="1026" height="839" key="SettingsEditor" timestamp="1586766940284">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="304" y="15" width="1026" height="839" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1586766940284" />
     <state x="799" y="0" width="801" height="860" key="dock-window-1" timestamp="1586194808883">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
