@@ -2,7 +2,10 @@ use crate::system::data::elementary::channels_input::{ChannelsInput, RgbaChannel
 
 pub struct HistogramDefaults;
 pub struct StatisticsDefaults;
+
+// point-operations
 pub struct BrightnessDefauls;
+pub struct ContrastDefaults;
 
 impl HistogramDefaults {
     pub const CHANNELS_INPUT: ChannelsInput = ChannelsInput {
@@ -27,6 +30,7 @@ impl StatisticsDefaults {
     };
 }
 
+// point-operations
 impl BrightnessDefauls {
     pub const CHANNELS_INPUT: RgbaChannelsInput = RgbaChannelsInput {
         red: true,
@@ -36,5 +40,15 @@ impl BrightnessDefauls {
     };
 
     pub const VALUE: i16 = 0;
-    pub const NEGATIVE: bool = false;
+}
+
+impl ContrastDefaults {
+    pub const CHANNELS_INPUT: RgbaChannelsInput = RgbaChannelsInput {
+        red: true,
+        green: true,
+        blue: true,
+        alpha: false
+    };
+
+    pub const VALUE: f64 = 1.0;
 }

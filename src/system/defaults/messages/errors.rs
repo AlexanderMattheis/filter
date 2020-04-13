@@ -6,12 +6,13 @@ pub const COULD_NOT_WRITE_FILE: &'static str = "Couldn't write the file!";
 pub const HISTOGRAM_IS_EMPTY: &'static str = "Histogram is empty!";
 pub const NOT_COMPUTABLE_MEDIAN: &'static str = "Not computable median!";
 
-pub const NOT_EXISTENT_BOOLEAN: &'static str = "Not existent boolean: ";
-pub const NOT_EXISTENT_CHANNEL: &'static str = "Not existent channel: ";
-pub const NOT_EXISTENT_FILTER: &'static str = "Not existent filter: ";
-pub const NOT_EXISTENT_PATH: &'static str = "Not existent path: ";
-
-pub const NOT_VALID_INTEGER: &'static str = "Not valid integer: ";
+pub const NOT_VALID_BOOLEAN: &'static str = "Not valid boolean: ";
+pub const NOT_VALID_CHANNEL: &'static str = "Not valid channel: ";
+pub const NOT_VALID_FILTER: &'static str = "Not valid filter: ";
+pub const NOT_VALID_NUMBER: &'static str = "Not valid number: ";
+pub const NOT_VALID_NUMBER_STRING: &'static str = "Not valid number-string: ";
+pub const NOT_VALID_OPERATION: &'static str = "Not valid operation: ";
+pub const NOT_VALID_PATH: &'static str = "Not valid path: ";
 
 pub const PARAMETER_WRONG_FORMAT: &'static str = "Wrong format of parameter: ";
 

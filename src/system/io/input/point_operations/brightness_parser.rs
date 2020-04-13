@@ -13,7 +13,7 @@ pub fn parse_params(params: &String) -> BrightnessInput {
     };
 
     let value = match input.value {
-        Some(brightness) => brightness,
+        Some(brightness) => brightness as i16,
         _ => BrightnessDefauls::VALUE
     };
 

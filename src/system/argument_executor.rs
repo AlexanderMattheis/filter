@@ -14,8 +14,8 @@ use crate::system::defaults::messages::errors::print_error_and_quit;
 use crate::system::defaults::output_filenames;
 use crate::system::io::input::{histogram_parser, statistics_parser};
 use crate::system::io::output::{histogram_builder, statistics_builder};
-use crate::system::io::input::point_operations::brightness_parser;
-use crate::logic::point_operations::brightness;
+use crate::system::io::input::point_operations::{brightness_parser, contrast_parser};
+use crate::logic::point_operations::{brightness, contrast};
 use crate::system::basic::strings;
 
 pub fn execute(matches: &ArgMatches) {
@@ -24,7 +24,7 @@ pub fn execute(matches: &ArgMatches) {
     let mut loaded_image = image::open(&arguments.input_path).unwrap();
 
     if !Path::new(&arguments.input_path).exists() || !Path::new(&arguments.output_path).exists() {
-        print_error_and_quit(errors::NOT_EXISTENT_PATH, Some(&arguments.output_path));
+        print_error_and_quit(errors::NOT_VALID_PATH, Some(&arguments.output_path));
     }
 
     let output_file_path_prefix = output_filenames::create_prefix(&arguments.input_path, &arguments.output_path);
@@ -35,16 +35,16 @@ pub fn execute(matches: &ArgMatches) {
         filters::STATISTICS => create_statistics(&loaded_image, &arguments.params, &output_file_path_prefix),
 
         // point operations
-        filters::AUTO_CONTRAST => compute_auto_contrast(&loaded_image, &arguments.params, &output_file_name_path),
+        filters::AUTO_CONTRAST => compute_auto_contrast(&mut loaded_image, &arguments.params, &output_file_name_path),
         filters::BRIGHTNESS => compute_brightness(&mut loaded_image, &arguments.params, &output_file_name_path),
-        filters::CONTRAST => compute_contrast(&loaded_image, &arguments.params, &output_file_name_path),
-        filters::GAMMA => compute_gamma(&loaded_image, &arguments.params, &output_file_name_path),
-        filters::HISTOGRAM_EQUALIZATION => compute_histogram_equalization(&loaded_image, &arguments.params, &output_file_name_path),
-        filters::HISTOGRAM_SPECIFICATION => compute_histogram_specification(&loaded_image, &arguments.params, &output_file_name_path),
-        filters::INVERSION => compute_inversion(&loaded_image, &arguments.params, &output_file_name_path),
-        filters::LINEAR_BLENDING => compute_linear_blending(&loaded_image, &arguments.params, &output_file_name_path),
-        filters::THRESHOLD => compute_threshold(&loaded_image, &arguments.params, &output_file_name_path),
-        _ => errors::print_error_and_quit(errors::NOT_EXISTENT_FILTER, Some(arguments.filter.as_str()))
+        filters::CONTRAST => compute_contrast(&mut loaded_image, &arguments.params, &output_file_name_path),
+        filters::GAMMA => compute_gamma(&mut loaded_image, &arguments.params, &output_file_name_path),
+        filters::HISTOGRAM_EQUALIZATION => compute_histogram_equalization(&mut loaded_image, &arguments.params, &output_file_name_path),
+        filters::HISTOGRAM_SPECIFICATION => compute_histogram_specification(&mut loaded_image, &arguments.params, &output_file_name_path),
+        filters::INVERSION => compute_inversion(&mut loaded_image, &arguments.params, &output_file_name_path),
+        filters::LINEAR_BLENDING => compute_linear_blending(&mut loaded_image, &arguments.params, &output_file_name_path),
+        filters::THRESHOLD => compute_threshold(&mut loaded_image, &arguments.params, &output_file_name_path),
+        _ => errors::print_error_and_quit(errors::NOT_VALID_FILTER, Some(arguments.filter.as_str()))
     }
 }
 
@@ -65,7 +65,7 @@ fn create_statistics(image: &DynamicImage, params: &String, output_filepath_pref
 }
 
 // point operations
-fn compute_auto_contrast(image: &DynamicImage, params: &String, output_file_name_path: &String) {}
+fn compute_auto_contrast(image: &mut DynamicImage, params: &String, output_file_name_path: &String) {}
 
 fn compute_brightness(image: &mut DynamicImage, params: &String, output_file_name_path: &String) {
     let input_params = brightness_parser::parse_params(params);
@@ -73,18 +73,20 @@ fn compute_brightness(image: &mut DynamicImage, params: &String, output_file_nam
     image.save(output_file_name_path);
 }
 
-fn compute_contrast(image: &DynamicImage, params: &String, output_file_name_path: &String) {
-
+fn compute_contrast(image: &mut DynamicImage, params: &String, output_file_name_path: &String) {
+    let input_params = contrast_parser::parse_params(params);
+    contrast::run(image, &input_params);
+    image.save(output_file_name_path);
 }
 
-fn compute_gamma(image: &DynamicImage, params: &String, output_file_name_path: &String) {}
+fn compute_gamma(image: &mut DynamicImage, params: &String, output_file_name_path: &String) {}
 
-fn compute_histogram_equalization(image: &DynamicImage, params: &String, output_file_name_path: &String) {}
+fn compute_histogram_equalization(image: &mut DynamicImage, params: &String, output_file_name_path: &String) {}
 
-fn compute_histogram_specification(image: &DynamicImage, params: &String, output_file_name_path: &String) {}
+fn compute_histogram_specification(image: &mut DynamicImage, params: &String, output_file_name_path: &String) {}
 
-fn compute_inversion(image: &DynamicImage, params: &String, output_file_name_path: &String) {}
+fn compute_inversion(image: &mut DynamicImage, params: &String, output_file_name_path: &String) {}
 
-fn compute_linear_blending(image: &DynamicImage, params: &String, output_file_name_path: &String) {}
+fn compute_linear_blending(image: &mut DynamicImage, params: &String, output_file_name_path: &String) {}
 
-fn compute_threshold(image: &DynamicImage, params: &String, output_file_name_path: &String) {}
+fn compute_threshold(image: &mut DynamicImage, params: &String, output_file_name_path: &String) {}

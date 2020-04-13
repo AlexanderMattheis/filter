@@ -5,37 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee39ad96-1580-4219-b6be-5b7b87080dc6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/logic/point_operations/brightness.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/logic/point_operations/mod.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/system/data/composed/point_operations/brightness_input.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/system/data/composed/point_operations/contrast_input.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/system/data/composed/point_operations/mod.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/system/io/input/point_operations/brightness_parser.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/system/io/input/point_operations/contrast_parser.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/system/io/input/point_operations/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/point_operations/contrast.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/histogram.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/histogram.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/mod.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/statistics.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/statistics.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/point_operations/brightness.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/point_operations/brightness.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/point_operations/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/point_operations/mod.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/system/argument_executor.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/argument_executor.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/system/basic/paths.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/basic/paths.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/system/data/composed/histogram_output.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/data/composed/histogram_output.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/system/data/composed/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/data/composed/mod.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/system/data/composed/statistics_output.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/data/composed/statistics_output.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/system/data/elementary/channels.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/data/elementary/channels.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/system/data/elementary/channels_input.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/data/elementary/channels_input.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/system/data/elementary/input.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/data/elementary/input.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/system/defaults/algorithm_params.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/defaults/algorithm_params.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/system/defaults/cli/filters_params.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/defaults/cli/filters_params.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/system/defaults/cli/filters_params_defaults.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/defaults/cli/filters_params_defaults.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/system/defaults/messages/errors.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/defaults/messages/errors.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/system/defaults/messages/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/defaults/messages/mod.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/system/defaults/output_filenames.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/defaults/output_filenames.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/system/io/input/_basic_parser.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/io/input/_basic_parser.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/system/io/input/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/io/input/mod.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/system/io/input/statistics_parser.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/io/input/statistics_parser.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/system/io/output/histogram_builder.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/io/output/histogram_builder.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/system/io/output/statistics_builder.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/io/output/statistics_builder.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/io/input/point_operations/brightness_parser.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/io/input/point_operations/brightness_parser.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/io/input/point_operations/contrast_parser.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/io/input/point_operations/contrast_parser.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +72,7 @@
       <recent name="$PROJECT_DIR$/src/system/defaults" />
     </key>
   </component>
-  <component name="RunManager" selected="Cargo Command.Run Debug-Build">
+  <component name="RunManager" selected="Cargo Command.Run Release-Build">
     <configuration name="Run Debug-Build" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
       <option name="channel" value="DEFAULT" />
       <option name="command" value="run  --package image-manipulation --bin image-manipulation -- --input &quot;$USER_HOME$/Pictures/Alex.jpg&quot; --filter &quot;brightness&quot; --params &quot;value=-80; channels=r&quot; --output &quot;$USER_HOME$/&quot;" />
@@ -110,7 +90,7 @@
     </configuration>
     <configuration name="Run Release-Build" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
       <option name="channel" value="DEFAULT" />
-      <option name="command" value="run --release --package image-manipulation --bin image-manipulation -- --input &quot;$USER_HOME$/Pictures/Alex.jpg&quot; --filter &quot;brightness&quot; --params &quot;value=+40&quot; --output &quot;$USER_HOME$/&quot;" />
+      <option name="command" value="run --release --package image-manipulation --bin image-manipulation -- --input &quot;$USER_HOME$/Pictures/Alex.jpg&quot; --filter &quot;contrast&quot; --params &quot;value=/5&quot; --output &quot;$USER_HOME$/&quot;" />
       <option name="allFeatures" value="false" />
       <option name="nocapture" value="false" />
       <option name="emulateTerminal" value="false" />
@@ -123,22 +103,9 @@
         <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Run image-manipulation" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
-      <option name="channel" value="DEFAULT" />
-      <option name="command" value="run --path &quot;$USER_HOME$/Pictures/test.png&quot; " />
-      <option name="allFeatures" value="false" />
-      <option name="nocapture" value="false" />
-      <option name="emulateTerminal" value="false" />
-      <option name="backtrace" value="SHORT" />
-      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
-      <envs />
-      <method v="2">
-        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
-      </method>
-    </configuration>
     <list>
-      <item itemvalue="Cargo Command.Run Debug-Build" />
       <item itemvalue="Cargo Command.Run Release-Build" />
+      <item itemvalue="Cargo Command.Run Debug-Build" />
     </list>
     <recent_temporary>
       <list>
@@ -170,10 +137,10 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="0" y="183" width="802" height="671" key="#Project_Structure/0.0.1600.860@0.0.1600.860" timestamp="1584187088106" />
-    <state x="0" y="86" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586770769915">
+    <state x="0" y="86" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586782795529">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="0" y="86" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860@0.0.1600.860" timestamp="1586770769915" />
+    <state x="0" y="86" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860@0.0.1600.860" timestamp="1586782795529" />
     <state x="515" y="236" width="561" height="382" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1585498652005">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -190,22 +157,22 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="576" y="174" width="440" height="505" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1586766529416" />
-    <state width="757" height="221" key="GridCell.Tab.0.bottom" timestamp="1586771882724">
+    <state width="1558" height="221" key="GridCell.Tab.0.bottom" timestamp="1586782796398">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="757" height="221" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1586771882724" />
-    <state width="757" height="221" key="GridCell.Tab.0.center" timestamp="1586771882724">
+    <state width="1558" height="221" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1586782796398" />
+    <state width="1558" height="221" key="GridCell.Tab.0.center" timestamp="1586782796398">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="757" height="221" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1586771882724" />
-    <state width="757" height="221" key="GridCell.Tab.0.left" timestamp="1586771882724">
+    <state width="1558" height="221" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1586782796398" />
+    <state width="1558" height="221" key="GridCell.Tab.0.left" timestamp="1586782796397">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="757" height="221" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1586771882724" />
-    <state width="757" height="221" key="GridCell.Tab.0.right" timestamp="1586771882724">
+    <state width="1558" height="221" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1586782796397" />
+    <state width="1558" height="221" key="GridCell.Tab.0.right" timestamp="1586782796398">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="757" height="221" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1586771882724" />
+    <state width="1558" height="221" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1586782796398" />
     <state x="304" y="15" width="1026" height="839" key="SettingsEditor" timestamp="1586766940284">
       <screen x="0" y="0" width="1600" height="860" />
     </state>

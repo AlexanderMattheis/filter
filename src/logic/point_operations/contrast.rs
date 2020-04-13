@@ -1,9 +1,9 @@
 use image::{DynamicImage, GenericImage, GenericImageView, Rgba};
 
-use crate::system::data::composed::point_operations::brightness_input::BrightnessInput;
+use crate::system::data::composed::point_operations::contrast_input::ContrastInput;
 use crate::system::defaults::algorithm_params::NUMBER_OF_COLOR_VALUES;
 
-pub fn run(image: &mut DynamicImage, input_params: &BrightnessInput) {
+pub fn run(image: &mut DynamicImage, input_params: &ContrastInput) {
     let mut lookup_table: [u8; NUMBER_OF_COLOR_VALUES] = [0; NUMBER_OF_COLOR_VALUES];
     create_lookup_table(input_params, &mut lookup_table);
 
@@ -33,16 +33,16 @@ pub fn run(image: &mut DynamicImage, input_params: &BrightnessInput) {
     }
 }
 
-fn create_lookup_table(input_params: &BrightnessInput, lookup_table: &mut [u8; NUMBER_OF_COLOR_VALUES]) {
+fn create_lookup_table(input_params: &ContrastInput, lookup_table: &mut [u8; NUMBER_OF_COLOR_VALUES]) {
     for i in 0..NUMBER_OF_COLOR_VALUES {
-        let new_value = (i as i16) + input_params.value;
+        let new_value = (i as f64) * input_params.value;
 
-        if new_value < 0 {
+        if new_value < 0.0 {
             lookup_table[i] = 0;
-        } else if new_value >= NUMBER_OF_COLOR_VALUES as i16 {
+        } else if new_value >= NUMBER_OF_COLOR_VALUES as f64 {
             lookup_table[i] = 255;
         } else {
-            lookup_table[i] = new_value as u8;
+            lookup_table[i] = new_value.round() as u8;
         }
     }
 }

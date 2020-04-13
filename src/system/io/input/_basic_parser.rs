@@ -16,6 +16,7 @@ pub fn parse_params(params: &String) -> Input {
         channels: None,
         logarithmic: None,
         cumulative: None,
+        division: None,
     };
 
     for param in splitted_params {
@@ -46,7 +47,10 @@ fn parse_param(param: &str, input: &mut Input) {
         filters_params::CHANNELS => input.channels = Some(parse_channels_value(param_value)),
         filters_params::LOGARITHMIC => input.logarithmic = Some(parse_boolean_value(param_value)),
         filters_params::CUMULATIVE => input.cumulative = Some(parse_boolean_value(param_value)),
-        filters_params::VALUE => input.value = Some(parse_integer_value(param_value)),
+        filters_params::VALUE => {
+            input.division = Some(is_division_operation(param_value));
+            input.value = Some(parse_number_value(get_number_string(param_value)))
+        }
         _ => {}
     };
 }
@@ -68,7 +72,7 @@ fn parse_channels_value(channels_value: &str) -> ChannelsInput {
             ChannelTypes::ALPHA => alpha = true,
             ChannelTypes::LUMINANCE => luminance = true,
             _ => {
-                errors::print_error_and_quit(errors::NOT_EXISTENT_CHANNEL, Some(char.encode_utf8(&mut tmp)));
+                errors::print_error_and_quit(errors::NOT_VALID_CHANNEL, Some(char.encode_utf8(&mut tmp)));
             }
         }
     }
@@ -76,22 +80,56 @@ fn parse_channels_value(channels_value: &str) -> ChannelsInput {
     return ChannelsInput { red, green, blue, alpha, luminance };
 }
 
-fn parse_boolean_value(logarithmic_value: &str) -> bool {
-    if logarithmic_value == "true" {
+fn parse_boolean_value(boolean_value: &str) -> bool {
+    if boolean_value == "true" {
         return true;
-    } else if logarithmic_value == "false" {
+    } else if boolean_value == "false" {
         return false;
     }
 
-    errors::print_error_and_quit(errors::NOT_EXISTENT_BOOLEAN, Some(logarithmic_value));
+    errors::print_error_and_quit(errors::NOT_VALID_BOOLEAN, Some(boolean_value));
 }
 
-fn parse_integer_value(number_value: &str) -> i16 {
-    let value = number_value.parse::<i16>();
+fn is_division_operation(operation_and_number_value: &str) -> bool {
+    let operation = match operation_and_number_value.chars().nth(0) {
+        Some(char) => char,
+        None => ' '
+    };
+
+    let irrelevant_possibilities = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*'];
+
+    if irrelevant_possibilities.contains(&operation) {
+        return false;
+    } else if operation == '/' {
+        return true;
+    }
+
+    errors::print_error_and_quit(errors::NOT_VALID_OPERATION, Some(operation.to_string().as_ref()));
+}
+
+fn get_number_string(operation_and_number_value: &str) -> &str {
+    let operation = match operation_and_number_value.chars().nth(0) {
+        Some(char) => char,
+        None => ' '
+    };
+
+    let irrelevant_possibilities = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-'];
+
+    if irrelevant_possibilities.contains(&operation) {
+        return operation_and_number_value;
+    } else if operation == '/' || operation == '*' {
+        return &operation_and_number_value[1..];
+    }
+
+    errors::print_error_and_quit(errors::NOT_VALID_NUMBER_STRING, Some(operation_and_number_value));
+}
+
+fn parse_number_value(number_value: &str) -> f64 {
+    let value = number_value.parse::<f64>();
 
     if value.is_ok() {
         return value.unwrap();
     }
 
-    errors::print_error_and_quit(errors::NOT_VALID_INTEGER, Some(number_value));
+    errors::print_error_and_quit(errors::NOT_VALID_NUMBER, Some(number_value));
 }
