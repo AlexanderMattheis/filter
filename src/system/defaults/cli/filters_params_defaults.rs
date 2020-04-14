@@ -41,7 +41,7 @@ impl AutoContrastDefaults {
         blue: true,
         alpha: false
     };
-
+    
     pub const QUANTILE_LOW: f64 = 0.005;
     pub const QUANTILE_HIGH: f64 = 0.005;
 }

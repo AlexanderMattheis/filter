@@ -14,6 +14,8 @@ pub const FAILED_WRITING_FILE: &'static str = "Failed writing the file!";
 // not existent
 pub const NOT_EXISTENT_MEDIAN: &'static str = "Not existent median!";
 pub const NOT_EXISTENT_HISTOGRAM: &'static str = "Histogram is empty!";
+pub const NOT_EXISTENT_HIGHER_BOUND: &'static str = "Not existent higher bound!";
+pub const NOT_EXISTENT_LOWER_BOUND: &'static str = "Not existent lowert bound!";
 
 // not valid
 pub const NOT_VALID_BOOLEAN: &'static str = "Not valid boolean: ";

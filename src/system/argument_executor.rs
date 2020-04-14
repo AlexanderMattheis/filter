@@ -12,7 +12,6 @@ use crate::system::data::composed::statistics_output::StatisticsOutput;
 use crate::system::defaults::algorithm_params::NUMBER_OF_INPUT_CHANNELS;
 use crate::system::defaults::cli::filters;
 use crate::system::defaults::messages::errors;
-use crate::system::defaults::messages::errors::print_error_and_quit;
 use crate::system::defaults::output_filenames;
 use crate::system::executors::point_operations;
 use crate::system::io::input::{histogram_parser, statistics_parser};
@@ -25,7 +24,7 @@ pub fn execute(matches: &ArgMatches) {
     let mut loaded_image = image::open(&arguments.input_path).unwrap();
 
     if !Path::new(&arguments.input_path).exists() || !Path::new(&arguments.output_path).exists() {
-        print_error_and_quit(errors::NOT_VALID_PATH, Some(&arguments.output_path));
+        errors::print_error_and_quit(errors::NOT_VALID_PATH, Some(&arguments.output_path));
     }
 
     let output_file_path_prefix = output_filenames::create_prefix(&arguments.input_path, &arguments.output_path);

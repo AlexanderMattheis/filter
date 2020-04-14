@@ -105,14 +105,14 @@ fn get_distribution_parameters(histogram: &[u32; NUMBER_OF_COLOR_VALUES], num_pi
 fn get_median_pixel_value(histogram: &[u32; NUMBER_OF_COLOR_VALUES], num_pixels: f64) -> u8 {
     let mut h = histogram.clone();
 
-    if (h[0] as f64) >= num_pixels / 2.0 {
+    if (h[0] as f64) >= num_pixels * 0.5 {
         return 0;
     }
 
     for i in 1..NUMBER_OF_COLOR_VALUES {
         h[i] += h[i - 1];
 
-        if (h[i] as f64) >= num_pixels / 2.0 {
+        if (h[i] as f64) >= num_pixels * 0.5 {
             return i as u8;
         }
     }
