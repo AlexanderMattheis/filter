@@ -27,10 +27,12 @@ pub const NOT_VALID_PATH: &'static str = "Not valid path: ";
 // values
 pub const MINIMUM_BIGGER_MAXIMUM: &'static str = "The minimum is bigger than the maximum.";
 
-pub const VALUE_HIGHER_255: &'static str = "The value is higher than 255.";
-pub const VALUE_LOWER_1_DIV_255: &'static str = "The value is lower than 1/255.";
-pub const VALUE_LOWER_MINUS_255: &'static str = "The value is lower than -255.";
-pub const VALUE_NEGATIVE: &'static str = "The value is negative.";
+pub const QUANTILES_SUM_HIGHER_1_0: &'static str = "The sum of lower and higher quantile is higher than 1.0!";
+
+pub const VALUE_HIGHER_255: &'static str = "The value is higher than 255!";
+pub const VALUE_LOWER_1_DIV_255: &'static str = "The value is lower than 1/255!";
+pub const VALUE_LOWER_MINUS_255: &'static str = "The value is lower than -255!";
+pub const VALUE_NEGATIVE: &'static str = "The value is negative!";
 
 // wrong format
 pub const WRONG_FORMAT_PARAMETER: &'static str = "Wrong format of parameter: ";

@@ -24,5 +24,5 @@ pub fn extract(matches: &ArgMatches) -> ExtractedArguments {
         _ => String::new()
     };
 
-    return ExtractedArguments { input_path: input_path, filter, params, output_path: output_path };
+    return ExtractedArguments { input_path, filter, params, output_path };
 }

@@ -47,11 +47,13 @@ fn parse_param(param: &str, input: &mut Input) {
         filters_params::CUMULATIVE => input.cumulative = Some(parse_boolean_value(param_value)),
         filters_params::MAXIMUM => input.maximum = Some(parse_number_value(param_value) as u8),
         filters_params::MINIMUM => input.minimum = Some(parse_number_value(param_value) as u8),
+        filters_params::QUANTILE_LOW => input.quantile_low = Some(parse_number_value(param_value)),
+        filters_params::QUANTILE_HIGH => input.quantile_high = Some(parse_number_value(param_value)),
         filters_params::THRESHOLD => input.threshold = Some(parse_number_value(param_value) as u8),
         filters_params::VALUE => {
             input.division = Some(is_division_operation(param_value));
             input.value = Some(parse_number_value(get_number_string(param_value)))
-        },
+        }
         _ => {}
     };
 }

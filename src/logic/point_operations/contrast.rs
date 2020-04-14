@@ -1,8 +1,8 @@
 use image::{DynamicImage, GenericImage, GenericImageView, Rgba};
 
+use crate::logic::_basic_operations;
 use crate::system::data::composed::point_operations::contrast_input::ContrastInput;
 use crate::system::defaults::algorithm_params::NUMBER_OF_COLOR_VALUES;
-use crate::logic::point_operations::_basic_operations;
 
 pub fn run(image: &mut DynamicImage, input_params: &ContrastInput) {
     let mut lookup_table: [u8; NUMBER_OF_COLOR_VALUES] = [0; NUMBER_OF_COLOR_VALUES];

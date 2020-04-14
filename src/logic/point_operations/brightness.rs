@@ -1,6 +1,6 @@
 use image::DynamicImage;
 
-use crate::logic::point_operations::_basic_operations;
+use crate::logic::_basic_operations;
 use crate::system::data::composed::point_operations::brightness_input::BrightnessInput;
 use crate::system::defaults::algorithm_params::NUMBER_OF_COLOR_VALUES;
 

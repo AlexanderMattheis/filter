@@ -3,5 +3,7 @@ pub const LOGARITHMIC: &'static str = "logarithmic";
 pub const CUMULATIVE: &'static str = "cumulative";
 pub const MINIMUM: &'static str = "minimum";
 pub const MAXIMUM: &'static str = "maximum";
+pub const QUANTILE_LOW: &'static str = "quantile-low";
+pub const QUANTILE_HIGH: &'static str = "quantile-high";
 pub const THRESHOLD: &'static str = "threshold";
 pub const VALUE: &'static str = "value";
