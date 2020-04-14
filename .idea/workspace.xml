@@ -6,7 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="ee39ad96-1580-4219-b6be-5b7b87080dc6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/statistics.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/statistics.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/argument_executor.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/argument_executor.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/defaults/messages/errors.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/defaults/messages/errors.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/io/input/_basic_parser.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/io/input/_basic_parser.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/io/input/point_operations/brightness_parser.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/io/input/point_operations/brightness_parser.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/io/input/point_operations/contrast_parser.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/io/input/point_operations/contrast_parser.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/system/io/input/point_operations/threshold_parser.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/io/input/point_operations/threshold_parser.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/io/output/statistics_builder.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/io/output/statistics_builder.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,22 +155,22 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="576" y="174" width="440" height="505" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1586766529416" />
-    <state width="1558" height="217" key="GridCell.Tab.0.bottom" timestamp="1586850821630">
+    <state width="1558" height="217" key="GridCell.Tab.0.bottom" timestamp="1586851424802">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="217" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1586850821630" />
-    <state width="1558" height="217" key="GridCell.Tab.0.center" timestamp="1586850821629">
+    <state width="1558" height="217" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1586851424802" />
+    <state width="1558" height="217" key="GridCell.Tab.0.center" timestamp="1586851424801">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="217" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1586850821629" />
-    <state width="1558" height="217" key="GridCell.Tab.0.left" timestamp="1586850821629">
+    <state width="1558" height="217" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1586851424801" />
+    <state width="1558" height="217" key="GridCell.Tab.0.left" timestamp="1586851424801">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="217" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1586850821629" />
-    <state width="1558" height="217" key="GridCell.Tab.0.right" timestamp="1586850821629">
+    <state width="1558" height="217" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1586851424801" />
+    <state width="1558" height="217" key="GridCell.Tab.0.right" timestamp="1586851424802">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="217" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1586850821629" />
+    <state width="1558" height="217" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1586851424802" />
     <state x="304" y="15" width="1026" height="839" key="SettingsEditor" timestamp="1586766940284">
       <screen x="0" y="0" width="1600" height="860" />
     </state>

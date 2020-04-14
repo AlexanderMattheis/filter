@@ -40,7 +40,7 @@ pub fn create_statistics(input_params: &StatisticsInput, statistics_output: &[St
 fn create_and_save_statistics(statistics_output: &StatisticsOutput, output_filepath_prefix: &String, channel_output_name: &'static str) {
     let output_filename = strings::concat_with_static(output_filepath_prefix, channel_output_name);
     let mut file = File::create(strings::concat_with_static(&output_filename, file_extensions::STATISTICS))
-        .expect(errors::COULD_NOT_CREATE_FILE);
+        .expect(errors::FAILED_CREATING_FILE);
 
     let formatted_output = format!("### Statistics for {color}\n\
     | Parameter     | Wert          |\n\
@@ -64,5 +64,5 @@ fn create_and_save_statistics(statistics_output: &StatisticsOutput, output_filep
     );
 
     file.write_all(formatted_output.as_bytes())
-        .expect(errors::COULD_NOT_WRITE_FILE);
+        .expect(errors::FAILED_WRITING_FILE);
 }

@@ -24,8 +24,8 @@ pub fn parse_params(params: &String) -> BrightnessInput {
 
 fn validate_input(value: i16) {
     if value < -255 {
-        errors::print_error_and_quit(errors::SHOULD_BE_HIGHER_EQ_MINUS_255, None);
+        errors::print_error_and_quit(errors::VALUE_LOWER_MINUS_255, None);
     } else if value > 255 {
-        errors::print_error_and_quit(errors::SHOULD_BE_LOWER_EQ_255, None);
+        errors::print_error_and_quit(errors::VALUE_HIGHER_255, None);
     }
 }

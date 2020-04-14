@@ -65,7 +65,9 @@ fn create_statistics(image: &DynamicImage, params: &String, output_filepath_pref
 }
 
 // point operations
-fn compute_auto_contrast(image: &mut DynamicImage, params: &String, output_file_name_path: &String) {}
+fn compute_auto_contrast(image: &mut DynamicImage, params: &String, output_file_name_path: &String) {
+
+}
 
 fn compute_brightness(image: &mut DynamicImage, params: &String, output_file_name_path: &String) {
     let input_params = brightness_parser::parse_params(params);

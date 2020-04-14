@@ -29,10 +29,10 @@ pub fn parse_params(params: &String) -> ContrastInput {
 
 fn validate_input(value: f64) {
     if value < 0.0 {
-        errors::print_error_and_quit(errors::SHOULD_BE_POSITIVE, None);
+        errors::print_error_and_quit(errors::VALUE_NEGATIVE, None);
     } else if value > 255.0 {
-        errors::print_error_and_quit(errors::SHOULD_BE_LOWER_EQ_255, None);
+        errors::print_error_and_quit(errors::VALUE_HIGHER_255, None);
     } else if value > 0.0 && value < 1.0 / 255.0 {
-        errors::print_error_and_quit(errors::SHOULD_BE_HIGHER_EQ_255, None);
+        errors::print_error_and_quit(errors::VALUE_LOWER_1_DIV_255, None);
     }
 }

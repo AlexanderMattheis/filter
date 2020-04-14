@@ -28,7 +28,7 @@ fn parse_param(param: &str, input: &mut Input) {
     let splitted_param: Vec<&str> = param.split(PARAM_NAME_VALUE_SEPARATOR).collect();
 
     if splitted_param.len() != 2 {
-        errors::print_error_and_quit(errors::PARAMETER_WRONG_FORMAT, Some(param));
+        errors::print_error_and_quit(errors::WRONG_FORMAT_PARAMETER, Some(param));
     }
 
     let param_name = match splitted_param.get(0) {

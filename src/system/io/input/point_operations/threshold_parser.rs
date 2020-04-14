@@ -23,5 +23,12 @@ pub fn parse_params(params: &String) -> ThresholdInput {
         _ => ThresholdDefaults::MAXIMUM
     };
 
+    validate_input(minimum, maximum);
     return ThresholdInput { threshold, minimum, maximum };
+}
+
+fn validate_input(minimum: u8, maximum: u8) {
+    if minimum > maximum {
+        errors::print_error_and_quit(errors::MINIMUM_BIGGER_MAXIMUM, None);
+    }
 }
