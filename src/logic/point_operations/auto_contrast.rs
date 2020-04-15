@@ -7,7 +7,6 @@ use crate::system::data::elementary::bounds_input::{PixelBound, RgbaPixelBoundsI
 use crate::system::data::elementary::channels_input::RgbaChannelsInput;
 use crate::system::defaults::algorithm_params::NUMBER_OF_COLOR_VALUES;
 use crate::system::defaults::messages::errors;
-use crate::system::defaults::messages::errors::{NOT_EXISTENT_HIGHER_BOUND, NOT_EXISTENT_LOWER_BOUND};
 
 pub fn run(image: &mut DynamicImage, input_params: &AutoContrastInput) {
     let mut statistics_histogram_output = StatisticsHistogramOutput::new();
@@ -61,7 +60,7 @@ fn get_lower_bound(histogram_data: &[u32; NUMBER_OF_COLOR_VALUES], pixels_bound_
         }
     }
 
-    errors::print_error_and_quit(NOT_EXISTENT_LOWER_BOUND, None);
+    return 255;
 }
 
 fn get_higher_bound(histogram_data: &[u32; NUMBER_OF_COLOR_VALUES], pixels_bound_higher: u32) -> u8 {
@@ -71,7 +70,7 @@ fn get_higher_bound(histogram_data: &[u32; NUMBER_OF_COLOR_VALUES], pixels_bound
         }
     }
 
-    errors::print_error_and_quit(NOT_EXISTENT_HIGHER_BOUND, None);
+    return 0;
 }
 
 fn compute_rgb_average_bound(rgba_bounds: &RgbaPixelBoundsInput, channels: &RgbaChannelsInput) -> PixelBound {
