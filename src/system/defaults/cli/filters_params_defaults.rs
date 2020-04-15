@@ -7,6 +7,7 @@ pub struct StatisticsDefaults;
 pub struct AutoContrastDefaults;
 pub struct BrightnessDefauls;
 pub struct ContrastDefaults;
+pub struct HistogramEqualizationDefaults;
 pub struct InversionDefaults;
 pub struct ThresholdDefaults;
 
@@ -41,7 +42,8 @@ impl AutoContrastDefaults {
         blue: true,
         alpha: false
     };
-    
+
+    pub const PER_CHANNEL: bool = false;
     pub const QUANTILE_LOW: f64 = 0.005;
     pub const QUANTILE_HIGH: f64 = 0.005;
 }
@@ -70,11 +72,23 @@ impl ContrastDefaults {
 
 impl InversionDefaults {
     pub const CHANNELS_INPUT: RgbaChannelsInput = RgbaChannelsInput {
-        red: false,
-        green: false,
-        blue: false,
+        red: true,
+        green: true,
+        blue: true,
         alpha: false
     };
+}
+
+impl HistogramEqualizationDefaults {
+    pub const CHANNELS_INPUT: RgbaChannelsInput = RgbaChannelsInput {
+        red: true,
+        green: true,
+        blue: true,
+        alpha: false
+    };
+
+    pub const ENHANCED: bool = true;
+    pub const PER_CHANNEL: bool = false;
 }
 
 impl ThresholdDefaults {

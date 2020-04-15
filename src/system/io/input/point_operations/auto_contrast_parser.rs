@@ -13,6 +13,11 @@ pub fn parse_params(params: &String) -> AutoContrastInput {
         _ => AutoContrastDefaults::CHANNELS_INPUT
     };
 
+    let per_channel = match input.per_channel {
+        Some(per_channel) => per_channel,
+        _ => AutoContrastDefaults::PER_CHANNEL
+    };
+
     let quantile_low = match input.quantile_low {
         Some(quantile_low) => quantile_low,
         _ => AutoContrastDefaults::QUANTILE_LOW
@@ -24,7 +29,7 @@ pub fn parse_params(params: &String) -> AutoContrastInput {
     };
 
     validate_input(quantile_low, quantile_high);
-    return AutoContrastInput { channels, quantile_low, quantile_high };
+    return AutoContrastInput { channels, per_channel, quantile_low, quantile_high };
 }
 
 fn validate_input(quantile_low: f64, quantile_high: f64) {

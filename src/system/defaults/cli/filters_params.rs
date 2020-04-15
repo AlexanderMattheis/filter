@@ -1,8 +1,10 @@
 pub const CHANNELS: &'static str = "channels";
 pub const LOGARITHMIC: &'static str = "logarithmic";
 pub const CUMULATIVE: &'static str = "cumulative";
+pub const ENHANCED: &'static str = "enhanced";
 pub const MINIMUM: &'static str = "minimum";
 pub const MAXIMUM: &'static str = "maximum";
+pub const PER_CHANNEL: &'static str = "per-channel";
 pub const QUANTILE_LOW: &'static str = "quantile-low";
 pub const QUANTILE_HIGH: &'static str = "quantile-high";
 pub const THRESHOLD: &'static str = "threshold";

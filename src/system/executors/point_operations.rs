@@ -1,7 +1,7 @@
 use image::DynamicImage;
 
-use crate::logic::point_operations::{auto_contrast, brightness, contrast, inversion, threshold};
-use crate::system::io::input::point_operations::{auto_contrast_parser, brightness_parser, contrast_parser, inversion_parser, threshold_parser};
+use crate::logic::point_operations::{auto_contrast, brightness, contrast, histogram_equalization, inversion, threshold};
+use crate::system::io::input::point_operations::{auto_contrast_parser, brightness_parser, contrast_parser, histogram_equalization_parser, inversion_parser, threshold_parser};
 
 pub fn compute_auto_contrast(image: &mut DynamicImage, params: &String, output_file_name_path: &String) {
     let input_params = auto_contrast_parser::parse_params(params);
@@ -23,7 +23,11 @@ pub fn compute_contrast(image: &mut DynamicImage, params: &String, output_file_n
 
 pub fn compute_gamma(image: &mut DynamicImage, params: &String, output_file_name_path: &String) {}
 
-pub fn compute_histogram_equalization(image: &mut DynamicImage, params: &String, output_file_name_path: &String) {}
+pub fn compute_histogram_equalization(image: &mut DynamicImage, params: &String, output_file_name_path: &String) {
+    let input_params = histogram_equalization_parser::parse_params(params);
+    histogram_equalization::run(image, &input_params);
+    image.save(output_file_name_path);
+}
 
 pub fn compute_histogram_specification(image: &mut DynamicImage, params: &String, output_file_name_path: &String) {}
 
