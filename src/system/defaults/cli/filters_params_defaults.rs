@@ -99,8 +99,6 @@ impl HistogramSpecificationDefaults {
         blue: true,
         alpha: false
     };
-
-    pub const PER_CHANNEL: bool = true;
 }
 
 impl ThresholdDefaults {

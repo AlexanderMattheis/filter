@@ -1,4 +1,5 @@
 # Ideas
 ## Histogram Specification
-### Histogram File
-Allow computing cumulative distribution function from an absolute histogram specified in file.
+### Multiple Images
+1. Computing average image histogram
+2. Applying average image histogram to each picture.

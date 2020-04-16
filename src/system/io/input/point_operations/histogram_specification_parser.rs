@@ -13,10 +13,5 @@ pub fn parse_params(params: &String) -> HistogramSpecificationInput {
         _ => HistogramSpecificationDefaults::CHANNELS_INPUT
     };
 
-    let per_channel = match input.per_channel {
-        Some(per_channel) => per_channel,
-        _ => HistogramSpecificationDefaults::PER_CHANNEL
-    };
-
-    return HistogramSpecificationInput { channels, per_channel };
+    return HistogramSpecificationInput { channels };
 }

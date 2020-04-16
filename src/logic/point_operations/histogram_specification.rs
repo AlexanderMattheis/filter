@@ -15,20 +15,9 @@ pub fn run(image: &mut DynamicImage, ref_image: &DynamicImage, input_params: &Hi
     compute_cumulative_distributions(image, ref_image, &mut image_cdf, &mut ref_image_cdf);
 
     // apply table
-    if input_params.per_channel {
-        let mut lookup_tables: LookupTables = LookupTables::new();
-        create_lookup_tables(input_params, &mut lookup_tables, &image_cdf, &ref_image_cdf);
-        _basic_operations::apply_lookup_tables(image, &lookup_tables, &input_params.channels);
-    } else {
-        let mut averaged_image_cdf: [f64; NUMBER_OF_COLOR_VALUES] = [0.0; NUMBER_OF_COLOR_VALUES];
-        let mut averaged_ref_image_cdf: [f64; NUMBER_OF_COLOR_VALUES] = [0.0; NUMBER_OF_COLOR_VALUES];
-        _basic_operations::compute_averaged_histogram(&image_cdf, &mut averaged_image_cdf, &input_params.channels);
-        _basic_operations::compute_averaged_histogram(&ref_image_cdf, &mut averaged_ref_image_cdf, &input_params.channels);
-
-        let mut lookup_table: [u8; NUMBER_OF_COLOR_VALUES] = [0; NUMBER_OF_COLOR_VALUES];
-        create_lookup_table(&mut lookup_table, &averaged_image_cdf, &averaged_ref_image_cdf);
-        _basic_operations::apply_lookup_table(image, &lookup_table, &input_params.channels);
-    }
+    let mut lookup_tables: LookupTables = LookupTables::new();
+    create_lookup_tables(input_params, &mut lookup_tables, &image_cdf, &ref_image_cdf);
+    _basic_operations::apply_lookup_tables(image, &lookup_tables, &input_params.channels);
 }
 
 fn compute_cumulative_distributions(image: &DynamicImage, ref_image: &DynamicImage,

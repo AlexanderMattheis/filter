@@ -6,11 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ee39ad96-1580-4219-b6be-5b7b87080dc6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/_basic_operations.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/_basic_operations.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/point_operations/histogram_equalization.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/point_operations/histogram_equalization.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/point_operations/histogram_specification.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/point_operations/histogram_specification.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/system/defaults/cli/filters_params_defaults.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/defaults/cli/filters_params_defaults.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/system/io/input/point_operations/histogram_specification_parser.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/io/input/point_operations/histogram_specification_parser.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IDEAS.md" beforeDir="false" afterPath="$PROJECT_DIR$/IDEAS.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +82,7 @@
     </configuration>
     <configuration name="Run Release-Build" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
       <option name="channel" value="DEFAULT" />
-      <option name="command" value="run  --release --package image-manipulation --bin image-manipulation -- --input &quot;$USER_HOME$/Pictures/Alex.jpg&quot; --reference &quot;$USER_HOME$/Pictures/Alex_2.jpg&quot; --params &quot;per-channel=true&quot; --filter &quot;histogram-specification&quot; --output &quot;$USER_HOME$/&quot;" />
+      <option name="command" value="run  --release --package image-manipulation --bin image-manipulation -- --input &quot;$USER_HOME$/Pictures/Alex.jpg&quot; --reference &quot;$USER_HOME$/Pictures/bananas.jpg&quot; --params &quot;per-channel=true&quot; --filter &quot;histogram-specification&quot; --output &quot;$USER_HOME$/&quot;" />
       <option name="allFeatures" value="false" />
       <option name="nocapture" value="false" />
       <option name="emulateTerminal" value="false" />
@@ -133,10 +129,10 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="0" y="183" width="802" height="671" key="#Project_Structure/0.0.1600.860@0.0.1600.860" timestamp="1584187088106" />
-    <state x="10" y="176" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587038374899">
+    <state x="10" y="176" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587039334693">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="10" y="176" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860@0.0.1600.860" timestamp="1587038374899" />
+    <state x="10" y="176" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860@0.0.1600.860" timestamp="1587039334693" />
     <state x="515" y="236" width="561" height="382" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1587021143267">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -153,22 +149,22 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="576" y="174" width="440" height="505" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1586766529416" />
-    <state width="1558" height="217" key="GridCell.Tab.0.bottom" timestamp="1587038378232">
+    <state width="1558" height="217" key="GridCell.Tab.0.bottom" timestamp="1587039407384">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="217" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1587038378232" />
-    <state width="1558" height="217" key="GridCell.Tab.0.center" timestamp="1587038378232">
+    <state width="1558" height="217" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1587039407384" />
+    <state width="1558" height="217" key="GridCell.Tab.0.center" timestamp="1587039407383">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="217" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1587038378232" />
-    <state width="1558" height="217" key="GridCell.Tab.0.left" timestamp="1587038378231">
+    <state width="1558" height="217" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1587039407383" />
+    <state width="1558" height="217" key="GridCell.Tab.0.left" timestamp="1587039407383">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="217" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1587038378231" />
-    <state width="1558" height="217" key="GridCell.Tab.0.right" timestamp="1587038378232">
+    <state width="1558" height="217" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1587039407383" />
+    <state width="1558" height="217" key="GridCell.Tab.0.right" timestamp="1587039407384">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="217" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1587038378232" />
+    <state width="1558" height="217" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1587039407384" />
     <state x="304" y="15" width="1026" height="839" key="SettingsEditor" timestamp="1586766940284">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
