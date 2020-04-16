@@ -7,6 +7,7 @@ pub struct StatisticsDefaults;
 pub struct AutoContrastDefaults;
 pub struct BrightnessDefauls;
 pub struct ContrastDefaults;
+pub struct GammaDefaults;
 pub struct HistogramEqualizationDefaults;
 pub struct HistogramSpecificationDefaults;
 pub struct InversionDefaults;
@@ -61,6 +62,17 @@ impl BrightnessDefauls {
 }
 
 impl ContrastDefaults {
+    pub const CHANNELS_INPUT: RgbaChannelsInput = RgbaChannelsInput {
+        red: true,
+        green: true,
+        blue: true,
+        alpha: false
+    };
+
+    pub const VALUE: f64 = 1.0;
+}
+
+impl GammaDefaults {
     pub const CHANNELS_INPUT: RgbaChannelsInput = RgbaChannelsInput {
         red: true,
         green: true,
