@@ -9,6 +9,11 @@ pub fn extract(matches: &ArgMatches) -> ExtractedArguments {
         _ => String::new()
     };
 
+    let reference_path = match matches.value_of(commands::REFERENCE) {
+        Some(reference_path) => String::from(reference_path),
+        _ => String::new()
+    };
+
     let filter = match matches.value_of(commands::FILTER) {
         Some(action) => String::from(action),
         _ => String::new()
@@ -24,5 +29,5 @@ pub fn extract(matches: &ArgMatches) -> ExtractedArguments {
         _ => String::new()
     };
 
-    return ExtractedArguments { input_path, filter, params, output_path };
+    return ExtractedArguments { input_path, reference_path, filter, params, output_path };
 }

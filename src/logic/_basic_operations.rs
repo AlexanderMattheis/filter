@@ -2,6 +2,7 @@ use image::{DynamicImage, GenericImage, GenericImageView, Rgba};
 
 use crate::system::data::composed::statistics_output::StatisticsHistogramOutput;
 use crate::system::data::elementary::channels_input::RgbaChannelsInput;
+use crate::system::data::histogram::RgbaHistogram;
 use crate::system::data::lookup_tables::LookupTables;
 use crate::system::defaults::algorithm_params::{AVERAGE_RGB_VALUE, LUMINANCE_BLUE, LUMINANCE_GREEN, LUMINANCE_RED, NUMBER_OF_COLOR_VALUES};
 
@@ -161,7 +162,37 @@ fn integrate_discrete(histograms: &mut StatisticsHistogramOutput) {
     }
 }
 
-pub fn compute_averaged_histogram(histograms: &StatisticsHistogramOutput, averaged_histogram: &mut [u32; 256], channels: &RgbaChannelsInput) {
+pub fn compute_averaged_histogram(histograms: &RgbaHistogram, averaged_histogram: &mut [f64; 256], channels: &RgbaChannelsInput) {
+    let mut count = 0.0;
+
+    if channels.red {
+        count += 1.0;
+    }
+
+    if channels.green {
+        count += 1.0;
+    }
+
+    if channels.blue {
+        count += 1.0;
+    }
+
+    if channels.alpha {
+        count += 1.0;
+    }
+
+    let divisor_factor = 1.0 / count;
+
+    for i in 0..averaged_histogram.len() {
+        averaged_histogram[i] += if channels.red { histograms.red_data[i] } else { 0.0 };
+        averaged_histogram[i] += if channels.green { histograms.green_data[i] } else { 0.0 };
+        averaged_histogram[i] += if channels.blue { histograms.blue_data[i] } else { 0.0 };
+        averaged_histogram[i] += if channels.alpha { histograms.alpha_data[i] } else { 0.0 };
+        averaged_histogram[i] = averaged_histogram[i] * divisor_factor;
+    }
+}
+
+pub fn compute_integer_averaged_histogram(histograms: &StatisticsHistogramOutput, averaged_histogram: &mut [u32; 256], channels: &RgbaChannelsInput) {
     let mut count = 0.0;
 
     if channels.red {
@@ -190,3 +221,5 @@ pub fn compute_averaged_histogram(histograms: &StatisticsHistogramOutput, averag
         averaged_histogram[i] = (averaged_histogram[i] as f64 * divisor_factor).round() as u32;
     }
 }
+
+

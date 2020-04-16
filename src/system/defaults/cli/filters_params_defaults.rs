@@ -8,6 +8,7 @@ pub struct AutoContrastDefaults;
 pub struct BrightnessDefauls;
 pub struct ContrastDefaults;
 pub struct HistogramEqualizationDefaults;
+pub struct HistogramSpecificationDefaults;
 pub struct InversionDefaults;
 pub struct ThresholdDefaults;
 
@@ -89,6 +90,17 @@ impl HistogramEqualizationDefaults {
 
     pub const ENHANCED: bool = true;
     pub const PER_CHANNEL: bool = false;
+}
+
+impl HistogramSpecificationDefaults {
+    pub const CHANNELS_INPUT: RgbaChannelsInput = RgbaChannelsInput {
+        red: true,
+        green: true,
+        blue: true,
+        alpha: false
+    };
+
+    pub const PER_CHANNEL: bool = true;
 }
 
 impl ThresholdDefaults {

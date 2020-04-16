@@ -3,14 +3,14 @@ pub struct ChannelsInput {
     pub green: bool,
     pub blue: bool,
     pub alpha: bool,
-    pub luminance: bool
+    pub luminance: bool,
 }
 
 pub struct RgbaChannelsInput {
     pub red: bool,
     pub green: bool,
     pub blue: bool,
-    pub alpha: bool
+    pub alpha: bool,
 }
 
 impl RgbaChannelsInput {
@@ -19,7 +19,7 @@ impl RgbaChannelsInput {
             red: channels.red,
             green: channels.green,
             blue: channels.blue,
-            alpha: channels.alpha
+            alpha: channels.alpha,
         };
     }
 }

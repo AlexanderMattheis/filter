@@ -3,8 +3,8 @@ use image::{DynamicImage, GenericImageView};
 use crate::logic::_basic_operations;
 use crate::system::data::composed::statistics_input::StatisticsInput;
 use crate::system::data::composed::statistics_output::{StatisticsHistogramOutput, StatisticsOutput};
-use crate::system::data::elementary::channels::Channel;
 use crate::system::defaults::algorithm_params::{LUMINANCE_BLUE, LUMINANCE_GREEN, LUMINANCE_RED, NUMBER_OF_COLOR_VALUES, NUMBER_OF_INPUT_CHANNELS};
+use crate::system::defaults::channels::Channel;
 use crate::system::defaults::messages::errors::{NOT_EXISTENT_HISTOGRAM, NOT_EXISTENT_MEDIAN, print_error_and_quit};
 
 struct HistogramDistribution {
