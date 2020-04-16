@@ -1,9 +1,7 @@
 use image::{DynamicImage, GenericImageView};
 
 use crate::logic::_basic_operations;
-use crate::system::data::composed::histogram_input::HistogramInput;
 use crate::system::data::composed::point_operations::histogram_specification_input::HistogramSpecificationInput;
-use crate::system::data::composed::statistics_output::StatisticsHistogramOutput;
 use crate::system::data::histogram::RgbaHistogram;
 use crate::system::data::lookup_tables::LookupTables;
 use crate::system::defaults::algorithm_params::NUMBER_OF_COLOR_VALUES;

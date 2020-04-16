@@ -4,6 +4,7 @@ extern crate image;
 use clap::{App, Arg};
 
 use system::defaults::cli::commands;
+
 use crate::system::argument_executor;
 
 mod logic;

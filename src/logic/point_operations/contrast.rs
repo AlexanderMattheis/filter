@@ -1,4 +1,4 @@
-use image::{DynamicImage, GenericImage, GenericImageView, Rgba};
+use image::{DynamicImage};
 
 use crate::logic::_basic_operations;
 use crate::system::data::composed::point_operations::contrast_input::ContrastInput;

@@ -7,7 +7,6 @@ use crate::system::data::composed::statistics_output::StatisticsHistogramOutput;
 use crate::system::data::elementary::channels_input::RgbaChannelsInput;
 use crate::system::data::lookup_tables::LookupTables;
 use crate::system::defaults::algorithm_params::NUMBER_OF_COLOR_VALUES;
-use crate::system::defaults::messages::errors;
 
 pub fn run(image: &mut DynamicImage, input_params: &AutoContrastInput) {
     let mut statistics_histogram_output = StatisticsHistogramOutput::new();
@@ -20,13 +19,13 @@ pub fn run(image: &mut DynamicImage, input_params: &AutoContrastInput) {
     // apply table
     if input_params.per_channel {
         let mut lookup_tables: LookupTables = LookupTables::new();
-        create_lookup_tables(input_params, &mut lookup_tables, &rgba_bounds);
+        create_lookup_tables(&mut lookup_tables, &rgba_bounds);
         _basic_operations::apply_lookup_tables(image, &lookup_tables, &input_params.channels);
     } else {
         let average_bound = compute_average_bound(&rgba_bounds, &input_params.channels);
 
         let mut lookup_table: [u8; NUMBER_OF_COLOR_VALUES] = [0; NUMBER_OF_COLOR_VALUES];
-        create_lookup_table(input_params, &mut lookup_table, &average_bound);
+        create_lookup_table(&mut lookup_table, &average_bound);
         _basic_operations::apply_lookup_table(image, &lookup_table, &input_params.channels);
     }
 }
@@ -105,15 +104,14 @@ fn compute_average_bound(rgba_bounds: &RgbaPixelBounds, channels: &RgbaChannelsI
     return PixelBound { lower, higher };
 }
 
-fn create_lookup_tables(input_params: &AutoContrastInput, lookup_tables: &mut LookupTables,
-                        rgba_bounds: &RgbaPixelBounds) {
-    create_lookup_table(input_params, &mut lookup_tables.red_bound, &rgba_bounds.red_bound);
-    create_lookup_table(input_params, &mut lookup_tables.green_bound, &rgba_bounds.green_bound);
-    create_lookup_table(input_params, &mut lookup_tables.blue_bound, &rgba_bounds.blue_bound);
-    create_lookup_table(input_params, &mut lookup_tables.alpha_bound, &rgba_bounds.alpha_bound);
+fn create_lookup_tables(lookup_tables: &mut LookupTables, rgba_bounds: &RgbaPixelBounds) {
+    create_lookup_table(&mut lookup_tables.red_bound, &rgba_bounds.red_bound);
+    create_lookup_table(&mut lookup_tables.green_bound, &rgba_bounds.green_bound);
+    create_lookup_table(&mut lookup_tables.blue_bound, &rgba_bounds.blue_bound);
+    create_lookup_table(&mut lookup_tables.alpha_bound, &rgba_bounds.alpha_bound);
 }
 
-fn create_lookup_table(input_params: &AutoContrastInput, lookup_table: &mut [u8; NUMBER_OF_COLOR_VALUES], pixel_bound: &PixelBound) {
+fn create_lookup_table(lookup_table: &mut [u8; NUMBER_OF_COLOR_VALUES], pixel_bound: &PixelBound) {
     let maximum_value = (NUMBER_OF_COLOR_VALUES - 1) as u8;
 
     let low = pixel_bound.lower as usize;

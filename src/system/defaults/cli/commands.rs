@@ -1,3 +1,4 @@
+// required
 pub const INPUT: &'static str = "input";
 pub const REFERENCE: &'static str = "reference";
 pub const FILTER: &'static str = "filter";

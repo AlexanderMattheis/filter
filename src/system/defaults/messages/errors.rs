@@ -11,6 +11,7 @@ They shouldn't answer on the question "What to do to solve the error?".
 pub const FAILED_CREATING_FILE: &'static str = "Failed creating the file!";
 pub const FAILED_LOADING_IMAGE: &'static str = "Failed loading the image: ";
 pub const FAILED_LOADING_REFERENCE_IMAGE: &'static str = "Failed loading the reference image: ";
+pub const FAILED_SAVING_IMAGE: &'static str = "Failed saving the image: ";
 pub const FAILED_WRITING_FILE: &'static str = "Failed writing the file!";
 
 // not existent

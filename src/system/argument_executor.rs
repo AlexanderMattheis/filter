@@ -1,13 +1,10 @@
-use std::error::Error;
 use std::path::Path;
 
 use clap::ArgMatches;
 use image::DynamicImage;
 
 use crate::logic::{histogram, statistics};
-use crate::logic::point_operations::{brightness, contrast, inversion, threshold};
 use crate::system::argument_extractor;
-use crate::system::basic::strings;
 use crate::system::data::composed::histogram_output::HistogramOutput;
 use crate::system::data::composed::statistics_output::StatisticsOutput;
 use crate::system::defaults::algorithm_params::NUMBER_OF_INPUT_CHANNELS;
@@ -16,13 +13,12 @@ use crate::system::defaults::messages::errors;
 use crate::system::defaults::output_filenames;
 use crate::system::executors::point_operations;
 use crate::system::io::input::{histogram_parser, statistics_parser};
-use crate::system::io::input::point_operations::{brightness_parser, contrast_parser, inversion_parser, threshold_parser};
 use crate::system::io::output::{histogram_builder, statistics_builder};
 
 pub fn execute(matches: &ArgMatches) {
     let arguments = argument_extractor::extract(matches);
 
-    let mut image =  match image::open(&arguments.input_path) {
+    let mut image = match image::open(&arguments.input_path) {
         Ok(image) => image,
         Err(error) => errors::print_error_and_quit(errors::FAILED_LOADING_IMAGE, Some(error.to_string().as_str()))
     };

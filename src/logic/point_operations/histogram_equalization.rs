@@ -1,7 +1,6 @@
 use image::DynamicImage;
 
 use crate::logic::_basic_operations;
-use crate::system::data::bounds::RgbaPixelBounds;
 use crate::system::data::composed::point_operations::histogram_equalization_input::HistogramEqualizationInput;
 use crate::system::data::composed::statistics_output::StatisticsHistogramOutput;
 use crate::system::data::lookup_tables::LookupTables;
@@ -45,7 +44,7 @@ fn create_lookup_tables(input_params: &HistogramEqualizationInput, lookup_tables
 }
 
 fn create_lookup_table(lookup_table: &mut [u8; NUMBER_OF_COLOR_VALUES], cumulative_histogram: &[u32; NUMBER_OF_COLOR_VALUES]) {
-    let maximum_value = (NUMBER_OF_COLOR_VALUES - 1);
+    let maximum_value = NUMBER_OF_COLOR_VALUES - 1;
 
     let factor = maximum_value as f64 / (cumulative_histogram[maximum_value] as f64);  // cumulative_histogram[maximum_value] = #pixels
 

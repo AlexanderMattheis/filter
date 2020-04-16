@@ -2,7 +2,6 @@ use image::{DynamicImage, GenericImage, GenericImageView, Rgba};
 
 use crate::system::data::composed::statistics_output::StatisticsHistogramOutput;
 use crate::system::data::elementary::channels_input::RgbaChannelsInput;
-use crate::system::data::histogram::RgbaHistogram;
 use crate::system::data::lookup_tables::LookupTables;
 use crate::system::defaults::algorithm_params::{AVERAGE_RGB_VALUE, LUMINANCE_BLUE, LUMINANCE_GREEN, LUMINANCE_RED, NUMBER_OF_COLOR_VALUES};
 
@@ -135,11 +134,11 @@ fn integrate_discrete_root(histograms: &mut StatisticsHistogramOutput) {
 
     // sum up non-rounded square-roots
     for i in 1..NUMBER_OF_COLOR_VALUES {
-        histogram_red[i] = (histogram_red[i - 1] + f64::sqrt(histograms.red_data[i] as f64));
-        histogram_green[i] = (histogram_green[i - 1] + f64::sqrt(histograms.green_data[i] as f64));
-        histogram_blue[i] = (histogram_blue[i - 1] + f64::sqrt(histograms.blue_data[i] as f64));
-        histogram_alpha[i] = (histogram_alpha[i - 1] + f64::sqrt(histograms.alpha_data[i] as f64));
-        histogram_luminance[i] = (histogram_luminance[i - 1] + f64::sqrt(histograms.luminance_data[i] as f64));
+        histogram_red[i] = histogram_red[i - 1] + f64::sqrt(histograms.red_data[i] as f64);
+        histogram_green[i] = histogram_green[i - 1] + f64::sqrt(histograms.green_data[i] as f64);
+        histogram_blue[i] = histogram_blue[i - 1] + f64::sqrt(histograms.blue_data[i] as f64);
+        histogram_alpha[i] = histogram_alpha[i - 1] + f64::sqrt(histograms.alpha_data[i] as f64);
+        histogram_luminance[i] = histogram_luminance[i - 1] + f64::sqrt(histograms.luminance_data[i] as f64);
     }
 
     // store rounded values
