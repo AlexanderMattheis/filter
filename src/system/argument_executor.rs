@@ -1,3 +1,4 @@
+use std::error::Error;
 use std::path::Path;
 
 use clap::ArgMatches;
@@ -21,9 +22,12 @@ use crate::system::io::output::{histogram_builder, statistics_builder};
 pub fn execute(matches: &ArgMatches) {
     let arguments = argument_extractor::extract(matches);
 
-    let mut image = image::open(&arguments.input_path).unwrap();
+    let mut image =  match image::open(&arguments.input_path) {
+        Ok(image) => image,
+        Err(error) => errors::print_error_and_quit(errors::FAILED_LOADING_IMAGE, Some(error.to_string().as_str()))
+    };
 
-    if !Path::new(&arguments.input_path).exists() || !Path::new(&arguments.output_path).exists() {
+    if !Path::new(&arguments.output_path).exists() {
         errors::print_error_and_quit(errors::NOT_VALID_PATH, Some(&arguments.output_path));
     }
 
@@ -41,7 +45,10 @@ pub fn execute(matches: &ArgMatches) {
         filters::GAMMA => point_operations::compute_gamma(&mut image, &arguments.params, &output_file_name_path),
         filters::HISTOGRAM_EQUALIZATION => point_operations::compute_histogram_equalization(&mut image, &arguments.params, &output_file_name_path),
         filters::HISTOGRAM_SPECIFICATION => {
-            let reference_image = image::open(&arguments.reference_path).unwrap();
+            let reference_image = match image::open(&arguments.reference_path) {
+                Ok(image) => image,
+                Err(error) => errors::print_error_and_quit(errors::FAILED_LOADING_REFERENCE_IMAGE, Some(error.to_string().as_str()))
+            };
             point_operations::compute_histogram_specification(&mut image, &reference_image, &arguments.params, &output_file_name_path);
         }
         filters::INVERSION => point_operations::compute_inversion(&mut image, &arguments.params, &output_file_name_path),
