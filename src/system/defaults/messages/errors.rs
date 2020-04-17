@@ -19,6 +19,9 @@ pub const NOT_EXISTENT_HISTOGRAM: &'static str = "Histogram is empty!";
 pub const NOT_EXISTENT_MEDIAN: &'static str = "Not existent median!";
 pub const NOT_EXISTENT_MANUAL: &'static str = "Not existent manual!";
 
+// not used
+pub const NOT_USED_LUMINANCE: &'static str = "Not used luminance value has been passed!";
+
 // not same
 pub const NOT_SAME_SIZE_PICTURES: &'static str = "Not same size of pictures!";
 
@@ -55,5 +58,9 @@ pub fn print_error_and_quit(error: &'static str, error_value: Option<&str>) -> !
 fn print_error(error: &'static str, error_value: &str) {
     eprint!("{}", error);
     eprintln!("{}", error_value);
+}
+
+pub fn print_warning(warning: &'static str) {
+    eprint!("{}", warning);
 }
 

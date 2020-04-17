@@ -126,7 +126,7 @@ impl LinearBlendingDefaults {
 }
 
 impl ThresholdDefaults {
-    pub const THRESHOLD: u8 = 127;
     pub const MINIMUM: u8 = 0;
     pub const MAXIMUM: u8 = 255;
+    pub const THRESHOLD: u8 = 127;
 }

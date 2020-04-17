@@ -14,7 +14,7 @@ pub fn extract(matches: &ArgMatches) -> ExtractedArguments {
         _ => String::new()
     };
 
-    let filter = match matches.value_of(commands::FILTER) {
+    let filter = match matches.value_of(commands::ACTION) {
         Some(action) => String::from(action),
         _ => String::new()
     };

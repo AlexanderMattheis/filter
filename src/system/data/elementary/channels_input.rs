@@ -1,3 +1,5 @@
+use crate::system::defaults::messages::errors;
+
 pub struct ChannelsInput {
     pub red: bool,
     pub green: bool,
@@ -13,7 +15,7 @@ impl ChannelsInput {
             green: channels.green,
             blue: channels.blue,
             alpha: channels.alpha,
-            luminance: false
+            luminance: false,
         };
     }
 }
@@ -27,6 +29,10 @@ pub struct RgbaChannelsInput {
 
 impl RgbaChannelsInput {
     pub fn new(channels: &ChannelsInput) -> RgbaChannelsInput {
+        if channels.luminance {
+            errors::print_warning(errors::NOT_USED_LUMINANCE);
+        }
+
         return RgbaChannelsInput {
             red: channels.red,
             green: channels.green,

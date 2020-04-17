@@ -14,7 +14,7 @@ pub fn parse_params(params: &String) -> BrightnessInput {
     };
 
     let value = match input.value {
-        Some(brightness) => brightness as i16,
+        Some(brightness) => brightness as i16,  // that is ok, since f64 should contain i16
         _ => BrightnessDefauls::VALUE
     };
 

@@ -41,15 +41,15 @@ fn parse_param(param: &str, input: &mut Input) {
         filters_params::LOGARITHMIC => input.logarithmic = Some(parse_boolean_value(param_value)),
         filters_params::CUMULATIVE => input.cumulative = Some(parse_boolean_value(param_value)),
         filters_params::ENHANCED => input.enhanced = Some(parse_boolean_value(param_value)),
-        filters_params::MAXIMUM => input.maximum = Some(parse_number_value(param_value) as u8),
-        filters_params::MINIMUM => input.minimum = Some(parse_number_value(param_value) as u8),
+        filters_params::MAXIMUM => input.maximum = Some(parse_uint_8(param_value)),
+        filters_params::MINIMUM => input.minimum = Some(parse_uint_8(param_value)),
         filters_params::PER_CHANNEL => input.per_channel = Some(parse_boolean_value(param_value)),
-        filters_params::QUANTILE_LOW => input.quantile_low = Some(parse_number_value(param_value)),
-        filters_params::QUANTILE_HIGH => input.quantile_high = Some(parse_number_value(param_value)),
-        filters_params::THRESHOLD => input.threshold = Some(parse_number_value(param_value) as u8),
+        filters_params::QUANTILE_LOW => input.quantile_low = Some(parse_double_value(param_value)),
+        filters_params::QUANTILE_HIGH => input.quantile_high = Some(parse_double_value(param_value)),
+        filters_params::THRESHOLD => input.threshold = Some(parse_uint_8(param_value)),
         filters_params::VALUE => {
             input.division = Some(is_division_operation(param_value));
-            input.value = Some(parse_number_value(get_number_string(param_value)))
+            input.value = Some(parse_double_value(get_number_string(param_value)))
         }
         _ => {}
     };
@@ -124,8 +124,18 @@ fn get_number_string(operation_and_number_value: &str) -> &str {
     errors::print_error_and_quit(errors::NOT_VALID_NUMBER_STRING, Some(operation_and_number_value));
 }
 
-fn parse_number_value(number_value: &str) -> f64 {
+fn parse_double_value(number_value: &str) -> f64 {
     let value = number_value.parse::<f64>();
+
+    if value.is_ok() {
+        return value.unwrap();
+    }
+
+    errors::print_error_and_quit(errors::NOT_VALID_NUMBER, Some(number_value));
+}
+
+fn parse_uint_8(number_value: &str) -> u8 {
+    let value = number_value.parse::<u8>();
 
     if value.is_ok() {
         return value.unwrap();

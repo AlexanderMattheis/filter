@@ -5,7 +5,7 @@ use crate::system::data::composed::statistics_input::StatisticsInput;
 use crate::system::data::composed::statistics_output::{StatisticsHistogramOutput, StatisticsOutput};
 use crate::system::defaults::algorithm_params::{NUMBER_OF_COLOR_VALUES, NUMBER_OF_INPUT_CHANNELS};
 use crate::system::defaults::channels::Channel;
-use crate::system::defaults::messages::errors::{NOT_EXISTENT_HISTOGRAM, NOT_EXISTENT_MEDIAN, print_error_and_quit};
+use crate::system::defaults::messages::errors;
 
 struct HistogramDistribution {
     average: f64,
@@ -74,7 +74,7 @@ fn get_first_non_zero(histogram: &[u32; NUMBER_OF_COLOR_VALUES], range: Vec<u32>
         }
     }
 
-    print_error_and_quit(NOT_EXISTENT_HISTOGRAM, None);
+    errors::print_error_and_quit(errors::NOT_EXISTENT_HISTOGRAM, None);
 }
 
 fn get_highest_pixel_value(histogram: &[u32; NUMBER_OF_COLOR_VALUES]) -> u8 {
@@ -117,7 +117,7 @@ fn get_median_pixel_value(histogram: &[u32; NUMBER_OF_COLOR_VALUES], num_pixels:
         }
     }
 
-    print_error_and_quit(NOT_EXISTENT_MEDIAN, None);
+    errors::print_error_and_quit(errors::NOT_EXISTENT_MEDIAN, None);
 }
 
 fn get_dynamics(histogram: &[u32; NUMBER_OF_COLOR_VALUES]) -> u16 {
