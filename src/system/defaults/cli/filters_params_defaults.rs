@@ -11,6 +11,7 @@ pub struct GammaDefaults;
 pub struct HistogramEqualizationDefaults;
 pub struct HistogramSpecificationDefaults;
 pub struct InversionDefaults;
+pub struct LinearBlendingDefaults;
 pub struct ThresholdDefaults;
 
 impl HistogramDefaults {
@@ -111,6 +112,17 @@ impl HistogramSpecificationDefaults {
         blue: true,
         alpha: false
     };
+}
+
+impl LinearBlendingDefaults {
+    pub const CHANNELS_INPUT: RgbaChannelsInput = RgbaChannelsInput {
+        red: true,
+        green: true,
+        blue: true,
+        alpha: false
+    };
+
+    pub const VALUE: f64 = 0.5;
 }
 
 impl ThresholdDefaults {

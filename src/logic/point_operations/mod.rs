@@ -5,4 +5,5 @@ pub mod gamma;
 pub mod histogram_equalization;
 pub mod histogram_specification;
 pub mod inversion;
+pub mod linear_blending;
 pub mod threshold;

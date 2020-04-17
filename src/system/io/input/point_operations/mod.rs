@@ -5,4 +5,5 @@ pub mod gamma_parser;
 pub mod histogram_equalization_parser;
 pub mod histogram_specification_parser;
 pub mod inversion_parser;
+pub mod linear_blending_parser;
 pub mod threshold_parser;

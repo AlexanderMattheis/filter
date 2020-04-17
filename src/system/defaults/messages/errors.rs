@@ -18,6 +18,9 @@ pub const FAILED_WRITING_FILE: &'static str = "Failed writing the file!";
 pub const NOT_EXISTENT_MEDIAN: &'static str = "Not existent median!";
 pub const NOT_EXISTENT_HISTOGRAM: &'static str = "Histogram is empty!";
 
+// not same
+pub const NOT_SAME_SIZE_PICTURES: &'static str = "Not same size of pictures!";
+
 // not valid
 pub const NOT_VALID_BOOLEAN: &'static str = "Not valid boolean: ";
 pub const NOT_VALID_CHANNEL: &'static str = "Not valid channel: ";
@@ -32,6 +35,7 @@ pub const MINIMUM_BIGGER_MAXIMUM: &'static str = "The minimum is bigger than the
 
 pub const QUANTILES_SUM_HIGHER_1_0: &'static str = "The sum of lower and higher quantile is higher than 1.0!";
 
+pub const VALUE_HIGHER_1: &'static str = "The value is higher than 1.0!";
 pub const VALUE_HIGHER_255: &'static str = "The value is higher than 255!";
 pub const VALUE_LOWER_1_DIV_255: &'static str = "The value is lower than 1/255!";
 pub const VALUE_LOWER_MINUS_255: &'static str = "The value is lower than -255!";

@@ -48,7 +48,13 @@ pub fn execute(matches: &ArgMatches) {
             point_operations::compute_histogram_specification(&mut image, &reference_image, &arguments.params, &output_file_name_path);
         }
         filters::INVERSION => point_operations::compute_inversion(&mut image, &arguments.params, &output_file_name_path),
-        filters::LINEAR_BLENDING => point_operations::compute_linear_blending(&mut image, &arguments.params, &output_file_name_path),
+        filters::LINEAR_BLENDING => {
+            let reference_image = match image::open(&arguments.reference_path) {
+                Ok(image) => image,
+                Err(error) => errors::print_error_and_quit(errors::FAILED_LOADING_REFERENCE_IMAGE, Some(error.to_string().as_str()))
+            };
+            point_operations::compute_linear_blending(&mut image, &reference_image, &arguments.params, &output_file_name_path)
+        }
         filters::THRESHOLD => point_operations::compute_threshold(&mut image, &arguments.params, &output_file_name_path),
         _ => errors::print_error_and_quit(errors::NOT_VALID_FILTER, Some(arguments.filter.as_str()))
     }

@@ -4,6 +4,7 @@ use crate::system::data::composed::statistics_output::StatisticsHistogramOutput;
 use crate::system::data::elementary::channels_input::RgbaChannelsInput;
 use crate::system::data::lookup_tables::LookupTables;
 use crate::system::defaults::algorithm_params::{AVERAGE_RGB_VALUE, LUMINANCE_BLUE, LUMINANCE_GREEN, LUMINANCE_RED, NUMBER_OF_COLOR_VALUES};
+use crate::system::defaults::messages::errors;
 
 pub fn apply_lookup_table(image: &mut DynamicImage, lookup_table: &[u8; NUMBER_OF_COLOR_VALUES], channels: &RgbaChannelsInput) {
     let dimensions = image.dimensions();
@@ -26,6 +27,40 @@ pub fn apply_lookup_table(image: &mut DynamicImage, lookup_table: &[u8; NUMBER_O
 
             if channels.alpha {
                 pixel_value[3] = lookup_table[pixel_value[3] as usize];
+            }
+
+            image.put_pixel(u, v, Rgba { 0: pixel_value });
+        }
+    }
+}
+
+pub fn apply_2d_lookup_table(image: &mut DynamicImage, ref_image: &DynamicImage, lookup_table: &[[u8; NUMBER_OF_COLOR_VALUES]; NUMBER_OF_COLOR_VALUES], channels: &RgbaChannelsInput) {
+    let image_dimensions = image.dimensions();
+    let ref_image_dimensions = ref_image.dimensions();
+
+    if image_dimensions.0 != ref_image_dimensions.0 || image_dimensions.1 != ref_image_dimensions.1 {
+        errors::print_error_and_quit(errors::NOT_SAME_SIZE_PICTURES, None);
+    }
+
+    for v in 0..image_dimensions.1 {
+        for u in 0..image_dimensions.0 {
+            let mut pixel_value = image.get_pixel(u, v).0;
+            let ref_pixel_value = ref_image.get_pixel(u, v).0;
+
+            if channels.red {
+                pixel_value[0] = lookup_table[pixel_value[0] as usize][ref_pixel_value[0] as usize];
+            }
+
+            if channels.green {
+                pixel_value[1] = lookup_table[pixel_value[1] as usize][ref_pixel_value[1] as usize];
+            }
+
+            if channels.blue {
+                pixel_value[2] = lookup_table[pixel_value[2] as usize][ref_pixel_value[2] as usize];
+            }
+
+            if channels.alpha {
+                pixel_value[3] = lookup_table[pixel_value[3] as usize][ref_pixel_value[3] as usize];
             }
 
             image.put_pixel(u, v, Rgba { 0: pixel_value });
