@@ -225,5 +225,3 @@ pub fn compute_integer_averaged_histogram(histograms: &StatisticsHistogramOutput
         averaged_histogram[i] = (averaged_histogram[i] as f64 * divisor_factor).round() as u32;
     }
 }
-
-

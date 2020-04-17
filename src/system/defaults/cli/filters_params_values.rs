@@ -8,3 +8,4 @@ impl ChannelTypes {
     pub const LUMINANCE: char = 'l';
 }
 
+

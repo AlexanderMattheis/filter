@@ -4,4 +4,5 @@ pub struct ExtractedArguments {
     pub filter: String,
     pub params: String,
     pub output_path: String,
+    pub manual: String
 }

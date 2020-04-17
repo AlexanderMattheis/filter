@@ -4,15 +4,12 @@ use crate::system::defaults::cli::filters_params;
 use crate::system::defaults::cli::filters_params_values::ChannelTypes;
 use crate::system::defaults::messages::errors;
 
-const PARAMS_SEPARATOR: &str = ";";
-const PARAM_NAME_VALUE_SEPARATOR: &str = "=";
-
 pub fn parse_params(params: &String) -> Input {
     if params.is_empty() {
         return Input::new();
     }
 
-    let splitted_params: Vec<&str> = params.split(PARAMS_SEPARATOR).collect();
+    let splitted_params: Vec<&str> = params.split(";").collect();
     let mut input = Input::new();
 
     for param in splitted_params {
@@ -23,7 +20,7 @@ pub fn parse_params(params: &String) -> Input {
 }
 
 fn parse_param(param: &str, input: &mut Input) {
-    let splitted_param: Vec<&str> = param.split(PARAM_NAME_VALUE_SEPARATOR).collect();
+    let splitted_param: Vec<&str> = param.split("=").collect();
 
     if splitted_param.len() != 2 {
         errors::print_error_and_quit(errors::WRONG_FORMAT_PARAMETER, Some(param));

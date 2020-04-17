@@ -7,3 +7,4 @@ pub mod io;
 pub mod argument_executor;
 pub mod argument_extractor;
 pub mod extracted_arguments;
+pub mod manual;

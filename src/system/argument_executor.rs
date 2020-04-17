@@ -4,7 +4,7 @@ use clap::ArgMatches;
 use image::DynamicImage;
 
 use crate::logic::{histogram, statistics};
-use crate::system::argument_extractor;
+use crate::system::{argument_extractor, manual};
 use crate::system::data::composed::histogram_output::HistogramOutput;
 use crate::system::data::composed::statistics_output::StatisticsOutput;
 use crate::system::defaults::algorithm_params::NUMBER_OF_INPUT_CHANNELS;
@@ -17,6 +17,7 @@ use crate::system::io::output::{histogram_builder, statistics_builder};
 
 pub fn execute(matches: &ArgMatches) {
     let arguments = argument_extractor::extract(matches);
+    manual::check(&arguments.manual);
 
     let mut image = match image::open(&arguments.input_path) {
         Ok(image) => image,

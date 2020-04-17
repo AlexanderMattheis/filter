@@ -29,5 +29,10 @@ pub fn extract(matches: &ArgMatches) -> ExtractedArguments {
         _ => String::new()
     };
 
-    return ExtractedArguments { input_path, reference_path, filter, params, output_path };
+    let manual = match matches.value_of(commands::MANUAL) {
+        Some(manual) => String::from(manual),
+        _ => String::new()
+    };
+
+    return ExtractedArguments { input_path, reference_path, filter, params, output_path, manual };
 }

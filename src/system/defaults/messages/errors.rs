@@ -15,8 +15,9 @@ pub const FAILED_SAVING_IMAGE: &'static str = "Failed saving the image: ";
 pub const FAILED_WRITING_FILE: &'static str = "Failed writing the file!";
 
 // not existent
-pub const NOT_EXISTENT_MEDIAN: &'static str = "Not existent median!";
 pub const NOT_EXISTENT_HISTOGRAM: &'static str = "Histogram is empty!";
+pub const NOT_EXISTENT_MEDIAN: &'static str = "Not existent median!";
+pub const NOT_EXISTENT_MANUAL: &'static str = "Not existent manual!";
 
 // not same
 pub const NOT_SAME_SIZE_PICTURES: &'static str = "Not same size of pictures!";
