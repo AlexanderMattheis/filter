@@ -19,6 +19,10 @@ pub fn check(manual_name: &String) {
         "" => {}
         _ => errors::print_error_and_quit(errors::NOT_EXISTENT_MANUAL, None)
     }
+
+    if !manual_name.eq("") {
+        process::exit(1);
+    }
 }
 
 fn print_basic() {
@@ -41,8 +45,6 @@ fn print_basic() {
              cumulative = filters_params::CUMULATIVE,
              logarithmic = filters_params::LOGARITHMIC
     );
-
-    process::exit(1);
 }
 
 fn print_point_operations() {
@@ -105,7 +107,7 @@ fn print_point_operations() {
     );
 
     println!("\nwhere:\n\
-    {brightness} = <-255|..|255>; {contrast} = <0|/255|..|*255>; {channels} = <r|g|..|rgb|..|rgba>; \n\
+    {brightness} = <-255|..|255>; {contrast} = <0.0|/255.0|..|*255.0>; {channels} = <r|g|..|rgb|..|rgba>; \n\
     {enhanced} = <false|true>; {gamma} = <0.0..>; {linear_blending} = <0.0|..|1.0>; {minimum} = <0|..|255>; {maximum} = <0|..|255>; \n\
     {per_channel} = <false|true>; {quantile_low} = <0.0|..|1.0>; {quantile_high} = <0.0|..|1.0>;  \n\
     {threshold} = <0|..|255>;",
@@ -122,8 +124,6 @@ fn print_point_operations() {
              quantile_high = filters_params::QUANTILE_HIGH,
              threshold = filters_params::THRESHOLD
     );
-
-    process::exit(1);
 }
 
 fn get_channels(channels_input: &ChannelsInput) -> String {
