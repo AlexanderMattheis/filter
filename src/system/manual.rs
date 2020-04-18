@@ -122,7 +122,7 @@ fn print_point_operations() {
              quantile_high = filters_params::QUANTILE_HIGH,
              threshold = filters_params::THRESHOLD
     );
-    
+
     process::exit(1);
 }
 
