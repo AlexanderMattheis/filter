@@ -1,6 +1,6 @@
 pub mod commands;
-pub mod filters;
-pub mod filters_params;
-pub mod filters_params_defaults;
-pub mod filters_params_values;
+pub mod actions;
+pub mod actions_params;
+pub mod actions_params_defaults;
+pub mod actions_params_values;
 pub mod manuals;

@@ -8,7 +8,7 @@ use crate::system::{argument_extractor, manual};
 use crate::system::data::composed::histogram_output::HistogramOutput;
 use crate::system::data::composed::statistics_output::StatisticsOutput;
 use crate::system::defaults::algorithm_params::NUMBER_OF_INPUT_CHANNELS;
-use crate::system::defaults::cli::filters;
+use crate::system::defaults::cli::actions;
 use crate::system::defaults::messages::errors;
 use crate::system::defaults::output_filenames;
 use crate::system::executors::point_operations;
@@ -32,31 +32,31 @@ pub fn execute(matches: &ArgMatches) {
     let output_file_name_path = output_filenames::create_output_filepath(&arguments.input_path, &arguments.output_path);
 
     match arguments.filter.as_str() {
-        filters::HISTOGRAM => create_histogram(&image, &arguments.params, &output_file_path_prefix),
-        filters::STATISTICS => create_statistics(&image, &arguments.params, &output_file_path_prefix),
+        actions::HISTOGRAM => create_histogram(&image, &arguments.params, &output_file_path_prefix),
+        actions::STATISTICS => create_statistics(&image, &arguments.params, &output_file_path_prefix),
 
         // point operations
-        filters::AUTO_CONTRAST => point_operations::compute_auto_contrast(&mut image, &arguments.params, &output_file_name_path),
-        filters::BRIGHTNESS => point_operations::compute_brightness(&mut image, &arguments.params, &output_file_name_path),
-        filters::CONTRAST => point_operations::compute_contrast(&mut image, &arguments.params, &output_file_name_path),
-        filters::GAMMA => point_operations::compute_gamma(&mut image, &arguments.params, &output_file_name_path),
-        filters::HISTOGRAM_EQUALIZATION => point_operations::compute_histogram_equalization(&mut image, &arguments.params, &output_file_name_path),
-        filters::HISTOGRAM_SPECIFICATION => {
+        actions::AUTO_CONTRAST => point_operations::compute_auto_contrast(&mut image, &arguments.params, &output_file_name_path),
+        actions::BRIGHTNESS => point_operations::compute_brightness(&mut image, &arguments.params, &output_file_name_path),
+        actions::CONTRAST => point_operations::compute_contrast(&mut image, &arguments.params, &output_file_name_path),
+        actions::GAMMA => point_operations::compute_gamma(&mut image, &arguments.params, &output_file_name_path),
+        actions::HISTOGRAM_EQUALIZATION => point_operations::compute_histogram_equalization(&mut image, &arguments.params, &output_file_name_path),
+        actions::HISTOGRAM_SPECIFICATION => {
             let reference_image = match image::open(&arguments.reference_path) {
                 Ok(image) => image,
                 Err(error) => errors::print_error_and_quit(errors::FAILED_LOADING_REFERENCE_IMAGE, Some(error.to_string().as_str()))
             };
             point_operations::compute_histogram_specification(&mut image, &reference_image, &arguments.params, &output_file_name_path);
         }
-        filters::INVERSION => point_operations::compute_inversion(&mut image, &arguments.params, &output_file_name_path),
-        filters::LINEAR_BLENDING => {
+        actions::INVERSION => point_operations::compute_inversion(&mut image, &arguments.params, &output_file_name_path),
+        actions::LINEAR_BLENDING => {
             let reference_image = match image::open(&arguments.reference_path) {
                 Ok(image) => image,
                 Err(error) => errors::print_error_and_quit(errors::FAILED_LOADING_REFERENCE_IMAGE, Some(error.to_string().as_str()))
             };
             point_operations::compute_linear_blending(&mut image, &reference_image, &arguments.params, &output_file_name_path)
         }
-        filters::THRESHOLD => point_operations::compute_threshold(&mut image, &arguments.params, &output_file_name_path),
+        actions::THRESHOLD => point_operations::compute_threshold(&mut image, &arguments.params, &output_file_name_path),
         _ => errors::print_error_and_quit(errors::NOT_VALID_FILTER, Some(arguments.filter.as_str()))
     }
 }

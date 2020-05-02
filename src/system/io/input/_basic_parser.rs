@@ -1,7 +1,7 @@
 use crate::system::data::elementary::channels_input::ChannelsInput;
 use crate::system::data::elementary::input::Input;
-use crate::system::defaults::cli::filters_params;
-use crate::system::defaults::cli::filters_params_values::ChannelTypes;
+use crate::system::defaults::cli::actions_params;
+use crate::system::defaults::cli::actions_params_values::ChannelTypes;
 use crate::system::defaults::messages::errors;
 
 pub fn parse_params(params: &String) -> Input {
@@ -37,17 +37,17 @@ fn parse_param(param: &str, input: &mut Input) {
     };
 
     match param_name {
-        filters_params::CHANNELS => input.channels = Some(parse_channels_value(param_value)),
-        filters_params::LOGARITHMIC => input.logarithmic = Some(parse_boolean_value(param_value)),
-        filters_params::CUMULATIVE => input.cumulative = Some(parse_boolean_value(param_value)),
-        filters_params::ENHANCED => input.enhanced = Some(parse_boolean_value(param_value)),
-        filters_params::MAXIMUM => input.maximum = Some(parse_uint_8(param_value)),
-        filters_params::MINIMUM => input.minimum = Some(parse_uint_8(param_value)),
-        filters_params::PER_CHANNEL => input.per_channel = Some(parse_boolean_value(param_value)),
-        filters_params::QUANTILE_LOW => input.quantile_low = Some(parse_double_value(param_value)),
-        filters_params::QUANTILE_HIGH => input.quantile_high = Some(parse_double_value(param_value)),
-        filters_params::THRESHOLD => input.threshold = Some(parse_uint_8(param_value)),
-        filters_params::VALUE => {
+        actions_params::CHANNELS => input.channels = Some(parse_channels_value(param_value)),
+        actions_params::LOGARITHMIC => input.logarithmic = Some(parse_boolean_value(param_value)),
+        actions_params::CUMULATIVE => input.cumulative = Some(parse_boolean_value(param_value)),
+        actions_params::ENHANCED => input.enhanced = Some(parse_boolean_value(param_value)),
+        actions_params::MAXIMUM => input.maximum = Some(parse_uint_8(param_value)),
+        actions_params::MINIMUM => input.minimum = Some(parse_uint_8(param_value)),
+        actions_params::PER_CHANNEL => input.per_channel = Some(parse_boolean_value(param_value)),
+        actions_params::QUANTILE_LOW => input.quantile_low = Some(parse_double_value(param_value)),
+        actions_params::QUANTILE_HIGH => input.quantile_high = Some(parse_double_value(param_value)),
+        actions_params::THRESHOLD => input.threshold = Some(parse_uint_8(param_value)),
+        actions_params::VALUE => {
             input.division = Some(is_division_operation(param_value));
             input.value = Some(parse_double_value(get_number_string(param_value)))
         }

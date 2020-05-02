@@ -1,4 +1,4 @@
-use crate::system::defaults::cli::filters_params_defaults::HistogramDefaults;
+use crate::system::defaults::cli::actions_params_defaults::HistogramDefaults;
 use crate::system::io::input::_basic_parser;
 use crate::system::data::composed::histogram_input::HistogramInput;
 use crate::system::data::elementary::input::Input;
