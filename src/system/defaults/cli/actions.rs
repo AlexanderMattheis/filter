@@ -11,3 +11,6 @@ pub const HISTOGRAM_SPECIFICATION: &'static str = "histogram-specification";
 pub const INVERSION: &'static str = "inversion";
 pub const LINEAR_BLENDING: &'static str = "linear-blending";
 pub const THRESHOLD: &'static str = "threshold";
+
+// filters
+pub const BOX_BLUR: &'static str = "box-blur";

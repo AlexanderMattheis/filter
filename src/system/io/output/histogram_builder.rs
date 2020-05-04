@@ -2,11 +2,11 @@ use plotly::{Bar, Layout, NamedColor, Plot};
 use plotly::common::{Marker, Title};
 use plotly::layout::Axis;
 
+use crate::logic::algorithm_params::NUMBER_OF_COLOR_VALUES;
 use crate::system::basic::strings;
-use crate::system::defaults::{colors, file_extensions, output_filenames::ChannelOutputNames};
-use crate::system::defaults::algorithm_params::NUMBER_OF_COLOR_VALUES;
 use crate::system::data::composed::histogram_input::HistogramInput;
 use crate::system::data::composed::histogram_output::HistogramOutput;
+use crate::system::defaults::{colors, file_extensions, output_filenames::ChannelOutputNames};
 
 pub fn create_histograms(input_params: &HistogramInput, histogram_output: &HistogramOutput, output_filepath_prefix: &String) {
     let y_max = compute_maximum(input_params, histogram_output);

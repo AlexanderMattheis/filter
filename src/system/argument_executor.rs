@@ -3,15 +3,15 @@ use std::path::Path;
 use clap::ArgMatches;
 use image::DynamicImage;
 
-use crate::logic::{histogram, statistics};
+use crate::logic::actions::{histogram, statistics};
+use crate::logic::algorithm_params::NUMBER_OF_INPUT_CHANNELS;
 use crate::system::{argument_extractor, manual};
 use crate::system::data::composed::histogram_output::HistogramOutput;
 use crate::system::data::composed::statistics_output::StatisticsOutput;
-use crate::system::defaults::algorithm_params::NUMBER_OF_INPUT_CHANNELS;
 use crate::system::defaults::cli::actions;
 use crate::system::defaults::messages::errors;
 use crate::system::defaults::output_filenames;
-use crate::system::executors::point_operations;
+use crate::system::executors::{filters, point_operations};
 use crate::system::io::input::{histogram_parser, statistics_parser};
 use crate::system::io::output::{histogram_builder, statistics_builder};
 
@@ -57,7 +57,12 @@ pub fn execute(matches: &ArgMatches) {
             point_operations::compute_linear_blending(&mut image, &reference_image, &arguments.params, &output_file_name_path)
         }
         actions::THRESHOLD => point_operations::compute_threshold(&mut image, &arguments.params, &output_file_name_path),
-        _ => errors::print_error_and_quit(errors::NOT_VALID_FILTER, Some(arguments.filter.as_str()))
+
+        // filters
+        actions::BOX_BLUR => filters::compute_box_blur(&image, &arguments.params, &output_file_name_path),
+
+        // _
+        _ => errors::print_error_and_quit(errors::NOT_VALID_FILTER, Some(arguments.filter.as_str())),
     }
 }
 

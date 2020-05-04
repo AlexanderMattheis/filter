@@ -1,7 +1,6 @@
-pub mod _basic_operations;
-
-pub mod histogram;
-pub mod statistics;
+pub mod algorithm_params;
 
 // folders
-pub mod point_operations;
+pub mod actions;
+pub mod data_structures;
+

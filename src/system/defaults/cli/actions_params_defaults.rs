@@ -1,18 +1,31 @@
 use crate::system::data::elementary::channels_input::{ChannelsInput, RgbaChannelsInput};
+use crate::system::defaults::types::border_handling::BorderHandling;
 
 pub struct HistogramDefaults;
+
 pub struct StatisticsDefaults;
 
 // point-operations
 pub struct AutoContrastDefaults;
+
 pub struct BrightnessDefauls;
+
 pub struct ContrastDefaults;
+
 pub struct GammaDefaults;
+
 pub struct HistogramEqualizationDefaults;
+
 pub struct HistogramSpecificationDefaults;
+
 pub struct InversionDefaults;
+
 pub struct LinearBlendingDefaults;
+
 pub struct ThresholdDefaults;
+
+// filters
+pub struct BoxBlurDefaults;
 
 impl HistogramDefaults {
     pub const CHANNELS_INPUT: ChannelsInput = ChannelsInput {
@@ -20,7 +33,7 @@ impl HistogramDefaults {
         green: false,
         blue: false,
         alpha: false,
-        luminance: true
+        luminance: true,
     };
 
     pub const LOGARITHMIC: bool = false;
@@ -33,7 +46,7 @@ impl StatisticsDefaults {
         green: false,
         blue: false,
         alpha: false,
-        luminance: true
+        luminance: true,
     };
 }
 
@@ -43,7 +56,7 @@ impl AutoContrastDefaults {
         red: true,
         green: true,
         blue: true,
-        alpha: false
+        alpha: false,
     };
 
     pub const PER_CHANNEL: bool = false;
@@ -56,7 +69,7 @@ impl BrightnessDefauls {
         red: true,
         green: true,
         blue: true,
-        alpha: false
+        alpha: false,
     };
 
     pub const VALUE: i16 = 0;
@@ -67,7 +80,7 @@ impl ContrastDefaults {
         red: true,
         green: true,
         blue: true,
-        alpha: false
+        alpha: false,
     };
 
     pub const VALUE: f64 = 1.0;
@@ -78,7 +91,7 @@ impl GammaDefaults {
         red: true,
         green: true,
         blue: true,
-        alpha: false
+        alpha: false,
     };
 
     pub const VALUE: f64 = 1.0;
@@ -89,7 +102,7 @@ impl InversionDefaults {
         red: true,
         green: true,
         blue: true,
-        alpha: false
+        alpha: false,
     };
 }
 
@@ -98,7 +111,7 @@ impl HistogramEqualizationDefaults {
         red: true,
         green: true,
         blue: true,
-        alpha: false
+        alpha: false,
     };
 
     pub const ENHANCED: bool = true;
@@ -110,7 +123,7 @@ impl HistogramSpecificationDefaults {
         red: true,
         green: true,
         blue: true,
-        alpha: false
+        alpha: false,
     };
 }
 
@@ -119,7 +132,7 @@ impl LinearBlendingDefaults {
         red: true,
         green: true,
         blue: true,
-        alpha: false
+        alpha: false,
     };
 
     pub const VALUE: f64 = 0.5;
@@ -129,4 +142,21 @@ impl ThresholdDefaults {
     pub const MINIMUM: u8 = 0;
     pub const MAXIMUM: u8 = 255;
     pub const THRESHOLD: u8 = 127;
+}
+
+// filters
+impl BoxBlurDefaults {
+    pub const BACKGROUND_COLOR: [u8; 4] = [255; 4];
+    pub const BORDER_HANDLING: BorderHandling = BorderHandling::PaddingExtend;
+
+    pub const CHANNELS_INPUT: RgbaChannelsInput = RgbaChannelsInput {
+        red: true,
+        green: true,
+        blue: true,
+        alpha: false
+    };
+
+    pub const ITERATIONS: u16 = 1;
+    pub const RADIUS_HORIZONTAL: usize = 50;
+    pub const RADIUS_VERTICAL: usize = 50;
 }

@@ -1,25 +1,24 @@
 use image::{DynamicImage, GenericImageView};
 
-use crate::logic::_basic_operations;
+use crate::logic::data_structures::histogram::FloatingPointRgbaHistogram;
+use crate::logic::data_structures::lookup_table::RgbaLookupTable;
 use crate::system::data::composed::point_operations::histogram_specification_input::HistogramSpecificationInput;
-use crate::system::data::histogram::RgbaHistogram;
-use crate::system::data::lookup_tables::LookupTables;
-use crate::system::defaults::algorithm_params::NUMBER_OF_COLOR_VALUES;
+use crate::logic::algorithm_params::NUMBER_OF_COLOR_VALUES;
 
 pub fn run(image: &mut DynamicImage, ref_image: &DynamicImage, input_params: &HistogramSpecificationInput) {
-    let mut image_cdf = RgbaHistogram::new();
-    let mut ref_image_cdf = RgbaHistogram::new();
+    let mut image_cdf = FloatingPointRgbaHistogram::new();
+    let mut ref_image_cdf = FloatingPointRgbaHistogram::new();
 
     compute_cumulative_distributions(image, ref_image, &mut image_cdf, &mut ref_image_cdf);
 
     // apply table
-    let mut lookup_tables: LookupTables = LookupTables::new();
+    let mut lookup_tables: RgbaLookupTable = RgbaLookupTable::new();
     create_lookup_tables(input_params, &mut lookup_tables, &image_cdf, &ref_image_cdf);
-    _basic_operations::apply_lookup_tables(image, &lookup_tables, &input_params.channels);
+    RgbaLookupTable::apply_lookup_tables(image, &lookup_tables, &input_params.channels);
 }
 
 fn compute_cumulative_distributions(image: &DynamicImage, ref_image: &DynamicImage,
-                                    image_cdf: &mut RgbaHistogram, ref_image_cdf: &mut RgbaHistogram) {
+                                    image_cdf: &mut FloatingPointRgbaHistogram, ref_image_cdf: &mut FloatingPointRgbaHistogram) {
     compute_histograms(image, ref_image, image_cdf, ref_image_cdf);
 
     let img_dimensions = (image.dimensions().0 * image.dimensions().1) as f64;
@@ -35,7 +34,7 @@ fn compute_cumulative_distributions(image: &DynamicImage, ref_image: &DynamicIma
     }
 }
 
-fn make_first_value_relative(image_cdf: &mut RgbaHistogram, img_dimensions: f64) {
+fn make_first_value_relative(image_cdf: &mut FloatingPointRgbaHistogram, img_dimensions: f64) {
     image_cdf.red_data[0] /= img_dimensions;
     image_cdf.green_data[0] /= img_dimensions;
     image_cdf.blue_data[0] /= img_dimensions;
@@ -43,7 +42,7 @@ fn make_first_value_relative(image_cdf: &mut RgbaHistogram, img_dimensions: f64)
 }
 
 fn compute_histograms(image: &DynamicImage, ref_image: &DynamicImage,
-                      image_cdf: &mut RgbaHistogram, ref_image_cdf: &mut RgbaHistogram) {
+                      image_cdf: &mut FloatingPointRgbaHistogram, ref_image_cdf: &mut FloatingPointRgbaHistogram) {
     let img_dimensions = image.dimensions();
     let ref_img_dimensions = ref_image.dimensions();
 
@@ -59,7 +58,7 @@ fn compute_histograms(image: &DynamicImage, ref_image: &DynamicImage,
 }
 
 fn count_values_in_both(image: &DynamicImage, ref_image: &DynamicImage,
-                        image_cdf: &mut RgbaHistogram, ref_image_cdf: &mut RgbaHistogram) {
+                        image_cdf: &mut FloatingPointRgbaHistogram, ref_image_cdf: &mut FloatingPointRgbaHistogram) {
     let dimensions = image.dimensions();
 
     for v in 0..dimensions.1 {
@@ -70,7 +69,7 @@ fn count_values_in_both(image: &DynamicImage, ref_image: &DynamicImage,
     }
 }
 
-fn count_values(image: &DynamicImage, histogram: &mut RgbaHistogram) {
+fn count_values(image: &DynamicImage, histogram: &mut FloatingPointRgbaHistogram) {
     let dimensions = image.dimensions();
 
     for v in 0..dimensions.1 {
@@ -80,7 +79,7 @@ fn count_values(image: &DynamicImage, histogram: &mut RgbaHistogram) {
     }
 }
 
-fn count_values_at(u: u32, v: u32, image: &DynamicImage, histogram: &mut RgbaHistogram) {
+fn count_values_at(u: u32, v: u32, image: &DynamicImage, histogram: &mut FloatingPointRgbaHistogram) {
     let pixel_value = image.get_pixel(u, v).0;
 
     let red_value = pixel_value[0] as usize;
@@ -94,15 +93,15 @@ fn count_values_at(u: u32, v: u32, image: &DynamicImage, histogram: &mut RgbaHis
     histogram.alpha_data[alpha_value] += 1.0;
 }
 
-fn sum_up_relative_values(index: usize, cdf: &mut RgbaHistogram, num_pixels: f64) {
+fn sum_up_relative_values(index: usize, cdf: &mut FloatingPointRgbaHistogram, num_pixels: f64) {
     cdf.red_data[index] = (cdf.red_data[index] / num_pixels) + cdf.red_data[index - 1];
     cdf.green_data[index] = (cdf.green_data[index] / num_pixels) + cdf.green_data[index - 1];
     cdf.blue_data[index] = (cdf.blue_data[index] / num_pixels) + cdf.blue_data[index - 1];
     cdf.alpha_data[index] = (cdf.alpha_data[index] / num_pixels) + cdf.alpha_data[index - 1];
 }
 
-fn create_lookup_tables(input_params: &HistogramSpecificationInput, lookup_tables: &mut LookupTables,
-                        image_cdf: &RgbaHistogram, ref_image_cdf: &RgbaHistogram) {
+fn create_lookup_tables(input_params: &HistogramSpecificationInput, lookup_tables: &mut RgbaLookupTable,
+                        image_cdf: &FloatingPointRgbaHistogram, ref_image_cdf: &FloatingPointRgbaHistogram) {
     if input_params.channels.red {
         create_lookup_table(&mut lookup_tables.red_bound, &image_cdf.red_data, &ref_image_cdf.red_data);
     }

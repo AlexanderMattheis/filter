@@ -1,16 +1,16 @@
 use image::{DynamicImage, GenericImageView};
 
-use crate::logic::_basic_operations;
-use crate::system::data::bounds::{PixelBound, RgbaPixelBounds};
+use crate::logic::algorithm_params::NUMBER_OF_COLOR_VALUES;
+use crate::logic::data_structures::bounds::{PixelBound, RgbaPixelBounds};
+use crate::logic::data_structures::histogram;
+use crate::logic::data_structures::histogram::IntegerRgbaHistogram;
+use crate::logic::data_structures::lookup_table::RgbaLookupTable;
 use crate::system::data::composed::point_operations::auto_contrast_input::AutoContrastInput;
-use crate::system::data::composed::statistics_output::StatisticsHistogramOutput;
 use crate::system::data::elementary::channels_input::RgbaChannelsInput;
-use crate::system::data::lookup_tables::LookupTables;
-use crate::system::defaults::algorithm_params::NUMBER_OF_COLOR_VALUES;
 
 pub fn run(image: &mut DynamicImage, input_params: &AutoContrastInput) {
-    let mut statistics_histogram_output = StatisticsHistogramOutput::new();
-    _basic_operations::compute_cumulative_histograms(image, &mut statistics_histogram_output, false);
+    let mut statistics_histogram_output = IntegerRgbaHistogram::new();
+    histogram::compute_cumulative_histograms(image, &mut statistics_histogram_output, false);
 
     // compute bounds
     let mut rgba_bounds = RgbaPixelBounds::new(255, 0);
@@ -18,19 +18,19 @@ pub fn run(image: &mut DynamicImage, input_params: &AutoContrastInput) {
 
     // apply table
     if input_params.per_channel {
-        let mut lookup_tables: LookupTables = LookupTables::new();
+        let mut lookup_tables: RgbaLookupTable = RgbaLookupTable::new();
         create_lookup_tables(&mut lookup_tables, &rgba_bounds);
-        _basic_operations::apply_lookup_tables(image, &lookup_tables, &input_params.channels);
+        RgbaLookupTable::apply_lookup_tables(image, &lookup_tables, &input_params.channels);
     } else {
         let average_bound = compute_average_bound(&rgba_bounds, &input_params.channels);
 
         let mut lookup_table: [u8; NUMBER_OF_COLOR_VALUES] = [0; NUMBER_OF_COLOR_VALUES];
         create_lookup_table(&mut lookup_table, &average_bound);
-        _basic_operations::apply_lookup_table(image, &lookup_table, &input_params.channels);
+        RgbaLookupTable::apply_lookup_table(image, &lookup_table, &input_params.channels);
     }
 }
 
-fn compute_bounds(statistics_histogram_output: &mut StatisticsHistogramOutput, rgba_bounds: &mut RgbaPixelBounds,
+fn compute_bounds(statistics_histogram_output: &mut IntegerRgbaHistogram, rgba_bounds: &mut RgbaPixelBounds,
                   input_params: &AutoContrastInput, image_dimensions: (u32, u32)) {
     let number_of_pixels = (image_dimensions.0 * image_dimensions.1) as f64;
     let pixels_bound_lower = (number_of_pixels * input_params.quantile_low).round() as u32;
@@ -104,7 +104,7 @@ fn compute_average_bound(rgba_bounds: &RgbaPixelBounds, channels: &RgbaChannelsI
     return PixelBound { lower, higher };
 }
 
-fn create_lookup_tables(lookup_tables: &mut LookupTables, rgba_bounds: &RgbaPixelBounds) {
+fn create_lookup_tables(lookup_tables: &mut RgbaLookupTable, rgba_bounds: &RgbaPixelBounds) {
     create_lookup_table(&mut lookup_tables.red_bound, &rgba_bounds.red_bound);
     create_lookup_table(&mut lookup_tables.green_bound, &rgba_bounds.green_bound);
     create_lookup_table(&mut lookup_tables.blue_bound, &rgba_bounds.blue_bound);

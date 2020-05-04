@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ee39ad96-1580-4219-b6be-5b7b87080dc6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/actions/filters/linear/box_blur.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/actions/filters/linear/box_blur.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/data_structures/patch.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/data_structures/patch.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/system/defaults/cli/actions_params_defaults.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/defaults/cli/actions_params_defaults.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +21,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Class" />
         <option value="Rust File" />
       </list>
     </option>
@@ -38,6 +42,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/system/data/composed" />
     <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
+    <property name="org.rust.hideDetachedFileNotifications/home/alex/Repositories/filter/src/logic/filters/linear/box.rs" value="true" />
     <property name="org.rust.hideDetachedFileNotifications/home/alex/Repositories/filter/src/logic/histogram.rs" value="true" />
     <property name="org.rust.hideDetachedFileNotifications/home/alex/Repositories/filter/src/logic/point_operations/histogram_equalization.rs" value="true" />
     <property name="org.rust.hideDetachedFileNotifications/home/alex/Repositories/filter/src/system/io/data/color.rs" value="true" />
@@ -52,11 +57,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/system/defaults" />
-      <recent name="$PROJECT_DIR$/src/system/data" />
       <recent name="$PROJECT_DIR$/src/logic" />
-      <recent name="$PROJECT_DIR$/src/logic/point_operations" />
-      <recent name="$PROJECT_DIR$/src/system/io/input/point_operations" />
+      <recent name="$PROJECT_DIR$/src/system/defaults/types" />
+      <recent name="$PROJECT_DIR$/src/logic/data_structures" />
+      <recent name="$PROJECT_DIR$/src/logic/actions" />
+      <recent name="$PROJECT_DIR$/src/system/defaults" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/system/data/composed" />
@@ -81,7 +86,7 @@
     </configuration>
     <configuration name="Run Release-Build" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
       <option name="channel" value="DEFAULT" />
-      <option name="command" value="run  --release --package image-manipulation --bin image-manipulation -- --input &quot;$USER_HOME$/Pictures/Alex.jpg&quot;  --action &quot;auto-contrast&quot; --params &quot;quantile-low=0.001&quot; --output &quot;$USER_HOME$/&quot;" />
+      <option name="command" value="run  --release --package image-manipulation --bin image-manipulation -- --input &quot;$USER_HOME$/Pictures/Alex.jpg&quot;  --action &quot;box-blur&quot; --params &quot;&quot; --output &quot;$USER_HOME$/&quot;" />
       <option name="allFeatures" value="false" />
       <option name="nocapture" value="false" />
       <option name="emulateTerminal" value="false" />
@@ -170,10 +175,10 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="0" y="183" width="802" height="671" key="#Project_Structure/0.0.1600.860@0.0.1600.860" timestamp="1584187088106" />
-    <state x="0" y="100" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587202484307">
+    <state x="0" y="100" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589015398679">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="0" y="100" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860@0.0.1600.860" timestamp="1587202484307" />
+    <state x="0" y="100" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860@0.0.1600.860" timestamp="1589015398679" />
     <state x="515" y="236" width="561" height="382" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1587021143267">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -190,22 +195,22 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="576" y="174" width="440" height="505" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1586766529416" />
-    <state width="1558" height="217" key="GridCell.Tab.0.bottom" timestamp="1587202492677">
+    <state width="1558" height="217" key="GridCell.Tab.0.bottom" timestamp="1589032057709">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="217" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1587202492677" />
-    <state width="1558" height="217" key="GridCell.Tab.0.center" timestamp="1587202492677">
+    <state width="1558" height="217" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1589032057709" />
+    <state width="1558" height="217" key="GridCell.Tab.0.center" timestamp="1589032057709">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="217" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1587202492677" />
-    <state width="1558" height="217" key="GridCell.Tab.0.left" timestamp="1587202492677">
+    <state width="1558" height="217" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1589032057709" />
+    <state width="1558" height="217" key="GridCell.Tab.0.left" timestamp="1589032057708">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="217" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1587202492677" />
-    <state width="1558" height="217" key="GridCell.Tab.0.right" timestamp="1587202492677">
+    <state width="1558" height="217" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1589032057708" />
+    <state width="1558" height="217" key="GridCell.Tab.0.right" timestamp="1589032057709">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="217" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1587202492677" />
+    <state width="1558" height="217" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1589032057709" />
     <state x="304" y="15" width="1026" height="839" key="SettingsEditor" timestamp="1587046484479">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -214,17 +219,17 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="799" y="0" width="801" height="860" key="dock-window-1/0.0.1600.860@0.0.1600.860" timestamp="1586194808883" />
-    <state x="476" y="163" width="647" height="534" key="find.popup" timestamp="1587156291380">
+    <state x="476" y="163" width="791" height="594" key="find.popup" timestamp="1589025981699">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="476" y="163" width="647" height="534" key="find.popup/0.0.1600.860@0.0.1600.860" timestamp="1587156291380" />
+    <state x="476" y="163" width="791" height="594" key="find.popup/0.0.1600.860@0.0.1600.860" timestamp="1589025981699" />
     <state x="463" y="193" key="run.anything.popup" timestamp="1587118309316">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="463" y="193" key="run.anything.popup/0.0.1600.860@0.0.1600.860" timestamp="1587118309316" />
-    <state x="463" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1587119027171">
+    <state x="463" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1588494010556">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="463" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1600.860@0.0.1600.860" timestamp="1587119027171" />
+    <state x="463" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1600.860@0.0.1600.860" timestamp="1588494010556" />
   </component>
 </project>

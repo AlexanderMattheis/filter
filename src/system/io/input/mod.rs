@@ -5,3 +5,4 @@ pub mod statistics_parser;
 
 // folders
 pub mod point_operations;
+pub mod filters;

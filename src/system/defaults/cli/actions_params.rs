@@ -1,11 +1,16 @@
+pub const BACKGROUND_COLOR: &'static str = "background-color";
+pub const BORDER_HANDLING: &'static str = "border-handling";
 pub const CHANNELS: &'static str = "channels";
 pub const LOGARITHMIC: &'static str = "logarithmic";
 pub const CUMULATIVE: &'static str = "cumulative";
 pub const ENHANCED: &'static str = "enhanced";
+pub const ITERATIONS: &'static str = "iterations";
 pub const MINIMUM: &'static str = "minimum";
 pub const MAXIMUM: &'static str = "maximum";
 pub const PER_CHANNEL: &'static str = "per-channel";
 pub const QUANTILE_LOW: &'static str = "quantile-low";
 pub const QUANTILE_HIGH: &'static str = "quantile-high";
+pub const RADIUS_HORIZONTAL: &'static str = "radius-horizontal";
+pub const RADIUS_VERTICAL: &'static str = "radius-vertical";
 pub const THRESHOLD: &'static str = "threshold";
 pub const VALUE: &'static str = "value";

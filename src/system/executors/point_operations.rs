@@ -1,6 +1,6 @@
 use image::DynamicImage;
 
-use crate::logic::point_operations::{auto_contrast, brightness, contrast, gamma, histogram_equalization, histogram_specification, inversion, linear_blending, threshold};
+use crate::logic::actions::point_operations::{auto_contrast, brightness, contrast, gamma, histogram_equalization, histogram_specification, inversion, linear_blending, threshold};
 use crate::system::defaults::messages::errors;
 use crate::system::io::input::point_operations::{auto_contrast_parser, brightness_parser, contrast_parser, gamma_parser, histogram_equalization_parser, histogram_specification_parser, inversion_parser, linear_blending_parser, threshold_parser};
 

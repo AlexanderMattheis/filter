@@ -7,3 +7,6 @@ pub const LUMINANCE_BLUE: f64 = 0.06060791;
 
 pub const NUMBER_OF_COLOR_VALUES: usize = 256;
 pub const NUMBER_OF_INPUT_CHANNELS: usize = 5;
+
+
+

@@ -27,7 +27,9 @@ pub const NOT_SAME_SIZE_PICTURES: &'static str = "Not same size of pictures!";
 
 // not valid
 pub const NOT_VALID_BOOLEAN: &'static str = "Not valid boolean: ";
+pub const NOT_VALID_BORDER_HANDLING: &'static str = "Not valid border-handling: ";
 pub const NOT_VALID_CHANNEL: &'static str = "Not valid channel: ";
+pub const NOT_VALID_COLOR: &'static str = "Not valid color: ";
 pub const NOT_VALID_FILTER: &'static str = "Not valid filter: ";
 pub const NOT_VALID_NUMBER: &'static str = "Not valid number: ";
 pub const NOT_VALID_NUMBER_STRING: &'static str = "Not valid number-string: ";

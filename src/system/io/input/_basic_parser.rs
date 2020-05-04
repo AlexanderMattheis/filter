@@ -1,8 +1,12 @@
+use std::collections::BTreeSet;
+use std::iter::FromIterator;
+
 use crate::system::data::elementary::channels_input::ChannelsInput;
 use crate::system::data::elementary::input::Input;
-use crate::system::defaults::cli::actions_params;
-use crate::system::defaults::cli::actions_params_values::ChannelTypes;
-use crate::system::defaults::messages::errors;
+use crate::system::defaults::cli::{actions_params, actions_params_values};
+use crate::system::defaults::cli::actions_params_values::{BorderHandlingTypes, ChannelTypes};
+use crate::system::defaults::messages::{errors, infos};
+use crate::system::defaults::types::border_handling::BorderHandling;
 
 pub fn parse_params(params: &String) -> Input {
     if params.is_empty() {
@@ -37,21 +41,82 @@ fn parse_param(param: &str, input: &mut Input) {
     };
 
     match param_name {
+        actions_params::BACKGROUND_COLOR => input.background_color = Some(parse_background_color(param_value)),
+        actions_params::BORDER_HANDLING => input.border_handling = Some(parse_border_handling(param_value)),
         actions_params::CHANNELS => input.channels = Some(parse_channels_value(param_value)),
         actions_params::LOGARITHMIC => input.logarithmic = Some(parse_boolean_value(param_value)),
         actions_params::CUMULATIVE => input.cumulative = Some(parse_boolean_value(param_value)),
         actions_params::ENHANCED => input.enhanced = Some(parse_boolean_value(param_value)),
-        actions_params::MAXIMUM => input.maximum = Some(parse_uint_8(param_value)),
-        actions_params::MINIMUM => input.minimum = Some(parse_uint_8(param_value)),
+        actions_params::ITERATIONS => input.iterations = Some(parse_uint_16_value(param_value)),
+        actions_params::MAXIMUM => input.maximum = Some(parse_uint_8_value(param_value)),
+        actions_params::MINIMUM => input.minimum = Some(parse_uint_8_value(param_value)),
         actions_params::PER_CHANNEL => input.per_channel = Some(parse_boolean_value(param_value)),
         actions_params::QUANTILE_LOW => input.quantile_low = Some(parse_double_value(param_value)),
         actions_params::QUANTILE_HIGH => input.quantile_high = Some(parse_double_value(param_value)),
-        actions_params::THRESHOLD => input.threshold = Some(parse_uint_8(param_value)),
+        actions_params::RADIUS_HORIZONTAL => input.radius_horizontal = Some(parse_usize_value(param_value)),
+        actions_params::RADIUS_VERTICAL => input.radius_vertical = Some(parse_usize_value(param_value)),
+        actions_params::THRESHOLD => input.threshold = Some(parse_uint_8_value(param_value)),
         actions_params::VALUE => {
             input.division = Some(is_division_operation(param_value));
             input.value = Some(parse_double_value(get_number_string(param_value)))
         }
         _ => {}
+    };
+}
+
+fn parse_background_color(hex_color: &str) -> [u8; 4] {
+    let wrong_prefix = !hex_color.starts_with("#");
+    let wrong_length = hex_color.len() != 7 && hex_color.len() != 9;
+    let not_hexadecimal = !BTreeSet::<char>::from_iter(hex_color[1..].chars())
+        .is_subset(&BTreeSet::<char>::from_iter(actions_params_values::HEXADECIMAL_CHARACTERS.chars()));
+
+    if wrong_prefix || wrong_length || not_hexadecimal {
+        println!("{}", infos::VALID_COLOR);
+        errors::print_error_and_quit(errors::NOT_VALID_COLOR, Some(hex_color));
+    }
+
+    return to_decimals(hex_color);
+}
+
+#[inline]
+fn to_decimals(hex_color: &str) -> [u8; 4] {
+    let mut hex_color_index = 1;  // skip '#'
+    let mut rgba_color_index = 0;
+    let mut rgba_color: [u8; 4] = [255; 4];  // avoids setting alpha-value
+
+    while hex_color_index < hex_color[1..].len() {
+        // cut out strings of length two for the different color values (rgba)
+        rgba_color[rgba_color_index] = to_decimal(&hex_color[hex_color_index..hex_color_index + 2], 16);
+        hex_color_index = hex_color_index + 2;
+        rgba_color_index = rgba_color_index + 1;
+    }
+
+    return rgba_color;
+}
+
+fn to_decimal(number: &str, number_base: u32) -> u8 {
+    let mut sum = 0;
+    let mut power = number.len() as u32;
+
+    for symbol in number.chars() {
+        power -= 1;
+        sum = sum + symbol.to_digit(number_base).unwrap() * number_base.pow(power);
+    }
+
+    return sum as u8;
+}
+
+fn parse_border_handling(border_handling: &str) -> BorderHandling {
+    return match border_handling {
+        BorderHandlingTypes::CONSTANT_VALUE => BorderHandling::ConstantValue,
+        BorderHandlingTypes::UNPROCESSED => BorderHandling::Unprocessed,
+        BorderHandlingTypes::PADDING_CONSTANT_VALUE => BorderHandling::PaddingConstantValue,
+        BorderHandlingTypes::PADDING_EXTEND => BorderHandling::PaddingExtend,
+        BorderHandlingTypes::PADDING_MIRROR => BorderHandling::PaddingMirror,
+        BorderHandlingTypes::PADDING_PERIODICALLY => BorderHandling::PaddingPeriodically,
+        _ => {
+            errors::print_error_and_quit(errors::NOT_VALID_BORDER_HANDLING, Some(border_handling));
+        }
     };
 }
 
@@ -134,8 +199,28 @@ fn parse_double_value(number_value: &str) -> f64 {
     errors::print_error_and_quit(errors::NOT_VALID_NUMBER, Some(number_value));
 }
 
-fn parse_uint_8(number_value: &str) -> u8 {
+fn parse_uint_8_value(number_value: &str) -> u8 {
     let value = number_value.parse::<u8>();
+
+    if value.is_ok() {
+        return value.unwrap();
+    }
+
+    errors::print_error_and_quit(errors::NOT_VALID_NUMBER, Some(number_value));
+}
+
+fn parse_uint_16_value(number_value: &str) -> u16 {
+    let value = number_value.parse::<u16>();
+
+    if value.is_ok() {
+        return value.unwrap();
+    }
+
+    errors::print_error_and_quit(errors::NOT_VALID_NUMBER, Some(number_value));
+}
+
+fn parse_usize_value(number_value: &str) -> usize {
+    let value = number_value.parse::<usize>();
 
     if value.is_ok() {
         return value.unwrap();

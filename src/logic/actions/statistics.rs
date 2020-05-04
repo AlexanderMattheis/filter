@@ -1,11 +1,12 @@
 use image::{DynamicImage, GenericImageView};
 
-use crate::logic::_basic_operations;
+use crate::logic::algorithm_params::{NUMBER_OF_INPUT_CHANNELS, NUMBER_OF_COLOR_VALUES};
+use crate::logic::data_structures::histogram;
+use crate::logic::data_structures::histogram::IntegerRgbaHistogram;
 use crate::system::data::composed::statistics_input::StatisticsInput;
-use crate::system::data::composed::statistics_output::{StatisticsHistogramOutput, StatisticsOutput};
-use crate::system::defaults::algorithm_params::{NUMBER_OF_COLOR_VALUES, NUMBER_OF_INPUT_CHANNELS};
-use crate::system::defaults::channels::Channel;
+use crate::system::data::composed::statistics_output::StatisticsOutput;
 use crate::system::defaults::messages::errors;
+use crate::system::defaults::types::channels::Channel;
 
 struct HistogramDistribution {
     average: f64,
@@ -13,28 +14,28 @@ struct HistogramDistribution {
 }
 
 pub fn run(image: &DynamicImage, input_params: &StatisticsInput, output_data: &mut [StatisticsOutput; NUMBER_OF_INPUT_CHANNELS]) {
-    let mut statistics_histogram_output = StatisticsHistogramOutput::new();
-    _basic_operations::compute_histograms(image, &mut statistics_histogram_output);
+    let mut rgba_histogram = IntegerRgbaHistogram::new();
+    histogram::compute_histograms(image, &mut rgba_histogram);
     let count_pixels = image.pixels().count() as f64;
 
     if input_params.channels.red {
-        compute_statistics(&statistics_histogram_output.red_data, output_data, Channel::RED, count_pixels);
+        compute_statistics(&rgba_histogram.red_data, output_data, Channel::Red, count_pixels);
     }
 
     if input_params.channels.green {
-        compute_statistics(&statistics_histogram_output.green_data, output_data, Channel::GREEN, count_pixels);
+        compute_statistics(&rgba_histogram.green_data, output_data, Channel::Green, count_pixels);
     }
 
     if input_params.channels.blue {
-        compute_statistics(&statistics_histogram_output.blue_data, output_data, Channel::BLUE, count_pixels);
+        compute_statistics(&rgba_histogram.blue_data, output_data, Channel::Blue, count_pixels);
     }
 
     if input_params.channels.alpha {
-        compute_statistics(&statistics_histogram_output.alpha_data, output_data, Channel::ALPHA, count_pixels);
+        compute_statistics(&rgba_histogram.alpha_data, output_data, Channel::Alpha, count_pixels);
     }
 
     if input_params.channels.luminance {
-        compute_statistics(&statistics_histogram_output.luminance_data, output_data, Channel::LUMINANCE, count_pixels);
+        compute_statistics(&rgba_histogram.luminance_data, output_data, Channel::Luminance, count_pixels);
     }
 }
 

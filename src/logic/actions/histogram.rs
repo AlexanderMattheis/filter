@@ -1,9 +1,6 @@
 use image::{DynamicImage, GenericImageView};
 
-use crate::system::defaults::algorithm_params::LUMINANCE_BLUE;
-use crate::system::defaults::algorithm_params::LUMINANCE_GREEN;
-use crate::system::defaults::algorithm_params::LUMINANCE_RED;
-use crate::system::defaults::algorithm_params::NUMBER_OF_COLOR_VALUES;
+use crate::logic::algorithm_params::{LUMINANCE_BLUE, LUMINANCE_GREEN, LUMINANCE_RED, NUMBER_OF_COLOR_VALUES};
 use crate::system::data::composed::{{histogram_input::HistogramInput, histogram_output::HistogramOutput}};
 
 pub fn run(image: &DynamicImage, input_params: &HistogramInput, output_data: &mut HistogramOutput) {
