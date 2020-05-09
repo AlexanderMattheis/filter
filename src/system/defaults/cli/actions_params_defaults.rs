@@ -147,7 +147,7 @@ impl ThresholdDefaults {
 // filters
 impl BoxBlurDefaults {
     pub const BACKGROUND_COLOR: [u8; 4] = [0; 4];
-    pub const BORDER_HANDLING: BorderHandling = BorderHandling::PaddingExtend;
+    pub const BORDER_HANDLING: BorderHandling = BorderHandling::PaddingPeriodically;
 
     pub const CHANNELS_INPUT: RgbaChannelsInput = RgbaChannelsInput {
         red: true,

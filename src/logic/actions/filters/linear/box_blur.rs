@@ -50,14 +50,14 @@ fn init_patch(image: &DynamicImage, patch: &mut Patch1D, input_params: &BoxBlurI
         PaddingConstantValue => init_patch_constant_value_at_start(image, patch, input_params, pos_u, pos_v, radius, horizontally),
         PaddingExtend => init_patch_extend_at_start(image, patch, pos_u, pos_v, radius, horizontally),
         PaddingMirror => init_patch_mirror_at_start(image, patch, pos_u, pos_v, radius, horizontally),
-        PaddingPeriodically => init_patch_periodically_at_start(image, patch, input_params, pos_u, pos_v, image_dimension),
+        PaddingPeriodically => init_patch_periodically_at_start(image, patch, pos_u, pos_v, radius, image_dimension, horizontally),
         _ => {}
     }
 }
 
 fn init_patch_constant_value_at_start(image: &DynamicImage, patch: &mut Patch1D, input_params: &BoxBlurInput, pos_u: u32, pos_v: u32, radius: u32, horizontally: bool) {
     // pixels outside the image
-    for i in 0..radius {
+    for _i in 0..radius {
         patch.insert_red_at_back(input_params.background_color[0]);
         patch.insert_green_at_back(input_params.background_color[1]);
         patch.insert_blue_at_back(input_params.background_color[2]);
@@ -69,7 +69,7 @@ fn init_patch_constant_value_at_start(image: &DynamicImage, patch: &mut Patch1D,
 
 fn init_inside_image_pixels(image: &DynamicImage, patch: &mut Patch1D, pos_u: u32, pos_v: u32, radius: u32, horizontally: bool) {
     for i in 0..(radius + 1) {  // '+1' due to the patch center
-        let mut pixel_value;
+        let pixel_value;
         if horizontally {
             pixel_value = image.get_pixel(i, pos_v).0;
         } else {
@@ -92,7 +92,7 @@ fn init_patch_extend_at_start(image: &DynamicImage, patch: &mut Patch1D, pos_u: 
     }
 
     // pixels outside the image
-    for i in 0..radius {
+    for _i in 0..radius {
         patch.insert_red_at_back(pixel_value[0]);
         patch.insert_green_at_back(pixel_value[1]);
         patch.insert_blue_at_back(pixel_value[2]);
@@ -104,12 +104,12 @@ fn init_patch_extend_at_start(image: &DynamicImage, patch: &mut Patch1D, pos_u: 
 
 fn init_patch_mirror_at_start(image: &DynamicImage, patch: &mut Patch1D, pos_u: u32, pos_v: u32, radius: u32, horizontally: bool) {
     // pixels outside the image
-    for i in 0..radius {
+    for r in 0..radius {
         let pixel_value;
         if horizontally {
-            pixel_value = image.get_pixel(i + 1, pos_v).0;
+            pixel_value = image.get_pixel(r + 1, pos_v).0;
         } else {
-            pixel_value = image.get_pixel(pos_u, i + 1).0;
+            pixel_value = image.get_pixel(pos_u, r + 1).0;
         }
 
         patch.insert_red_at_back(pixel_value[0]);
@@ -118,11 +118,26 @@ fn init_patch_mirror_at_start(image: &DynamicImage, patch: &mut Patch1D, pos_u: 
         patch.insert_alpha_at_back(pixel_value[3]);
     }
 
-    init_inside_image_pixels(image, patch, pos_u, pos_v, radius, horizontally)
+    init_inside_image_pixels(image, patch, pos_u, pos_v, radius, horizontally);
 }
 
-fn init_patch_periodically_at_start(image: &DynamicImage, patch: &Patch1D, input_params: &BoxBlurInput, pos_u: u32, pos_v: u32, image_dimension: u32) {
-    //
+fn init_patch_periodically_at_start(image: &DynamicImage, patch: &mut Patch1D, pos_u: u32, pos_v: u32, radius: u32, image_dimension: u32, horizontally: bool) {
+    // pixels outside the image
+    for r in radius..0 {
+        let pixel_value;
+        if horizontally {
+            pixel_value = image.get_pixel(image_dimension - r, pos_v).0;
+        } else {
+            pixel_value = image.get_pixel(pos_u, image_dimension - r).0;
+        }
+
+        patch.insert_red_at_back(pixel_value[0]);
+        patch.insert_green_at_back(pixel_value[1]);
+        patch.insert_blue_at_back(pixel_value[2]);
+        patch.insert_alpha_at_back(pixel_value[3]);
+    }
+
+    init_inside_image_pixels(image, patch, pos_u, pos_v, radius, horizontally);
 }
 
 fn handle_border_at_end(image: &DynamicImage, patch: &mut Patch1D, input_params: &BoxBlurInput, pos_u: u32, pos_v: u32, radius: u32, image_dimension: u32, horizontally: bool) {
@@ -130,17 +145,9 @@ fn handle_border_at_end(image: &DynamicImage, patch: &mut Patch1D, input_params:
         PaddingConstantValue => create_padding_constant_value_at_end(patch, input_params),
         PaddingExtend => create_padding_extend_at_end(image, patch, pos_u, pos_v, image_dimension, horizontally),
         PaddingMirror => create_padding_mirror_at_end(image, patch, pos_u, pos_v, radius, image_dimension, horizontally),
-        PaddingPeriodically => init_patch_periodically_at_start(image, patch, input_params, pos_u, pos_v, image_dimension),
+        PaddingPeriodically => create_padding_periodically_at_end(image, patch, pos_u, pos_v, radius, image_dimension, horizontally),
         _ => {}
     }
-}
-
-fn create_constant_values(patch: &mut Patch1D, input_params: &BoxBlurInput, pos_u: u32, pos_v: u32, image_width: u32, radius: u32) {
-    //
-}
-
-fn create_unprocessed_values(image: &DynamicImage, patch: &Patch1D, input_params: &BoxBlurInput, pos_u: u32, pos_v: u32, image_dimension: u32, radius: u32) {
-    //
 }
 
 fn create_padding_constant_value_at_end(patch: &mut Patch1D, input_params: &BoxBlurInput) {
@@ -167,11 +174,12 @@ fn create_padding_extend_at_end(image: &DynamicImage, patch: &mut Patch1D, pos_u
 fn create_padding_mirror_at_end(image: &DynamicImage, patch: &mut Patch1D, pos_u: u32, pos_v: u32, radius: u32, image_dimension: u32, horizontally: bool) {
     let pixel_value;
     if horizontally {
-        let boxes_outside_image = (image_dimension as i32 - (pos_u + 1 + radius) as i32).abs() as u32;
+        // '+1' since you start counting from zero
+        let boxes_outside_image = pos_u + 1 + radius - image_dimension;
         let pos_mirror = (image_dimension - 1) - boxes_outside_image;
         pixel_value = image.get_pixel(pos_mirror, pos_v).0;
     } else {
-        let boxes_outside_image = (image_dimension as i32 - (pos_v + 1 + radius) as i32).abs() as u32;
+        let boxes_outside_image = pos_v + 1 + radius - image_dimension;
         let pos_mirror = (image_dimension - 1) - boxes_outside_image;
         pixel_value = image.get_pixel(pos_u, pos_mirror).0;
     }
@@ -179,10 +187,25 @@ fn create_padding_mirror_at_end(image: &DynamicImage, patch: &mut Patch1D, pos_u
     patch.insert_red_at_back(pixel_value[0]);
     patch.insert_green_at_back(pixel_value[1]);
     patch.insert_blue_at_back(pixel_value[2]);
-    patch.insert_alpha_at_back(pixel_value[3])
+    patch.insert_alpha_at_back(pixel_value[3]);
 }
 
-fn create_padding_periodically_at_end(image: &DynamicImage, patch: &Patch1D, input_params: &BoxBlurInput, pos_u: u32, pos_v: u32, image_dimension: u32) {
+fn create_padding_periodically_at_end(image: &DynamicImage, patch: &mut Patch1D, pos_u: u32, pos_v: u32, radius: u32, image_dimension: u32, horizontally: bool) {
+    // can be solved with *MATHEMATICAL* modulo, but this should be less performant
+    let pixel_value;
+
+    if horizontally {
+        let pos_from_start = pos_u + radius - image_dimension;
+        pixel_value = image.get_pixel(pos_from_start, pos_v).0;
+    } else {
+        let pos_from_start = pos_v + radius - image_dimension;
+        pixel_value = image.get_pixel(pos_u, pos_from_start).0;
+    }
+
+    patch.insert_red_at_back(pixel_value[0]);
+    patch.insert_green_at_back(pixel_value[1]);
+    patch.insert_blue_at_back(pixel_value[2]);
+    patch.insert_alpha_at_back(pixel_value[3]);
 }
 
 fn set_patch_horizontally(image: &DynamicImage, patch: &mut Patch1D, input_params: &BoxBlurInput, pos_u: u32, pos_v: u32, radius: u32) {
@@ -215,7 +238,7 @@ fn set_pixel_values(pixel_value: &mut [u8; 4], original_pixel_value: &[u8; 4], p
     set_pixel_value(pixel_value, original_pixel_value, patch.average_alpha(), input_params.channels.alpha, 3);
 }
 
-fn set_pixel_value(mut pixel_value: &mut [u8; 4], original_pixel_value: &[u8; 4], patch_value: u8, channel_active: bool, channel_index: usize) {
+fn set_pixel_value(pixel_value: &mut [u8; 4], original_pixel_value: &[u8; 4], patch_value: u8, channel_active: bool, channel_index: usize) {
     if channel_active {
         pixel_value[channel_index] = patch_value;
     } else {

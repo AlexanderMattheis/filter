@@ -21,10 +21,6 @@ impl Patch1D {
         };
     }
 
-    pub fn len(&mut self) -> usize {
-        return self.size;
-    }
-
     pub fn insert_red_at_back(&mut self, value: u8) {
         insert_value_at_back(&mut self.red, value, self.size);
     }
