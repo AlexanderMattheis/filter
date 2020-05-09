@@ -6,7 +6,7 @@ use crate::system::data::elementary::input::Input;
 use crate::system::defaults::cli::{actions_params, actions_params_values};
 use crate::system::defaults::cli::actions_params_values::{BorderHandlingTypes, ChannelTypes};
 use crate::system::defaults::messages::{errors, infos};
-use crate::system::defaults::types::border_handling::BorderHandling;
+use crate::system::defaults::types::border_handling_type::BorderHandlingType;
 
 pub fn parse_params(params: &String) -> Input {
     if params.is_empty() {
@@ -106,14 +106,14 @@ fn to_decimal(number: &str, number_base: u32) -> u8 {
     return sum as u8;
 }
 
-fn parse_border_handling(border_handling: &str) -> BorderHandling {
+fn parse_border_handling(border_handling: &str) -> BorderHandlingType {
     return match border_handling {
-        BorderHandlingTypes::CONSTANT_VALUE => BorderHandling::ConstantValue,
-        BorderHandlingTypes::UNPROCESSED => BorderHandling::Unprocessed,
-        BorderHandlingTypes::PADDING_CONSTANT_VALUE => BorderHandling::PaddingConstantValue,
-        BorderHandlingTypes::PADDING_EXTEND => BorderHandling::PaddingExtend,
-        BorderHandlingTypes::PADDING_MIRROR => BorderHandling::PaddingMirror,
-        BorderHandlingTypes::PADDING_PERIODICALLY => BorderHandling::PaddingPeriodically,
+        BorderHandlingTypes::CONSTANT_VALUE => BorderHandlingType::ConstantValue,
+        BorderHandlingTypes::UNPROCESSED => BorderHandlingType::Unprocessed,
+        BorderHandlingTypes::PADDING_CONSTANT_VALUE => BorderHandlingType::PaddingConstantValue,
+        BorderHandlingTypes::PADDING_EXTEND => BorderHandlingType::PaddingExtend,
+        BorderHandlingTypes::PADDING_MIRROR => BorderHandlingType::PaddingMirror,
+        BorderHandlingTypes::PADDING_PERIODICALLY => BorderHandlingType::PaddingPeriodically,
         _ => {
             errors::print_error_and_quit(errors::NOT_VALID_BORDER_HANDLING, Some(border_handling));
         }

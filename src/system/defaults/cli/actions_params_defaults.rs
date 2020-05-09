@@ -1,5 +1,5 @@
 use crate::system::data::elementary::channels_input::{ChannelsInput, RgbaChannelsInput};
-use crate::system::defaults::types::border_handling::BorderHandling;
+use crate::system::defaults::types::border_handling_type::BorderHandlingType;
 
 pub struct HistogramDefaults;
 
@@ -147,7 +147,7 @@ impl ThresholdDefaults {
 // filters
 impl BoxBlurDefaults {
     pub const BACKGROUND_COLOR: [u8; 4] = [0; 4];
-    pub const BORDER_HANDLING: BorderHandling = BorderHandling::PaddingPeriodically;
+    pub const BORDER_HANDLING: BorderHandlingType = BorderHandlingType::PaddingExtend;
 
     pub const CHANNELS_INPUT: RgbaChannelsInput = RgbaChannelsInput {
         red: true,

@@ -1,4 +1,4 @@
-pub enum Channel {
+pub enum ChannelType {
     Red,
     Green,
     Blue,

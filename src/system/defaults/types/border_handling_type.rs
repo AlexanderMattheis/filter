@@ -1,4 +1,4 @@
-pub enum BorderHandling {
+pub enum BorderHandlingType {
     ConstantValue,
     Unprocessed,
     PaddingConstantValue,

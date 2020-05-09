@@ -1,9 +1,9 @@
 use crate::system::data::elementary::channels_input::ChannelsInput;
-use crate::system::defaults::types::border_handling::BorderHandling;
+use crate::system::defaults::types::border_handling_type::BorderHandlingType;
 
 pub struct Input {
     pub background_color: Option<[u8; 4]>,
-    pub border_handling: Option<BorderHandling>,
+    pub border_handling: Option<BorderHandlingType>,
     pub channels: Option<ChannelsInput>,
     pub cumulative: Option<bool>,
     // tells if should be divided by value

@@ -8,31 +8,31 @@ use crate::system::data::composed::statistics_output::StatisticsOutput;
 use crate::system::defaults::file_extensions;
 use crate::system::defaults::messages::errors;
 use crate::system::defaults::output_filenames::ChannelOutputNames;
-use crate::system::defaults::types::channels::Channel;
+use crate::system::defaults::types::channel_type::ChannelType;
 
 pub fn create_statistics(input_params: &StatisticsInput, statistics_output: &[StatisticsOutput; NUMBER_OF_INPUT_CHANNELS], output_filepath_prefix: &String) {
     if input_params.channels.red {
-        create_and_save_statistics(&statistics_output[Channel::Red as usize],
+        create_and_save_statistics(&statistics_output[ChannelType::Red as usize],
                                    output_filepath_prefix, ChannelOutputNames::RED);
     }
 
     if input_params.channels.green {
-        create_and_save_statistics(&statistics_output[Channel::Green as usize],
+        create_and_save_statistics(&statistics_output[ChannelType::Green as usize],
                                    output_filepath_prefix, ChannelOutputNames::GREEN);
     }
 
     if input_params.channels.blue {
-        create_and_save_statistics(&statistics_output[Channel::Blue as usize],
+        create_and_save_statistics(&statistics_output[ChannelType::Blue as usize],
                                    output_filepath_prefix, ChannelOutputNames::BLUE);
     }
 
     if input_params.channels.alpha {
-        create_and_save_statistics(&statistics_output[Channel::Red as usize], output_filepath_prefix,
+        create_and_save_statistics(&statistics_output[ChannelType::Red as usize], output_filepath_prefix,
                                    ChannelOutputNames::ALPHA);
     }
 
     if input_params.channels.luminance {
-        create_and_save_statistics(&statistics_output[Channel::Red as usize],
+        create_and_save_statistics(&statistics_output[ChannelType::Red as usize],
                                    output_filepath_prefix, ChannelOutputNames::LUMINANCE);
     }
 }

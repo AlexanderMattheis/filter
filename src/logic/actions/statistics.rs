@@ -6,7 +6,7 @@ use crate::logic::data_structures::histogram::IntegerRgbaHistogram;
 use crate::system::data::composed::statistics_input::StatisticsInput;
 use crate::system::data::composed::statistics_output::StatisticsOutput;
 use crate::system::defaults::messages::errors;
-use crate::system::defaults::types::channels::Channel;
+use crate::system::defaults::types::channel_type::ChannelType;
 
 struct HistogramDistribution {
     average: f64,
@@ -19,29 +19,29 @@ pub fn run(image: &DynamicImage, input_params: &StatisticsInput, output_data: &m
     let count_pixels = image.pixels().count() as f64;
 
     if input_params.channels.red {
-        compute_statistics(&rgba_histogram.red_data, output_data, Channel::Red, count_pixels);
+        compute_statistics(&rgba_histogram.red_data, output_data, ChannelType::Red, count_pixels);
     }
 
     if input_params.channels.green {
-        compute_statistics(&rgba_histogram.green_data, output_data, Channel::Green, count_pixels);
+        compute_statistics(&rgba_histogram.green_data, output_data, ChannelType::Green, count_pixels);
     }
 
     if input_params.channels.blue {
-        compute_statistics(&rgba_histogram.blue_data, output_data, Channel::Blue, count_pixels);
+        compute_statistics(&rgba_histogram.blue_data, output_data, ChannelType::Blue, count_pixels);
     }
 
     if input_params.channels.alpha {
-        compute_statistics(&rgba_histogram.alpha_data, output_data, Channel::Alpha, count_pixels);
+        compute_statistics(&rgba_histogram.alpha_data, output_data, ChannelType::Alpha, count_pixels);
     }
 
     if input_params.channels.luminance {
-        compute_statistics(&rgba_histogram.luminance_data, output_data, Channel::Luminance, count_pixels);
+        compute_statistics(&rgba_histogram.luminance_data, output_data, ChannelType::Luminance, count_pixels);
     }
 }
 
 fn compute_statistics(histogram: &[u32; NUMBER_OF_COLOR_VALUES],
                       output_data: &mut [StatisticsOutput; NUMBER_OF_INPUT_CHANNELS],
-                      channel: Channel, count_pixels: f64) {
+                      channel: ChannelType, count_pixels: f64) {
     let min = get_lowest_pixel_value(histogram);
     let max = get_highest_pixel_value(histogram);
 
