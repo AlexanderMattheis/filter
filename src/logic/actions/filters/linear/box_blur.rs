@@ -39,7 +39,7 @@ fn fill_patch_horizontally(image: &DynamicImage, patch: &mut Patch1D, input_para
     if pos_u == 0 {
         init_patch(image, patch, input_params, pos_u, pos_v, radius, image_width, true);
     } else if pos_u + radius >= image_width {
-        handle_border_at_end(image, patch, input_params, pos_u, pos_v, image_width, true);  // for more efficiency
+        handle_border_at_end(image, patch, input_params, pos_u, pos_v, radius, image_width, true);  // for more efficiency
     } else {
         set_patch_horizontally(image, patch, input_params, pos_u, pos_v, radius);
     }
@@ -49,7 +49,7 @@ fn init_patch(image: &DynamicImage, patch: &mut Patch1D, input_params: &BoxBlurI
     match input_params.border_handling {
         PaddingConstantValue => init_patch_constant_value_at_start(image, patch, input_params, pos_u, pos_v, radius, horizontally),
         PaddingExtend => init_patch_extend_at_start(image, patch, pos_u, pos_v, radius, horizontally),
-        PaddingMirror => init_patch_mirror_at_start(image, patch, input_params, pos_u, pos_v, image_dimension),
+        PaddingMirror => init_patch_mirror_at_start(image, patch, pos_u, pos_v, radius, horizontally),
         PaddingPeriodically => init_patch_periodically_at_start(image, patch, input_params, pos_u, pos_v, image_dimension),
         _ => {}
     }
@@ -102,19 +102,34 @@ fn init_patch_extend_at_start(image: &DynamicImage, patch: &mut Patch1D, pos_u: 
     init_inside_image_pixels(image, patch, pos_u, pos_v, radius, horizontally);
 }
 
-fn init_patch_mirror_at_start(image: &DynamicImage, patch: &Patch1D, input_params: &BoxBlurInput, pos_u: u32, pos_v: u32, image_dimension: u32) {
-    //
+fn init_patch_mirror_at_start(image: &DynamicImage, patch: &mut Patch1D, pos_u: u32, pos_v: u32, radius: u32, horizontally: bool) {
+    // pixels outside the image
+    for i in 0..radius {
+        let pixel_value;
+        if horizontally {
+            pixel_value = image.get_pixel(i + 1, pos_v).0;
+        } else {
+            pixel_value = image.get_pixel(pos_u, i + 1).0;
+        }
+
+        patch.insert_red_at_back(pixel_value[0]);
+        patch.insert_green_at_back(pixel_value[1]);
+        patch.insert_blue_at_back(pixel_value[2]);
+        patch.insert_alpha_at_back(pixel_value[3]);
+    }
+
+    init_inside_image_pixels(image, patch, pos_u, pos_v, radius, horizontally)
 }
 
 fn init_patch_periodically_at_start(image: &DynamicImage, patch: &Patch1D, input_params: &BoxBlurInput, pos_u: u32, pos_v: u32, image_dimension: u32) {
     //
 }
 
-fn handle_border_at_end(image: &DynamicImage, patch: &mut Patch1D, input_params: &BoxBlurInput, pos_u: u32, pos_v: u32, image_dimension: u32, horizontally: bool) {
+fn handle_border_at_end(image: &DynamicImage, patch: &mut Patch1D, input_params: &BoxBlurInput, pos_u: u32, pos_v: u32, radius: u32, image_dimension: u32, horizontally: bool) {
     match input_params.border_handling {
         PaddingConstantValue => create_padding_constant_value_at_end(patch, input_params),
         PaddingExtend => create_padding_extend_at_end(image, patch, pos_u, pos_v, image_dimension, horizontally),
-        PaddingMirror => create_padding_mirror_at_end(image, patch, input_params, pos_u, pos_v, image_dimension),
+        PaddingMirror => create_padding_mirror_at_end(image, patch, pos_u, pos_v, radius, image_dimension, horizontally),
         PaddingPeriodically => init_patch_periodically_at_start(image, patch, input_params, pos_u, pos_v, image_dimension),
         _ => {}
     }
@@ -149,12 +164,25 @@ fn create_padding_extend_at_end(image: &DynamicImage, patch: &mut Patch1D, pos_u
     patch.insert_alpha_at_back(pixel_value[3]);
 }
 
-fn create_padding_mirror_at_end(image: &DynamicImage, patch: &Patch1D, input_params: &BoxBlurInput, pos_u: u32, pos_v: u32, image_dimension: u32) {
-    //
+fn create_padding_mirror_at_end(image: &DynamicImage, patch: &mut Patch1D, pos_u: u32, pos_v: u32, radius: u32, image_dimension: u32, horizontally: bool) {
+    let pixel_value;
+    if horizontally {
+        let boxes_outside_image = (image_dimension as i32 - (pos_u + 1 + radius) as i32).abs() as u32;
+        let pos_mirror = (image_dimension - 1) - boxes_outside_image;
+        pixel_value = image.get_pixel(pos_mirror, pos_v).0;
+    } else {
+        let boxes_outside_image = (image_dimension as i32 - (pos_v + 1 + radius) as i32).abs() as u32;
+        let pos_mirror = (image_dimension - 1) - boxes_outside_image;
+        pixel_value = image.get_pixel(pos_u, pos_mirror).0;
+    }
+
+    patch.insert_red_at_back(pixel_value[0]);
+    patch.insert_green_at_back(pixel_value[1]);
+    patch.insert_blue_at_back(pixel_value[2]);
+    patch.insert_alpha_at_back(pixel_value[3])
 }
 
 fn create_padding_periodically_at_end(image: &DynamicImage, patch: &Patch1D, input_params: &BoxBlurInput, pos_u: u32, pos_v: u32, image_dimension: u32) {
-    //
 }
 
 fn set_patch_horizontally(image: &DynamicImage, patch: &mut Patch1D, input_params: &BoxBlurInput, pos_u: u32, pos_v: u32, radius: u32) {
@@ -218,7 +246,7 @@ fn fill_patch_vertically(image: &DynamicImage, patch: &mut Patch1D, input_params
     if pos_v == 0 {
         init_patch(image, patch, input_params, pos_u, pos_v, radius, image_height, false);
     } else if pos_v + radius >= image_height {
-        handle_border_at_end(image, patch, input_params, pos_u, pos_v, image_height, false);  // for more efficiency
+        handle_border_at_end(image, patch, input_params, pos_u, pos_v, radius, image_height, false);  // for more efficiency
     } else {
         set_patch_vertically(image, patch, input_params, pos_u, pos_v, radius);
     }

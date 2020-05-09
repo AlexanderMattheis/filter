@@ -1,7 +1,7 @@
 use std::collections::LinkedList;
 
 pub struct Patch1D {
-    pub red: LinkedList<u8>,
+    red: LinkedList<u8>,
     green: LinkedList<u8>,
     blue: LinkedList<u8>,
     alpha: LinkedList<u8>,
