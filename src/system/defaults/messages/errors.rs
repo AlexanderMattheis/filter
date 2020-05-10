@@ -37,6 +37,9 @@ pub const NOT_VALID_OPERATION: &'static str = "Not valid operation: ";
 pub const NOT_VALID_PATH: &'static str = "Not valid path: ";
 
 // values
+pub const RADIUS_BIGGER_IMAGE_HORIZONTAL: &'static str = "The horizontal radius is bigger than the image.";
+pub const RADIUS_BIGGER_IMAGE_VERTICAL: &'static str = "The vertical radius is bigger than the image.";
+
 pub const MINIMUM_BIGGER_MAXIMUM: &'static str = "The minimum is bigger than the maximum.";
 
 pub const QUANTILES_SUM_HIGHER_1_0: &'static str = "The sum of lower and higher quantile is higher than 1.0!";
