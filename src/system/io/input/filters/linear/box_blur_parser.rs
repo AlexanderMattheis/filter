@@ -2,9 +2,10 @@ use crate::system::data::composed::filters::linear::box_blur_input::BoxBlurInput
 use crate::system::data::elementary::channels_input::RgbaChannelsInput;
 use crate::system::data::elementary::input::Input;
 use crate::system::defaults::cli::actions_params_defaults::BoxBlurDefaults;
+use crate::system::defaults::messages::errors;
 use crate::system::io::input::_basic_parser;
 
-pub fn parse_params(params: &String) -> BoxBlurInput {
+pub fn parse_params(params: &String, image_dimensions: &(u32, u32)) -> BoxBlurInput {
     let input: Input = _basic_parser::parse_params(params);
 
     let background_color = match input.background_color {
@@ -37,6 +38,7 @@ pub fn parse_params(params: &String) -> BoxBlurInput {
         _ => BoxBlurDefaults::RADIUS_VERTICAL
     };
 
+    validate_input(radius_horizontal as u32, radius_vertical as u32, image_dimensions);
     return BoxBlurInput {
         background_color,
         border_handling,
@@ -46,3 +48,14 @@ pub fn parse_params(params: &String) -> BoxBlurInput {
         radius_vertical,
     };
 }
+
+fn validate_input(radius_horizontal: u32, radius_vertical: u32, image_dimensions: &(u32, u32)) {
+    if radius_horizontal > image_dimensions.0 {
+        errors::print_error_and_quit(errors::RADIUS_BIGGER_IMAGE_HORIZONTAL, None);
+    }
+
+    if radius_vertical > image_dimensions.1 {
+        errors::print_error_and_quit(errors::RADIUS_BIGGER_IMAGE_VERTICAL, None);
+    }
+}
+

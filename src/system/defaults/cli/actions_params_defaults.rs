@@ -153,7 +153,7 @@ impl BoxBlurDefaults {
         red: true,
         green: true,
         blue: true,
-        alpha: false
+        alpha: true
     };
 
     pub const ITERATIONS: u16 = 1;
