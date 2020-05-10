@@ -4,6 +4,9 @@ use crate::logic::actions::filters::border_handling;
 use crate::logic::data_structures::patch::Patch1D;
 use crate::system::data::composed::filters::linear::box_blur_input::BoxBlurInput;
 
+/*
+Hint: Could be optimized by about 40% by not using the Patch1D data structure but only indices to read out a certain pixel value.
+*/
 pub fn run(image: &DynamicImage, temp_image_1: &mut DynamicImage, temp_image_2: &mut DynamicImage, input_params: &BoxBlurInput) {
     for i in 0..input_params.iterations {
         if i == 0 {

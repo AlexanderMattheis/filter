@@ -1,4 +1,5 @@
 use image::{DynamicImage, GenericImageView};
+
 use crate::logic::data_structures::patch::Patch1D;
 use crate::system::data::composed::filters::linear::box_blur_input::BoxBlurInput;
 use crate::system::defaults::types::border_handling_type::BorderHandlingType;
