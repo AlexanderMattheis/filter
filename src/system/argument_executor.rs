@@ -60,6 +60,7 @@ pub fn execute(matches: &ArgMatches) {
 
         // filters
         actions::BOX_BLUR => filters::compute_box_blur(&image, &arguments.params, &output_file_name_path),
+        actions::GAUSSIAN_BLUR => filters::compute_gaussian_blur(&image, &arguments.params, &output_file_name_path),
 
         // _
         _ => errors::print_error_and_quit(errors::NOT_VALID_FILTER, Some(arguments.filter.as_str())),

@@ -20,6 +20,7 @@ impl ChannelsInput {
     }
 }
 
+#[derive(Copy, Clone)]
 pub struct RgbaChannelsInput {
     pub red: bool,
     pub green: bool,

@@ -2,6 +2,7 @@ use image::{DynamicImage, GenericImage, GenericImageView, Rgba};
 
 use crate::logic::actions::filters::border_handling;
 use crate::logic::data_structures::patch::Patch1D;
+use crate::system::data::composed::filters::linear::_linear_input::LinearInput;
 use crate::system::data::composed::filters::linear::box_blur_input::BoxBlurInput;
 
 /*
@@ -10,18 +11,18 @@ Hint: Could be optimized by about 40% by not using the Patch1D data structure bu
 pub fn run(image: &DynamicImage, temp_image_1: &mut DynamicImage, temp_image_2: &mut DynamicImage, input_params: &BoxBlurInput) {
     for i in 0..input_params.iterations {
         if i == 0 {
-            blur_horizontally(image, temp_image_1, input_params);
-            blur_vertically(temp_image_1, temp_image_2, input_params);
+            blur_horizontally(image, temp_image_1, &input_params.linear_input);
+            blur_vertically(temp_image_1, temp_image_2, &input_params.linear_input);
         } else {
-            blur_horizontally(temp_image_2, temp_image_1, input_params);
-            blur_vertically(temp_image_1, temp_image_2, input_params);
+            blur_horizontally(temp_image_2, temp_image_1, &input_params.linear_input);
+            blur_vertically(temp_image_1, temp_image_2, &input_params.linear_input);
         }
     }
 }
 
-fn blur_horizontally(image: &DynamicImage, empty_image: &mut DynamicImage, input_params: &BoxBlurInput) {
+fn blur_horizontally(image: &DynamicImage, empty_image: &mut DynamicImage, input_params: &LinearInput) {
     let dimensions = image.dimensions();
-    let mut patch_horizontal = Patch1D::new(2 * input_params.radius_horizontal + 1);
+    let mut patch_horizontal = Patch1D::new(2 * input_params.radius_horizontal + 1, None);
 
     for v in 0..dimensions.1 {
         for u in 0..dimensions.0 {  // '-patch_width' due to way border-handling is handled
@@ -36,7 +37,7 @@ fn blur_horizontally(image: &DynamicImage, empty_image: &mut DynamicImage, input
     }
 }
 
-fn fill_patch_horizontally(image: &DynamicImage, patch: &mut Patch1D, input_params: &BoxBlurInput, pos_u: u32, pos_v: u32, image_width: u32) {
+fn fill_patch_horizontally(image: &DynamicImage, patch: &mut Patch1D, input_params: &LinearInput, pos_u: u32, pos_v: u32, image_width: u32) {
     let radius = input_params.radius_horizontal as u32;
 
     if pos_u == 0 {
@@ -48,13 +49,12 @@ fn fill_patch_horizontally(image: &DynamicImage, patch: &mut Patch1D, input_para
     }
 }
 
-
-fn set_patch_horizontally(image: &DynamicImage, patch: &mut Patch1D, input_params: &BoxBlurInput, pos_u: u32, pos_v: u32, radius: u32) {
+fn set_patch_horizontally(image: &DynamicImage, patch: &mut Patch1D, input_params: &LinearInput, pos_u: u32, pos_v: u32, radius: u32) {
     let pixel_value = image.get_pixel((pos_u + radius) as u32, pos_v as u32).0;
     insert_rgba_values(patch, input_params, &pixel_value);
 }
 
-fn insert_rgba_values(patch: &mut Patch1D, input_params: &BoxBlurInput, pixel_value: &[u8; 4]) {
+fn insert_rgba_values(patch: &mut Patch1D, input_params: &LinearInput, pixel_value: &[u8; 4]) {
     if input_params.channels.red {
         patch.insert_red_at_back(pixel_value[0]);
     }
@@ -72,7 +72,7 @@ fn insert_rgba_values(patch: &mut Patch1D, input_params: &BoxBlurInput, pixel_va
     }
 }
 
-fn set_pixel_values(pixel_value: &mut [u8; 4], original_pixel_value: &[u8; 4], patch: &Patch1D, input_params: &BoxBlurInput) {
+fn set_pixel_values(pixel_value: &mut [u8; 4], original_pixel_value: &[u8; 4], patch: &Patch1D, input_params: &LinearInput) {
     set_pixel_value(pixel_value, original_pixel_value, patch.average_red(), input_params.channels.red, 0);
     set_pixel_value(pixel_value, original_pixel_value, patch.average_green(), input_params.channels.green, 1);
     set_pixel_value(pixel_value, original_pixel_value, patch.average_blue(), input_params.channels.blue, 2);
@@ -87,9 +87,9 @@ fn set_pixel_value(pixel_value: &mut [u8; 4], original_pixel_value: &[u8; 4], pa
     }
 }
 
-fn blur_vertically(image: &DynamicImage, empty_image: &mut DynamicImage, input_params: &BoxBlurInput) {
+fn blur_vertically(image: &DynamicImage, empty_image: &mut DynamicImage, input_params: &LinearInput) {
     let dimensions = image.dimensions();
-    let mut patch_vertical = Patch1D::new(2 * input_params.radius_vertical + 1);
+    let mut patch_vertical = Patch1D::new(2 * input_params.radius_vertical + 1, None);
 
     for u in 0..dimensions.0 {
         for v in 0..dimensions.1 {
@@ -104,7 +104,7 @@ fn blur_vertically(image: &DynamicImage, empty_image: &mut DynamicImage, input_p
     }
 }
 
-fn fill_patch_vertically(image: &DynamicImage, patch: &mut Patch1D, input_params: &BoxBlurInput, pos_u: u32, pos_v: u32, image_height: u32) {
+fn fill_patch_vertically(image: &DynamicImage, patch: &mut Patch1D, input_params: &LinearInput, pos_u: u32, pos_v: u32, image_height: u32) {
     let radius = input_params.radius_vertical as u32;
 
     if pos_v == 0 {
@@ -116,7 +116,7 @@ fn fill_patch_vertically(image: &DynamicImage, patch: &mut Patch1D, input_params
     }
 }
 
-fn set_patch_vertically(image: &DynamicImage, patch: &mut Patch1D, input_params: &BoxBlurInput, pos_u: u32, pos_v: u32, radius: u32) {
+fn set_patch_vertically(image: &DynamicImage, patch: &mut Patch1D, input_params: &LinearInput, pos_u: u32, pos_v: u32, radius: u32) {
     let pixel_value = image.get_pixel(pos_u as u32, (pos_v + radius) as u32).0;
     insert_rgba_values(patch, input_params, &pixel_value);
 }

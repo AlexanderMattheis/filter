@@ -1,4 +1,6 @@
-use std::collections::LinkedList;
+use std::collections::{HashMap, LinkedList};
+
+use crate::logic::data_structures::kernel::Kernel1D;
 
 pub struct Patch1D {
     red: LinkedList<u8>,
@@ -11,12 +13,14 @@ pub struct Patch1D {
     sum_blue: u32,
     sum_alpha: u32,
 
+    kernel: Kernel1D,
+
     size: usize,
     average_factor: f64,
 }
 
 impl Patch1D {
-    pub fn new(length: usize) -> Patch1D {
+    pub fn new(length: usize, kernel: Option<Kernel1D>) -> Patch1D {
         return Patch1D {
             red: LinkedList::new(),
             green: LinkedList::new(),
@@ -27,6 +31,8 @@ impl Patch1D {
             sum_green: 0,
             sum_blue: 0,
             sum_alpha: 0,
+
+            kernel: kernel.unwrap_or(Kernel1D::default()),
 
             size: length,
             average_factor: 1.0 / (length as f64),
@@ -65,6 +71,22 @@ impl Patch1D {
         return average(self.sum_alpha, self.average_factor);
     }
 
+    pub fn weighted_average_red(&self) -> u8 {
+        return weighted_average(&self.red, &self.kernel);
+    }
+
+    pub fn weighted_average_green(&self) -> u8 {
+        return weighted_average(&self.green, &self.kernel);
+    }
+
+    pub fn weighted_average_blue(&self) -> u8 {
+        return weighted_average(&self.blue, &self.kernel);
+    }
+
+    pub fn weighted_average_alpha(&self) -> u8 {
+        return weighted_average(&self.alpha, &self.kernel);
+    }
+
     pub fn clear(&mut self) {
         self.red.clear();
         self.green.clear();
@@ -89,4 +111,14 @@ fn insert_value_at_back(list: &mut LinkedList<u8>, sum: &mut u32, value: u8, max
 
 fn average(sum: u32, average_factor: f64) -> u8 {
     return ((sum as f64) * average_factor).round() as u8;
+}
+
+fn weighted_average(values: &LinkedList<u8>, kernel: &Kernel1D) -> u8 {
+    let mut weighted_sum = 0;
+
+    for value in values {
+        weighted_sum += 0;
+    }
+
+    return ((weighted_sum as f64) * kernel.divisor_factor).round() as u8;
 }

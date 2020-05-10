@@ -1,10 +1,10 @@
 use image::{DynamicImage, GenericImageView};
 
 use crate::logic::data_structures::patch::Patch1D;
-use crate::system::data::composed::filters::linear::box_blur_input::BoxBlurInput;
+use crate::system::data::composed::filters::linear::_linear_input::LinearInput;
 use crate::system::defaults::types::border_handling_type::BorderHandlingType;
 
-pub(crate) fn init_patch(image: &DynamicImage, patch: &mut Patch1D, input_params: &BoxBlurInput, pos_u: u32, pos_v: u32, radius: u32, image_dimension: u32, horizontally: bool) {
+pub(crate) fn init_patch(image: &DynamicImage, patch: &mut Patch1D, input_params: &LinearInput, pos_u: u32, pos_v: u32, radius: u32, image_dimension: u32, horizontally: bool) {
     match input_params.border_handling {
         BorderHandlingType::PaddingConstantValue => init_patch_constant_value_at_start(image, patch, input_params, pos_u, pos_v, radius, horizontally),
         BorderHandlingType::PaddingExtend => init_patch_extend_at_start(image, patch, pos_u, pos_v, radius, horizontally),
@@ -14,7 +14,7 @@ pub(crate) fn init_patch(image: &DynamicImage, patch: &mut Patch1D, input_params
     }
 }
 
-fn init_patch_constant_value_at_start(image: &DynamicImage, patch: &mut Patch1D, input_params: &BoxBlurInput, pos_u: u32, pos_v: u32, radius: u32, horizontally: bool) {
+fn init_patch_constant_value_at_start(image: &DynamicImage, patch: &mut Patch1D, input_params: &LinearInput, pos_u: u32, pos_v: u32, radius: u32, horizontally: bool) {
     // pixels outside the image
     for _i in 0..radius {
         patch.insert_red_at_back(input_params.background_color[0]);
@@ -99,7 +99,7 @@ fn init_patch_periodically_at_start(image: &DynamicImage, patch: &mut Patch1D, p
     init_inside_image_pixels(image, patch, pos_u, pos_v, radius, horizontally);
 }
 
-pub(crate) fn handle_border_at_end(image: &DynamicImage, patch: &mut Patch1D, input_params: &BoxBlurInput, pos_u: u32, pos_v: u32, radius: u32, image_dimension: u32, horizontally: bool) {
+pub(crate) fn handle_border_at_end(image: &DynamicImage, patch: &mut Patch1D, input_params: &LinearInput, pos_u: u32, pos_v: u32, radius: u32, image_dimension: u32, horizontally: bool) {
     match input_params.border_handling {
         BorderHandlingType::PaddingConstantValue => create_padding_constant_value_at_end(patch, input_params),
         BorderHandlingType::PaddingExtend => create_padding_extend_at_end(image, patch, pos_u, pos_v, image_dimension, horizontally),
@@ -109,7 +109,7 @@ pub(crate) fn handle_border_at_end(image: &DynamicImage, patch: &mut Patch1D, in
     }
 }
 
-fn create_padding_constant_value_at_end(patch: &mut Patch1D, input_params: &BoxBlurInput) {
+fn create_padding_constant_value_at_end(patch: &mut Patch1D, input_params: &LinearInput) {
     patch.insert_red_at_back(input_params.background_color[0]);
     patch.insert_green_at_back(input_params.background_color[1]);
     patch.insert_blue_at_back(input_params.background_color[2]);

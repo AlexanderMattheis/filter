@@ -14,3 +14,4 @@ pub const THRESHOLD: &'static str = "threshold";
 
 // filters
 pub const BOX_BLUR: &'static str = "box-blur";
+pub const GAUSSIAN_BLUR: &'static str = "gaussian-blur";

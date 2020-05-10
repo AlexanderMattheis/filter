@@ -1,3 +1,5 @@
+
+#[derive(Copy, Clone)]
 pub enum BorderHandlingType {
     ConstantValue,
     Unprocessed,
