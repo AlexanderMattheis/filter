@@ -22,7 +22,7 @@ pub fn run(image: &DynamicImage, temp_image_1: &mut DynamicImage, temp_image_2: 
 
 fn blur_horizontally(image: &DynamicImage, empty_image: &mut DynamicImage, input_params: &LinearInput) {
     let dimensions = image.dimensions();
-    let mut patch_horizontal = Patch1D::new(2 * input_params.radius_horizontal + 1, None);
+    let mut patch_horizontal = Patch1D::new(input_params.radius_horizontal, None);
 
     for v in 0..dimensions.1 {
         for u in 0..dimensions.0 {  // '-patch_width' due to way border-handling is handled
@@ -86,7 +86,7 @@ fn set_pixel_values(pixel_value: &mut [u8; 4], original_pixel_value: &[u8; 4], p
 
 fn blur_vertically(image: &DynamicImage, empty_image: &mut DynamicImage, input_params: &LinearInput) {
     let dimensions = image.dimensions();
-    let mut patch_vertical = Patch1D::new(2 * input_params.radius_vertical + 1, None);
+    let mut patch_vertical = Patch1D::new(input_params.radius_vertical, None);
 
     for u in 0..dimensions.0 {
         for v in 0..dimensions.1 {

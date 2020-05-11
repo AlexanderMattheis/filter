@@ -20,7 +20,9 @@ pub struct Patch1D {
 }
 
 impl Patch1D {
-    pub fn new(length: usize, kernel: Option<Kernel1D>) -> Patch1D {
+    pub fn new(radius: usize, kernel: Option<Kernel1D>) -> Patch1D {
+        let length = 2 * radius + 1;
+
         return Patch1D {
             red: VecDeque::new(),
             green: VecDeque::new(),
@@ -116,9 +118,9 @@ fn average(sum: u32, average_factor: f64) -> u8 {
 
 fn weighted_average(values: &VecDeque<u8>, kernel: &Kernel1D) -> u8 {
     let mut weighted_sum = 0;
-
-    for value in values {
-        weighted_sum += 0;
+    
+    for i in 0..values.len() {
+        weighted_sum += (values[i] as i32) * kernel.weights[i];
     }
 
     return ((weighted_sum as f64) * kernel.divisor_factor).round() as u8;
