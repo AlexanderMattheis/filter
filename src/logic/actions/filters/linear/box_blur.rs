@@ -4,7 +4,6 @@ use crate::logic::actions::filters::border_handling;
 use crate::logic::data_structures::patch::Patch1D;
 use crate::system::data::composed::filters::linear::_linear_input::LinearInput;
 use crate::system::data::composed::filters::linear::box_blur_input::BoxBlurInput;
-use std::time::Instant;
 
 /*
 Hint: Could be optimized by about 20% if not the Patch1D data structure but only indices are used to read out a certain pixel value.
@@ -74,18 +73,15 @@ fn insert_rgba_values(patch: &mut Patch1D, input_params: &LinearInput, pixel_val
 }
 
 fn set_pixel_values(pixel_value: &mut [u8; 4], original_pixel_value: &[u8; 4], patch: &Patch1D, input_params: &LinearInput) {
-    set_pixel_value(pixel_value, original_pixel_value, patch.average_red(), input_params.channels.red, 0);
-    set_pixel_value(pixel_value, original_pixel_value, patch.average_green(), input_params.channels.green, 1);
-    set_pixel_value(pixel_value, original_pixel_value, patch.average_blue(), input_params.channels.blue, 2);
-    set_pixel_value(pixel_value, original_pixel_value, patch.average_alpha(), input_params.channels.alpha, 3);
-}
+    let new_value_red = if input_params.channels.red { patch.average_red() } else { original_pixel_value[0] };
+    let new_value_green = if input_params.channels.green { patch.average_green() } else { original_pixel_value[1] };
+    let new_value_blue = if input_params.channels.green { patch.average_blue() } else { original_pixel_value[2] };
+    let new_value_alpha = if input_params.channels.alpha { patch.average_alpha() } else { original_pixel_value[3] };
 
-fn set_pixel_value(pixel_value: &mut [u8; 4], original_pixel_value: &[u8; 4], patch_value: u8, channel_active: bool, channel_index: usize) {
-    if channel_active {
-        pixel_value[channel_index] = patch_value;
-    } else {
-        pixel_value[channel_index] = original_pixel_value[channel_index];
-    }
+    pixel_value[0] = new_value_red;
+    pixel_value[1] = new_value_green;
+    pixel_value[2] = new_value_blue;
+    pixel_value[3] = new_value_alpha;
 }
 
 fn blur_vertically(image: &DynamicImage, empty_image: &mut DynamicImage, input_params: &LinearInput) {
