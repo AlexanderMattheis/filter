@@ -1,12 +1,12 @@
-use std::collections::{HashMap, LinkedList};
+use std::collections::{HashMap, LinkedList, VecDeque};
 
 use crate::logic::data_structures::kernel::Kernel1D;
 
 pub struct Patch1D {
-    red: LinkedList<u8>,
-    green: LinkedList<u8>,
-    blue: LinkedList<u8>,
-    alpha: LinkedList<u8>,
+    red: VecDeque<u8>,
+    green: VecDeque<u8>,
+    blue: VecDeque<u8>,
+    alpha: VecDeque<u8>,
 
     sum_red: u32,
     sum_green: u32,
@@ -22,10 +22,10 @@ pub struct Patch1D {
 impl Patch1D {
     pub fn new(length: usize, kernel: Option<Kernel1D>) -> Patch1D {
         return Patch1D {
-            red: LinkedList::new(),
-            green: LinkedList::new(),
-            blue: LinkedList::new(),
-            alpha: LinkedList::new(),
+            red: VecDeque::new(),
+            green: VecDeque::new(),
+            blue: VecDeque::new(),
+            alpha: VecDeque::new(),
 
             sum_red: 0,
             sum_green: 0,
@@ -100,12 +100,13 @@ impl Patch1D {
     }
 }
 
-fn insert_value_at_back(list: &mut LinkedList<u8>, sum: &mut u32, value: u8, maximum_len: usize) {
-    if list.len() >= maximum_len {
-        *sum = *sum - (list.pop_front().unwrap() as u32);
+fn insert_value_at_back(queue: &mut VecDeque<u8>, sum: &mut u32, value: u8, maximum_len: usize) {
+    if queue.len() >= maximum_len {
+        *sum = *sum - (queue[0] as u32);
+        queue.pop_front();
     }
 
-    list.push_back(value);
+    queue.push_back(value);
     *sum = *sum + (value as u32);
 }
 
@@ -113,7 +114,7 @@ fn average(sum: u32, average_factor: f64) -> u8 {
     return ((sum as f64) * average_factor).round() as u8;
 }
 
-fn weighted_average(values: &LinkedList<u8>, kernel: &Kernel1D) -> u8 {
+fn weighted_average(values: &VecDeque<u8>, kernel: &Kernel1D) -> u8 {
     let mut weighted_sum = 0;
 
     for value in values {

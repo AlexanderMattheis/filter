@@ -156,7 +156,7 @@ impl BoxBlurDefaults {
         alpha: true
     };
 
-    pub const ITERATIONS: u16 = 1;
-    pub const RADIUS_HORIZONTAL: usize = 3;
-    pub const RADIUS_VERTICAL: usize = 3;
+    pub const ITERATIONS: u16 = 3;
+    pub const RADIUS_HORIZONTAL: usize = 10;
+    pub const RADIUS_VERTICAL: usize = 10;
 }

@@ -90,8 +90,8 @@ fn insert_rgba_values(patch: &mut Patch1D, input_params: &LinearInput, pixel_val
 }
 
 fn set_pixel_values(pixel_value: &mut [u8; 4], original_pixel_value: &[u8; 4], patch: &Patch1D, input_params: &LinearInput) {
-    set_pixel_value(pixel_value, original_pixel_value, patch.average_red(), input_params.channels.red, 0);
-    set_pixel_value(pixel_value, original_pixel_value, patch.average_green(), input_params.channels.green, 1);
-    set_pixel_value(pixel_value, original_pixel_value, patch.average_blue(), input_params.channels.blue, 2);
-    set_pixel_value(pixel_value, original_pixel_value, patch.average_alpha(), input_params.channels.alpha, 3);
+    // set_pixel_value(pixel_value, original_pixel_value, patch.average_red(), input_params.channels.red, 0);
+    // set_pixel_value(pixel_value, original_pixel_value, patch.average_green(), input_params.channels.green, 1);
+    // set_pixel_value(pixel_value, original_pixel_value, patch.average_blue(), input_params.channels.blue, 2);
+    // set_pixel_value(pixel_value, original_pixel_value, patch.average_alpha(), input_params.channels.alpha, 3);
 }
