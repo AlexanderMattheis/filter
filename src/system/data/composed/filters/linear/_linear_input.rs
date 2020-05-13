@@ -1,4 +1,3 @@
-use crate::system::data::composed::filters::linear::box_blur_input::BoxBlurInput;
 use crate::system::data::elementary::channels_input::RgbaChannelsInput;
 use crate::system::defaults::types::border_handling_type::BorderHandlingType;
 

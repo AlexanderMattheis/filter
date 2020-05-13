@@ -25,6 +25,7 @@ pub struct LinearBlendingDefaults;
 pub struct ThresholdDefaults;
 
 // filters
+pub struct LinearFilterDefaults;
 pub struct BoxBlurDefaults;
 
 impl HistogramDefaults {
@@ -145,7 +146,7 @@ impl ThresholdDefaults {
 }
 
 // filters
-impl BoxBlurDefaults {
+impl LinearFilterDefaults {
     pub const BACKGROUND_COLOR: [u8; 4] = [0; 4];
     pub const BORDER_HANDLING: BorderHandlingType = BorderHandlingType::PaddingExtend;
 
@@ -156,7 +157,10 @@ impl BoxBlurDefaults {
         alpha: false
     };
 
-    pub const ITERATIONS: u16 = 3;
     pub const RADIUS_HORIZONTAL: usize = 10;
     pub const RADIUS_VERTICAL: usize = 10;
+}
+
+impl BoxBlurDefaults {
+    pub const ITERATIONS: u16 = 3;
 }

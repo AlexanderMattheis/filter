@@ -1,5 +1,3 @@
-use std::collections::HashMap;
-
 pub struct Kernel1D {
     pub weights: Vec<i32>,
     pub divisor_factor: f64,

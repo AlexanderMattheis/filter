@@ -1,4 +1,4 @@
-use std::collections::{HashMap, LinkedList, VecDeque};
+use std::collections::VecDeque;
 
 use crate::logic::data_structures::kernel::Kernel1D;
 
@@ -118,7 +118,7 @@ fn average(sum: u32, average_factor: f64) -> u8 {
 
 fn weighted_average(values: &VecDeque<u8>, kernel: &Kernel1D) -> u8 {
     let mut weighted_sum = 0;
-    
+
     for i in 0..values.len() {
         weighted_sum += (values[i] as i32) * kernel.weights[i];
     }
