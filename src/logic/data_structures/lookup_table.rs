@@ -1,14 +1,14 @@
 use image::{DynamicImage, GenericImage, GenericImageView, Rgba};
 
-use crate::logic::algorithm_params::{AVERAGE_RGB_VALUE, NUMBER_OF_COLOR_VALUES};
+use crate::logic::algorithm_params::{AVERAGE_RGB_VALUE, NUM_OF_VALUES};
 use crate::system::data::elementary::channels_input::RgbaChannelsInput;
 use crate::system::defaults::messages::errors;
 
 pub struct RgbaLookupTable {
-    pub red_bound: [u8; NUMBER_OF_COLOR_VALUES],
-    pub green_bound: [u8; NUMBER_OF_COLOR_VALUES],
-    pub blue_bound: [u8; NUMBER_OF_COLOR_VALUES],
-    pub alpha_bound: [u8; NUMBER_OF_COLOR_VALUES],
+    pub red_bound: [u8; NUM_OF_VALUES],
+    pub green_bound: [u8; NUM_OF_VALUES],
+    pub blue_bound: [u8; NUM_OF_VALUES],
+    pub alpha_bound: [u8; NUM_OF_VALUES],
 }
 
 impl RgbaLookupTable {
@@ -21,7 +21,7 @@ impl RgbaLookupTable {
         };
     }
 
-    pub fn apply_lookup_table(image: &mut DynamicImage, lookup_table: &[u8; NUMBER_OF_COLOR_VALUES], channels: &RgbaChannelsInput) {
+    pub fn apply_lookup_table(image: &mut DynamicImage, lookup_table: &[u8; NUM_OF_VALUES], channels: &RgbaChannelsInput) {
         let dimensions = image.dimensions();
 
         for v in 0..dimensions.1 {
@@ -49,7 +49,7 @@ impl RgbaLookupTable {
         }
     }
 
-    pub fn apply_2d_lookup_table(image: &mut DynamicImage, ref_image: &DynamicImage, lookup_table: &[[u8; NUMBER_OF_COLOR_VALUES]; NUMBER_OF_COLOR_VALUES], channels: &RgbaChannelsInput) {
+    pub fn apply_2d_lookup_table(image: &mut DynamicImage, ref_image: &DynamicImage, lookup_table: &[[u8; NUM_OF_VALUES]; NUM_OF_VALUES], channels: &RgbaChannelsInput) {
         let image_dimensions = image.dimensions();
         let ref_image_dimensions = ref_image.dimensions();
 
@@ -111,12 +111,12 @@ impl RgbaLookupTable {
         }
     }
 
-    pub fn apply_average_lookup_table(image: &mut DynamicImage, lookup_table: &[u8; NUMBER_OF_COLOR_VALUES]) {
+    pub fn apply_average_lookup_table(image: &mut DynamicImage, lookup_table: &[u8; NUM_OF_VALUES]) {
         apply_lookup_table_weighted(image, lookup_table, AVERAGE_RGB_VALUE, AVERAGE_RGB_VALUE, AVERAGE_RGB_VALUE);
     }
 }
 
-fn apply_lookup_table_weighted(image: &mut DynamicImage, lookup_table: &[u8; NUMBER_OF_COLOR_VALUES],
+fn apply_lookup_table_weighted(image: &mut DynamicImage, lookup_table: &[u8; NUM_OF_VALUES],
                                weight_red: f64, weight_green: f64, weight_blue: f64) {
     let dimensions = image.dimensions();
 

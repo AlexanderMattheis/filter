@@ -108,8 +108,6 @@ fn to_decimal(number: &str, number_base: u32) -> u8 {
 
 fn parse_border_handling(border_handling: &str) -> BorderHandlingType {
     return match border_handling {
-        BorderHandlingTypes::CONSTANT_VALUE => BorderHandlingType::ConstantValue,
-        BorderHandlingTypes::UNPROCESSED => BorderHandlingType::Unprocessed,
         BorderHandlingTypes::PADDING_CONSTANT_VALUE => BorderHandlingType::PaddingConstantValue,
         BorderHandlingTypes::PADDING_EXTEND => BorderHandlingType::PaddingExtend,
         BorderHandlingTypes::PADDING_MIRROR => BorderHandlingType::PaddingMirror,

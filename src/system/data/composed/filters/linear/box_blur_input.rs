@@ -1,6 +1,6 @@
-use crate::system::data::composed::filters::linear::_linear_input::LinearInput;
+use crate::system::data::composed::filters::filter_input::FilterInput;
 
 pub struct BoxBlurInput {
-    pub linear_input: LinearInput,
+    pub filter_input: FilterInput,
     pub iterations: u16,
 }

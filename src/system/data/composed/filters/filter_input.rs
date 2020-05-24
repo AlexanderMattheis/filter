@@ -1,7 +1,7 @@
 use crate::system::data::elementary::channels_input::RgbaChannelsInput;
 use crate::system::defaults::types::border_handling_type::BorderHandlingType;
 
-pub struct LinearInput {
+pub struct FilterInput {
     pub background_color: [u8; 4],
     pub border_handling: BorderHandlingType,
     pub channels: RgbaChannelsInput,

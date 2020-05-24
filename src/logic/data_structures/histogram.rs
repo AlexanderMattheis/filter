@@ -1,42 +1,42 @@
 use image::{DynamicImage, GenericImageView};
 
-use crate::logic::algorithm_params::{LUMINANCE_BLUE, LUMINANCE_GREEN, LUMINANCE_RED, NUMBER_OF_COLOR_VALUES};
+use crate::logic::algorithm_params::{LUMINANCE_BLUE, LUMINANCE_GREEN, LUMINANCE_RED, NUM_OF_VALUES};
 use crate::system::data::elementary::channels_input::RgbaChannelsInput;
 
 pub struct FloatingPointRgbaHistogram {
-    pub red_data: [f64; NUMBER_OF_COLOR_VALUES],
-    pub green_data: [f64; NUMBER_OF_COLOR_VALUES],
-    pub blue_data: [f64; NUMBER_OF_COLOR_VALUES],
-    pub alpha_data: [f64; NUMBER_OF_COLOR_VALUES],
+    pub red_data: [f64; NUM_OF_VALUES],
+    pub green_data: [f64; NUM_OF_VALUES],
+    pub blue_data: [f64; NUM_OF_VALUES],
+    pub alpha_data: [f64; NUM_OF_VALUES],
 }
 
 impl FloatingPointRgbaHistogram {
     pub fn new() -> FloatingPointRgbaHistogram {
         return FloatingPointRgbaHistogram {
-            red_data: [0.0; NUMBER_OF_COLOR_VALUES],
-            green_data: [0.0; NUMBER_OF_COLOR_VALUES],
-            blue_data: [0.0; NUMBER_OF_COLOR_VALUES],
-            alpha_data: [0.0; NUMBER_OF_COLOR_VALUES],
+            red_data: [0.0; NUM_OF_VALUES],
+            green_data: [0.0; NUM_OF_VALUES],
+            blue_data: [0.0; NUM_OF_VALUES],
+            alpha_data: [0.0; NUM_OF_VALUES],
         };
     }
 }
 
 pub struct IntegerRgbaHistogram {
-    pub red_data: [u32; NUMBER_OF_COLOR_VALUES],
-    pub green_data: [u32; NUMBER_OF_COLOR_VALUES],
-    pub blue_data: [u32; NUMBER_OF_COLOR_VALUES],
-    pub alpha_data: [u32; NUMBER_OF_COLOR_VALUES],
-    pub luminance_data: [u32; NUMBER_OF_COLOR_VALUES],
+    pub red_data: [u32; NUM_OF_VALUES],
+    pub green_data: [u32; NUM_OF_VALUES],
+    pub blue_data: [u32; NUM_OF_VALUES],
+    pub alpha_data: [u32; NUM_OF_VALUES],
+    pub luminance_data: [u32; NUM_OF_VALUES],
 }
 
 impl IntegerRgbaHistogram {
     pub fn new() -> IntegerRgbaHistogram {
         return IntegerRgbaHistogram {
-            red_data: [0; NUMBER_OF_COLOR_VALUES],
-            green_data: [0; NUMBER_OF_COLOR_VALUES],
-            blue_data: [0; NUMBER_OF_COLOR_VALUES],
-            alpha_data: [0; NUMBER_OF_COLOR_VALUES],
-            luminance_data: [0; NUMBER_OF_COLOR_VALUES],
+            red_data: [0; NUM_OF_VALUES],
+            green_data: [0; NUM_OF_VALUES],
+            blue_data: [0; NUM_OF_VALUES],
+            alpha_data: [0; NUM_OF_VALUES],
+            luminance_data: [0; NUM_OF_VALUES],
         };
     }
 }
@@ -116,7 +116,7 @@ fn integrate_discrete_root(histograms: &mut IntegerRgbaHistogram) {
     histogram_luminance[0] = f64::sqrt(histograms.luminance_data[0] as f64);
 
     // sum up non-rounded square-roots
-    for i in 1..NUMBER_OF_COLOR_VALUES {
+    for i in 1..NUM_OF_VALUES {
         histogram_red[i] = histogram_red[i - 1] + f64::sqrt(histograms.red_data[i] as f64);
         histogram_green[i] = histogram_green[i - 1] + f64::sqrt(histograms.green_data[i] as f64);
         histogram_blue[i] = histogram_blue[i - 1] + f64::sqrt(histograms.blue_data[i] as f64);
@@ -125,7 +125,7 @@ fn integrate_discrete_root(histograms: &mut IntegerRgbaHistogram) {
     }
 
     // store rounded values
-    for i in 0..NUMBER_OF_COLOR_VALUES {
+    for i in 0..NUM_OF_VALUES {
         histograms.red_data[i] = histogram_red[i].round() as u32;
         histograms.green_data[i] = histogram_green[i].round() as u32;
         histograms.blue_data[i] = histogram_blue[i].round() as u32;
@@ -135,7 +135,7 @@ fn integrate_discrete_root(histograms: &mut IntegerRgbaHistogram) {
 }
 
 fn integrate_discrete(histograms: &mut IntegerRgbaHistogram) {
-    for i in 1..NUMBER_OF_COLOR_VALUES {
+    for i in 1..NUM_OF_VALUES {
         histograms.red_data[i] += histograms.red_data[i - 1];
         histograms.green_data[i] += histograms.green_data[i - 1];
         histograms.blue_data[i] += histograms.blue_data[i - 1];

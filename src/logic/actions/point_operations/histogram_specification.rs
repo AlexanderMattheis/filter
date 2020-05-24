@@ -3,7 +3,7 @@ use image::{DynamicImage, GenericImageView};
 use crate::logic::data_structures::histogram::FloatingPointRgbaHistogram;
 use crate::logic::data_structures::lookup_table::RgbaLookupTable;
 use crate::system::data::composed::point_operations::histogram_specification_input::HistogramSpecificationInput;
-use crate::logic::algorithm_params::NUMBER_OF_COLOR_VALUES;
+use crate::logic::algorithm_params::NUM_OF_VALUES;
 
 pub fn run(image: &mut DynamicImage, ref_image: &DynamicImage, input_params: &HistogramSpecificationInput) {
     let mut image_cdf = FloatingPointRgbaHistogram::new();
@@ -28,7 +28,7 @@ fn compute_cumulative_distributions(image: &DynamicImage, ref_image: &DynamicIma
     make_first_value_relative(image_cdf, img_dimensions);
     make_first_value_relative(ref_image_cdf, ref_img_dimensions);
 
-    for i in 1..NUMBER_OF_COLOR_VALUES {
+    for i in 1..NUM_OF_VALUES {
         sum_up_relative_values(i, image_cdf, img_dimensions);
         sum_up_relative_values(i, ref_image_cdf, ref_img_dimensions);
     }
@@ -119,10 +119,10 @@ fn create_lookup_tables(input_params: &HistogramSpecificationInput, lookup_table
     }
 }
 
-fn create_lookup_table(lookup_table: &mut [u8; NUMBER_OF_COLOR_VALUES],
-                       probability_density: &[f64; NUMBER_OF_COLOR_VALUES], ref_probability_density: &[f64; NUMBER_OF_COLOR_VALUES]) {
-    for i in 0..NUMBER_OF_COLOR_VALUES {
-        for j in 0..NUMBER_OF_COLOR_VALUES {
+fn create_lookup_table(lookup_table: &mut [u8; NUM_OF_VALUES],
+                       probability_density: &[f64; NUM_OF_VALUES], ref_probability_density: &[f64; NUM_OF_VALUES]) {
+    for i in 0..NUM_OF_VALUES {
+        for j in 0..NUM_OF_VALUES {
             if probability_density[i] <= ref_probability_density[j] {
                 lookup_table[i] = j as u8;
                 break;  // to get the first `j` (minimum)

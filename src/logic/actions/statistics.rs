@@ -1,6 +1,6 @@
 use image::{DynamicImage, GenericImageView};
 
-use crate::logic::algorithm_params::{NUMBER_OF_INPUT_CHANNELS, NUMBER_OF_COLOR_VALUES};
+use crate::logic::algorithm_params::{NUMBER_OF_INPUT_CHANNELS, NUM_OF_VALUES};
 use crate::logic::data_structures::histogram;
 use crate::logic::data_structures::histogram::IntegerRgbaHistogram;
 use crate::system::data::composed::statistics_input::StatisticsInput;
@@ -39,7 +39,7 @@ pub fn run(image: &DynamicImage, input_params: &StatisticsInput, output_data: &m
     }
 }
 
-fn compute_statistics(histogram: &[u32; NUMBER_OF_COLOR_VALUES],
+fn compute_statistics(histogram: &[u32; NUM_OF_VALUES],
                       output_data: &mut [StatisticsOutput; NUMBER_OF_INPUT_CHANNELS],
                       channel: ChannelType, count_pixels: f64) {
     let min = get_lowest_pixel_value(histogram);
@@ -64,11 +64,11 @@ fn compute_statistics(histogram: &[u32; NUMBER_OF_COLOR_VALUES],
     }
 }
 
-fn get_lowest_pixel_value(histogram: &[u32; NUMBER_OF_COLOR_VALUES]) -> u8 {
-    return get_first_non_zero(histogram, (0..NUMBER_OF_COLOR_VALUES as u32).collect());
+fn get_lowest_pixel_value(histogram: &[u32; NUM_OF_VALUES]) -> u8 {
+    return get_first_non_zero(histogram, (0..NUM_OF_VALUES as u32).collect());
 }
 
-fn get_first_non_zero(histogram: &[u32; NUMBER_OF_COLOR_VALUES], range: Vec<u32>) -> u8 {
+fn get_first_non_zero(histogram: &[u32; NUM_OF_VALUES], range: Vec<u32>) -> u8 {
     for i in range {
         if histogram[i as usize] > 0 {
             return i as u8;
@@ -78,15 +78,15 @@ fn get_first_non_zero(histogram: &[u32; NUMBER_OF_COLOR_VALUES], range: Vec<u32>
     errors::print_error_and_quit(errors::NOT_EXISTENT_HISTOGRAM, None);
 }
 
-fn get_highest_pixel_value(histogram: &[u32; NUMBER_OF_COLOR_VALUES]) -> u8 {
-    return get_first_non_zero(histogram, (0..NUMBER_OF_COLOR_VALUES as u32).rev().collect());
+fn get_highest_pixel_value(histogram: &[u32; NUM_OF_VALUES]) -> u8 {
+    return get_first_non_zero(histogram, (0..NUM_OF_VALUES as u32).rev().collect());
 }
 
-fn get_distribution_parameters(histogram: &[u32; NUMBER_OF_COLOR_VALUES], num_pixels: f64) -> HistogramDistribution {
+fn get_distribution_parameters(histogram: &[u32; NUM_OF_VALUES], num_pixels: f64) -> HistogramDistribution {
     let mut sum_a = 0;
     let mut sum_b = 0;
 
-    for i in 0..NUMBER_OF_COLOR_VALUES {
+    for i in 0..NUM_OF_VALUES {
         let value = (i as u64) * (histogram[i] as u64);
 
         sum_a += value;
@@ -103,14 +103,14 @@ fn get_distribution_parameters(histogram: &[u32; NUMBER_OF_COLOR_VALUES], num_pi
     };
 }
 
-fn get_median_pixel_value(histogram: &[u32; NUMBER_OF_COLOR_VALUES], num_pixels: f64) -> u8 {
+fn get_median_pixel_value(histogram: &[u32; NUM_OF_VALUES], num_pixels: f64) -> u8 {
     let mut h = histogram.clone();
 
     if (h[0] as f64) >= num_pixels * 0.5 {
         return 0;
     }
 
-    for i in 1..NUMBER_OF_COLOR_VALUES {
+    for i in 1..NUM_OF_VALUES {
         h[i] += h[i - 1];
 
         if (h[i] as f64) >= num_pixels * 0.5 {
@@ -121,10 +121,10 @@ fn get_median_pixel_value(histogram: &[u32; NUMBER_OF_COLOR_VALUES], num_pixels:
     errors::print_error_and_quit(errors::NOT_EXISTENT_MEDIAN, None);
 }
 
-fn get_dynamics(histogram: &[u32; NUMBER_OF_COLOR_VALUES]) -> u16 {
+fn get_dynamics(histogram: &[u32; NUM_OF_VALUES]) -> u16 {
     let mut count: u16 = 0;
 
-    for i in 0..NUMBER_OF_COLOR_VALUES {
+    for i in 0..NUM_OF_VALUES {
         // each bin stands for a pixel value, and pixel values that have occurred are counted
         if histogram[i] > 0 {
             count += 1;

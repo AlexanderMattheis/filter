@@ -25,7 +25,7 @@ pub struct LinearBlendingDefaults;
 pub struct ThresholdDefaults;
 
 // filters
-pub struct LinearFilterDefaults;
+pub struct FilterDefaults;
 pub struct BoxBlurDefaults;
 
 impl HistogramDefaults {
@@ -146,8 +146,8 @@ impl ThresholdDefaults {
 }
 
 // filters
-impl LinearFilterDefaults {
-    pub const BACKGROUND_COLOR: [u8; 4] = [0; 4];
+impl FilterDefaults {
+    pub const BACKGROUND_COLOR: [u8; 4] = [0, 0, 0, 255];
     pub const BORDER_HANDLING: BorderHandlingType = BorderHandlingType::PaddingExtend;
 
     pub const CHANNELS_INPUT: RgbaChannelsInput = RgbaChannelsInput {

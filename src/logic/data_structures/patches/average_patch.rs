@@ -2,7 +2,7 @@ use std::collections::VecDeque;
 
 use crate::logic::data_structures::kernel::Kernel1D;
 
-pub struct Patch1D {
+pub struct AveragePatch1D {
     red: VecDeque<u8>,
     green: VecDeque<u8>,
     blue: VecDeque<u8>,
@@ -16,14 +16,14 @@ pub struct Patch1D {
     kernel: Kernel1D,
 
     size: usize,
-    average_factor: f64,
+    average_factor: f64
 }
 
-impl Patch1D {
-    pub fn new(radius: usize, kernel: Option<Kernel1D>) -> Patch1D {
+impl AveragePatch1D {
+    pub fn new(radius: usize, kernel: Option<Kernel1D>) -> AveragePatch1D {
         let length = 2 * radius + 1;
 
-        return Patch1D {
+        return AveragePatch1D {
             red: VecDeque::new(),
             green: VecDeque::new(),
             blue: VecDeque::new(),
@@ -109,7 +109,7 @@ fn insert_value_at_back(queue: &mut VecDeque<u8>, sum: &mut u32, value: u8, maxi
     }
 
     queue.push_back(value);
-    *sum = *sum + (value as u32);
+    *sum = *sum + (value as u32);  // could be enhanced by using a lookup table with respect to the size of the patch
 }
 
 fn average(sum: u32, average_factor: f64) -> u8 {
@@ -117,10 +117,10 @@ fn average(sum: u32, average_factor: f64) -> u8 {
 }
 
 fn weighted_average(values: &VecDeque<u8>, kernel: &Kernel1D) -> u8 {
-    let mut weighted_sum = 0;
+    let mut weighted_sum = 0.0;
 
     for i in 0..values.len() {
-        weighted_sum += (values[i] as i32) * kernel.weights[i];
+        weighted_sum += (values[i] as f64) * kernel.weights[i];
     }
 
     return ((weighted_sum as f64) * kernel.divisor_factor).round() as u8;

@@ -1,6 +1,6 @@
 use image::{DynamicImage, GenericImageView};
 
-use crate::logic::algorithm_params::NUMBER_OF_COLOR_VALUES;
+use crate::logic::algorithm_params::NUM_OF_VALUES;
 use crate::logic::data_structures::bounds::{PixelBound, RgbaPixelBounds};
 use crate::logic::data_structures::histogram;
 use crate::logic::data_structures::histogram::IntegerRgbaHistogram;
@@ -24,7 +24,7 @@ pub fn run(image: &mut DynamicImage, input_params: &AutoContrastInput) {
     } else {
         let average_bound = compute_average_bound(&rgba_bounds, &input_params.channels);
 
-        let mut lookup_table: [u8; NUMBER_OF_COLOR_VALUES] = [0; NUMBER_OF_COLOR_VALUES];
+        let mut lookup_table: [u8; NUM_OF_VALUES] = [0; NUM_OF_VALUES];
         create_lookup_table(&mut lookup_table, &average_bound);
         RgbaLookupTable::apply_lookup_table(image, &lookup_table, &input_params.channels);
     }
@@ -42,15 +42,15 @@ fn compute_bounds(statistics_histogram_output: &mut IntegerRgbaHistogram, rgba_b
     rgba_bounds.alpha_bound = get_bounds(&statistics_histogram_output.alpha_data, pixels_bound_lower, pixels_bound_higher);
 }
 
-fn get_bounds(histogram_data: &[u32; NUMBER_OF_COLOR_VALUES], pixels_bound_lower: u32, pixels_bound_higher: u32) -> PixelBound {
+fn get_bounds(histogram_data: &[u32; NUM_OF_VALUES], pixels_bound_lower: u32, pixels_bound_higher: u32) -> PixelBound {
     let lower = get_lower_bound(histogram_data, pixels_bound_lower);
     let higher = get_higher_bound(histogram_data, pixels_bound_higher);
 
     return PixelBound { lower, higher };
 }
 
-fn get_lower_bound(histogram_data: &[u32; NUMBER_OF_COLOR_VALUES], pixels_bound_lower: u32) -> u8 {
-    for i in 0..NUMBER_OF_COLOR_VALUES {
+fn get_lower_bound(histogram_data: &[u32; NUM_OF_VALUES], pixels_bound_lower: u32) -> u8 {
+    for i in 0..NUM_OF_VALUES {
         if histogram_data[i] >= pixels_bound_lower {
             return i as u8;
         }
@@ -59,8 +59,8 @@ fn get_lower_bound(histogram_data: &[u32; NUMBER_OF_COLOR_VALUES], pixels_bound_
     return 255;
 }
 
-fn get_higher_bound(histogram_data: &[u32; NUMBER_OF_COLOR_VALUES], pixels_bound_higher: u32) -> u8 {
-    for i in (0..NUMBER_OF_COLOR_VALUES).rev() {
+fn get_higher_bound(histogram_data: &[u32; NUM_OF_VALUES], pixels_bound_higher: u32) -> u8 {
+    for i in (0..NUM_OF_VALUES).rev() {
         if histogram_data[i] <= pixels_bound_higher {
             return i as u8;
         }
@@ -111,15 +111,15 @@ fn create_lookup_tables(lookup_tables: &mut RgbaLookupTable, rgba_bounds: &RgbaP
     create_lookup_table(&mut lookup_tables.alpha_bound, &rgba_bounds.alpha_bound);
 }
 
-fn create_lookup_table(lookup_table: &mut [u8; NUMBER_OF_COLOR_VALUES], pixel_bound: &PixelBound) {
-    let maximum_value = (NUMBER_OF_COLOR_VALUES - 1) as u8;
+fn create_lookup_table(lookup_table: &mut [u8; NUM_OF_VALUES], pixel_bound: &PixelBound) {
+    let maximum_value = (NUM_OF_VALUES - 1) as u8;
 
     let low = pixel_bound.lower as usize;
     let high = pixel_bound.higher as usize;
 
     let contrast_factor = maximum_value as f64 / (high - low) as f64;
 
-    for i in 0..NUMBER_OF_COLOR_VALUES {
+    for i in 0..NUM_OF_VALUES {
         if i <= low {
             lookup_table[i] = 0;
         } else if low < i && i < high {

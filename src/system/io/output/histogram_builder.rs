@@ -2,7 +2,7 @@ use plotly::{Bar, Layout, NamedColor, Plot};
 use plotly::common::{Marker, Title};
 use plotly::layout::Axis;
 
-use crate::logic::algorithm_params::NUMBER_OF_COLOR_VALUES;
+use crate::logic::algorithm_params::NUM_OF_VALUES;
 use crate::system::basic::strings;
 use crate::system::data::composed::histogram_input::HistogramInput;
 use crate::system::data::composed::histogram_output::HistogramOutput;
@@ -71,9 +71,9 @@ fn compute_maximum(input_params: &HistogramInput, histogram_output: &HistogramOu
     return maximum;
 }
 
-fn create_and_save_histogram(histogram_data: &[f64; NUMBER_OF_COLOR_VALUES], y_range_max: f64, logarithmic: bool, color: &str, output_filepath_prefix: &String) {
+fn create_and_save_histogram(histogram_data: &[f64; NUM_OF_VALUES], y_range_max: f64, logarithmic: bool, color: &str, output_filepath_prefix: &String) {
     let trace = Bar::new(
-        (0..NUMBER_OF_COLOR_VALUES).collect(),
+        (0..NUM_OF_VALUES).collect(),
         histogram_data.to_vec(),
     )
         .name("Frequency of Pixel Values")

@@ -5,8 +5,6 @@ pub struct ChannelTypes;
 pub const HEXADECIMAL_CHARACTERS: &'static str = "0123456789ABCDEFabcdef";
 
 impl BorderHandlingTypes {
-    pub const CONSTANT_VALUE: &'static str = "constant-value";
-    pub const UNPROCESSED: &'static str = "unprocessed";
     pub const PADDING_CONSTANT_VALUE: &'static str = "padding-constant-value";
     pub const PADDING_EXTEND: &'static str = "padding-extend";
     pub const PADDING_MIRROR: &'static str = "padding-mirror";

@@ -35,7 +35,7 @@ pub fn execute(matches: &ArgMatches) {
         actions::HISTOGRAM => create_histogram(&image, &arguments.params, &output_file_path_prefix),
         actions::STATISTICS => create_statistics(&image, &arguments.params, &output_file_path_prefix),
 
-        // point operations
+        // POINT OPERATIONS
         actions::AUTO_CONTRAST => point_operations::compute_auto_contrast(&mut image, &arguments.params, &output_file_name_path),
         actions::BRIGHTNESS => point_operations::compute_brightness(&mut image, &arguments.params, &output_file_name_path),
         actions::CONTRAST => point_operations::compute_contrast(&mut image, &arguments.params, &output_file_name_path),
@@ -58,9 +58,13 @@ pub fn execute(matches: &ArgMatches) {
         }
         actions::THRESHOLD => point_operations::compute_threshold(&mut image, &arguments.params, &output_file_name_path),
 
-        // filters
+        // FILTERS
+        // linear
         actions::BOX_BLUR => filters::compute_box_blur(&image, &arguments.params, &output_file_name_path),
         actions::GAUSSIAN_BLUR => filters::compute_gaussian_blur(&image, &arguments.params, &output_file_name_path),
+
+        // non-linear
+        actions::MAXIMUM_FILTER => filters::compute_maximum_filter(&image, &arguments.params, &output_file_name_path),
 
         // _
         _ => errors::print_error_and_quit(errors::NOT_VALID_FILTER, Some(arguments.filter.as_str())),

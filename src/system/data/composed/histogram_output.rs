@@ -1,21 +1,21 @@
-use crate::logic::algorithm_params::NUMBER_OF_COLOR_VALUES;
+use crate::logic::algorithm_params::NUM_OF_VALUES;
 
 pub struct HistogramOutput {
-    pub red_data: [f64; NUMBER_OF_COLOR_VALUES],
-    pub green_data: [f64; NUMBER_OF_COLOR_VALUES],
-    pub blue_data: [f64; NUMBER_OF_COLOR_VALUES],
-    pub alpha_data: [f64; NUMBER_OF_COLOR_VALUES],
-    pub luminance_data: [f64; NUMBER_OF_COLOR_VALUES],
+    pub red_data: [f64; NUM_OF_VALUES],
+    pub green_data: [f64; NUM_OF_VALUES],
+    pub blue_data: [f64; NUM_OF_VALUES],
+    pub alpha_data: [f64; NUM_OF_VALUES],
+    pub luminance_data: [f64; NUM_OF_VALUES],
 }
 
 impl HistogramOutput {
     pub fn new() -> HistogramOutput {
         return HistogramOutput {
-            red_data: [0.0; NUMBER_OF_COLOR_VALUES],
-            green_data: [0.0; NUMBER_OF_COLOR_VALUES],
-            blue_data: [0.0; NUMBER_OF_COLOR_VALUES],
-            alpha_data: [0.0; NUMBER_OF_COLOR_VALUES],
-            luminance_data: [0.0; NUMBER_OF_COLOR_VALUES],
+            red_data: [0.0; NUM_OF_VALUES],
+            green_data: [0.0; NUM_OF_VALUES],
+            blue_data: [0.0; NUM_OF_VALUES],
+            alpha_data: [0.0; NUM_OF_VALUES],
+            luminance_data: [0.0; NUM_OF_VALUES],
         };
     }
 }
