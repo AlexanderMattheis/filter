@@ -65,6 +65,8 @@ pub fn execute(matches: &ArgMatches) {
 
         // non-linear
         actions::MAXIMUM_FILTER => filters::compute_maximum_filter(&image, &arguments.params, &output_file_name_path),
+        actions::MEDIAN_FILTER => filters::compute_median_filter(&image, &arguments.params, &output_file_name_path),
+        actions::MINIMUM_FILTER => filters::compute_minimum_filter(&image, &arguments.params, &output_file_name_path),
 
         // _
         _ => errors::print_error_and_quit(errors::NOT_VALID_FILTER, Some(arguments.filter.as_str())),

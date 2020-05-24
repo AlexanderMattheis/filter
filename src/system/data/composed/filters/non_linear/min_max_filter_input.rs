@@ -1,5 +1,5 @@
 use crate::system::data::composed::filters::filter_input::FilterInput;
 
-pub struct MaximumFilterInput {
+pub struct MinMaxFilterInput {
     pub filter_input: FilterInput
 }

@@ -1,2 +1,2 @@
 pub mod average_patch;
-pub mod maximum_patch;
+pub mod min_max_patch;

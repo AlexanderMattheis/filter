@@ -19,3 +19,5 @@ pub const GAUSSIAN_BLUR: &'static str = "gaussian-blur";
 
 // non-linear
 pub const MAXIMUM_FILTER: &'static str = "maximum-filter";
+pub const MEDIAN_FILTER: &'static str = "median-filter";
+pub const MINIMUM_FILTER: &'static str = "minimum-filter";
