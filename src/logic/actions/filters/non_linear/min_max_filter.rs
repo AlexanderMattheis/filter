@@ -1,27 +1,22 @@
 use image::{DynamicImage, GenericImage, GenericImageView, Rgba};
 
 use crate::logic::actions::filters::border_handling::BorderHandling;
+use crate::logic::actions::filters::non_linear::_non_linear_filter;
+use crate::logic::actions::filters::non_linear::_non_linear_filter::LookupTable;
 use crate::logic::algorithm_params::{NUM_OF_VALUES, NUM_OF_VALUES_SUM};
 use crate::logic::data_structures::patches::min_max_patch::MinMaxPatch1D;
 use crate::system::data::composed::filters::filter_input::FilterInput;
 use crate::system::data::composed::filters::non_linear::min_max_filter_input::MinMaxFilterInput;
 use crate::system::data::elementary::channels_input::RgbaChannelsInput;
 
-pub type LookupTable = [[u16; NUM_OF_VALUES]; NUM_OF_VALUES_SUM];
-
+/// Hint: Same problem as with the Median Filter with multiple dimensions.
+/// As an approximation for multidimensional ranking a one dimensional ranking parameter (="sum") is used,
+/// since practically there is no big visual difference.
 pub fn run(image: &DynamicImage, empty_image: &mut DynamicImage, input_params: &MinMaxFilterInput, compute_minima: bool) {
     let mut lookup_table: LookupTable = [[0; NUM_OF_VALUES]; NUM_OF_VALUES_SUM];
 
-    create_lookup_table(&mut lookup_table);
+    _non_linear_filter::create_lookup_table(&mut lookup_table);
     compute_extrema(image, empty_image, &lookup_table, &input_params.filter_input, compute_minima);
-}
-
-fn create_lookup_table(lookup_table: &mut LookupTable) {
-    for i in 0..NUM_OF_VALUES_SUM {
-        for j in 0..NUM_OF_VALUES {
-            lookup_table[i][j] = (i + j) as u16;
-        }
-    }
 }
 
 fn compute_extrema(image: &DynamicImage, empty_image: &mut DynamicImage, lookup_table: &LookupTable, filter_input: &FilterInput, compute_minima: bool) {
@@ -36,7 +31,7 @@ fn compute_extrema(image: &DynamicImage, empty_image: &mut DynamicImage, lookup_
             fill_patch(image, &border_handling, &(u, v), &dimensions,
                        &mut min_max_patch, &lookup_table, &filter_input, compute_minima);
 
-            empty_image.put_pixel(u as u32, v as u32, Rgba { 0: min_max_patch.get_max().0 });
+            empty_image.put_pixel(u as u32, v as u32, Rgba { 0: min_max_patch.get_extrema().0 });
         }
         min_max_patch.clear();  // in a new line there are new values
     }
@@ -47,14 +42,14 @@ fn fill_patch(image: &DynamicImage, border_handling: &BorderHandling, position: 
     let radius_horizontal = filter_input.radius_horizontal as i32;
 
     if position.0 == 0 {
-        init_maximum_patch(image, &border_handling, &position, &dimensions, min_max_patch, lookup_table, filter_input, compute_minima);
+        init_min_max_patch(image, &border_handling, &position, &dimensions, min_max_patch, lookup_table, filter_input, compute_minima);
     } else {
         min_max_patch.insert(&get_vertical_extrema(
             image, border_handling, radius_horizontal, position, dimensions, lookup_table, filter_input, compute_minima));
     }
 }
 
-fn init_maximum_patch(image: &DynamicImage, border_handling: &BorderHandling,
+fn init_min_max_patch(image: &DynamicImage, border_handling: &BorderHandling,
                       position: &(i32, i32), dimensions: &(i32, i32), min_max_patch: &mut MinMaxPatch1D,
                       lookup_table: &LookupTable, filter_params: &FilterInput, compute_minima: bool) {
     let horizontal = filter_params.radius_horizontal as i32;
@@ -112,5 +107,5 @@ fn get_sum(pixel_value: &[u8; 4], channels: &RgbaChannelsInput, lookup_table: &L
         sum = lookup_table[sum as usize][pixel_value[3] as usize];
     }
 
-    return sum as u16;
+    return sum;
 }

@@ -37,7 +37,10 @@ fn blur_horizontally(image: &DynamicImage, empty_image: &mut DynamicImage, input
 fn compute_gaussian_kernel(radius: i32) -> Kernel1D {
     let mut kernel: Vec<f64> = Vec::new();
     let mut weights_sum = 0.0;
-    let exponent_factor = -1.0 / (2.0 * (radius * radius) as f64);
+
+    // see discussion https://stackoverflow.com/questions/17841098/gaussian-blur-standard-deviation-radius-and-kernel-size
+    let sigma = radius as f64 / 3.0;
+    let exponent_factor = -1.0 / (2.0 * (sigma * sigma) as f64);
 
     for x in -radius..=radius {
         let weight;
@@ -47,7 +50,7 @@ fn compute_gaussian_kernel(radius: i32) -> Kernel1D {
         } else {
             weight = kernel[(radius - x) as usize];
         }
-
+        
         kernel.push(weight);
         weights_sum += weight;
     }

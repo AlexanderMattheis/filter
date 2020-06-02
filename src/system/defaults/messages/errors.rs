@@ -1,11 +1,8 @@
+//! The messages here should give an answer on the question "What is the error?".
+//! They shouldn't answer on the question "What to do to solve the error?".
+
 use std::process;
-
 use crate::system::defaults::messages::infos;
-
-/*
-The messages here should give an answer on the question "What is the error?".
-They shouldn't answer on the question "What to do to solve the error?".
-*/
 
 // failed
 pub const FAILED_CREATING_FILE: &'static str = "Failed creating the file!";

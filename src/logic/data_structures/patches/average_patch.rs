@@ -16,7 +16,7 @@ pub struct AveragePatch1D {
     kernel: Kernel1D,
 
     size: usize,
-    average_factor: f64
+    average_factor: f64,
 }
 
 impl AveragePatch1D {
@@ -24,10 +24,10 @@ impl AveragePatch1D {
         let length = 2 * radius + 1;
 
         return AveragePatch1D {
-            red: VecDeque::new(),
-            green: VecDeque::new(),
-            blue: VecDeque::new(),
-            alpha: VecDeque::new(),
+            red: VecDeque::with_capacity(length),
+            green: VecDeque::with_capacity(length),
+            blue: VecDeque::with_capacity(length),
+            alpha: VecDeque::with_capacity(length),
 
             sum_red: 0,
             sum_green: 0,

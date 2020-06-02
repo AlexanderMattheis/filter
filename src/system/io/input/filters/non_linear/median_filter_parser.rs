@@ -1,5 +1,4 @@
 use crate::system::data::composed::filters::filter_input::FilterInput;
-use crate::system::data::composed::filters::non_linear::maximum_filter_input::MinMaxFilterInput;
 use crate::system::data::composed::filters::non_linear::median_filter_input::MedianFilterInput;
 use crate::system::data::elementary::input::Input;
 use crate::system::io::input::_basic_parser;

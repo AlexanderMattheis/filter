@@ -6,9 +6,8 @@ use crate::logic::data_structures::patches::average_patch::AveragePatch1D;
 use crate::system::data::composed::filters::filter_input::FilterInput;
 use crate::system::data::composed::filters::linear::box_blur_input::BoxBlurInput;
 
-/*
-Hint: Could be optimized by about 20% if not the Patch1D data structure but only indices are used to read out a certain pixel value.
-*/
+/// # Hint
+/// Could be optimized by about 20% if not the Patch1D data structure but only indices are used to read out a certain pixel value.
 pub fn run(image: &DynamicImage, temp_image_1: &mut DynamicImage, temp_image_2: &mut DynamicImage, input_params: &BoxBlurInput) {
     let border_handling = BorderHandling::new(&input_params.filter_input.border_handling);
 

@@ -21,7 +21,7 @@ impl MinMaxPatch1D {
         let default_value = if compute_minima { NUM_OF_VALUES_SUM as u16 } else { 0 };
 
         return MinMaxPatch1D {
-            rgba: VecDeque::new(),
+            rgba: VecDeque::with_capacity(length),
 
             most_extreme: ([0; 4], default_value),
             second_extreme: ([0; 4], default_value),
@@ -80,7 +80,7 @@ impl MinMaxPatch1D {
         self.second_extreme_index = 0;
     }
 
-    pub fn get_max(&mut self) -> ([u8; 4], u16) {
+    pub fn get_extrema(&mut self) -> ([u8; 4], u16) {
         return self.most_extreme;
     }
 }
