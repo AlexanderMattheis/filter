@@ -5,13 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee39ad96-1580-4219-b6be-5b7b87080dc6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/logic/actions/filters/non_linear/median_rgba_filter.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/data_structures/patches/median_stack_patch.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/actions/filters/non_linear/median_filter.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/actions/filters/non_linear/median_grayscale_filter.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/actions/filters/linear/box_blur.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/actions/filters/linear/box_blur.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/actions/filters/linear/gaussian_blur.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/actions/filters/linear/gaussian_blur.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/actions/filters/non_linear/_non_linear_filter.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/actions/filters/non_linear/_non_linear_filter.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/actions/filters/non_linear/median_grayscale_filter.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/actions/filters/non_linear/median_grayscale_filter.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/logic/actions/filters/non_linear/min_max_filter.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/actions/filters/non_linear/min_max_filter.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/logic/actions/filters/non_linear/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/actions/filters/non_linear/mod.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/data_structures/patches/median_patch.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/data_structures/patches/median_grayscale_patch.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/data_structures/patches/median_grayscale_patch.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/data_structures/patches/median_histogram_patch.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/data_structures/patches/min_max_patch.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/data_structures/patches/min_max_patch.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/logic/data_structures/patches/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/data_structures/patches/mod.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/system/defaults/cli/actions_params_defaults.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/defaults/cli/actions_params_defaults.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/system/executors/filters.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/executors/filters.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -44,7 +49,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/system/data/composed" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/logic/actions/filters/non_linear" />
     <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
     <property name="org.rust.hideDetachedFileNotifications/home/alex/Repositories/filter/src/logic/filters/linear/box.rs" value="true" />
     <property name="org.rust.hideDetachedFileNotifications/home/alex/Repositories/filter/src/logic/histogram.rs" value="true" />
@@ -60,16 +65,17 @@
     <property name="settings.editor.selected.configurable" value="language.rust.cargo" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/system/data/composed" />
-      <recent name="$PROJECT_DIR$/src/system/io" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/logic/data_structures/patches" />
       <recent name="$PROJECT_DIR$/src/system/data/composed/filters/" />
       <recent name="$PROJECT_DIR$/src/system/io/input/filters" />
       <recent name="$PROJECT_DIR$/src/logic" />
       <recent name="$PROJECT_DIR$/src/system/defaults/types" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/logic/actions/filters/non_linear" />
+      <recent name="$PROJECT_DIR$/src/system/data/composed" />
+      <recent name="$PROJECT_DIR$/src/system/io" />
     </key>
   </component>
   <component name="RunManager" selected="Cargo Command.Run Release-Build">
@@ -90,7 +96,7 @@
     </configuration>
     <configuration name="Run Release-Build" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
       <option name="channel" value="DEFAULT" />
-      <option name="command" value="run  --release --package image-manipulation --bin image-manipulation -- --input &quot;$USER_HOME$/Pictures/Alex.jpg&quot;  --action &quot;median-filter&quot; --params &quot;&quot; --output &quot;$USER_HOME$/&quot;" />
+      <option name="command" value="run  --release --package image-manipulation --bin image-manipulation -- --input &quot;$USER_HOME$/Pictures/cballs.png&quot;  --action &quot;median-filter&quot; --params &quot;&quot; --output &quot;$USER_HOME$/&quot;" />
       <option name="allFeatures" value="false" />
       <option name="nocapture" value="false" />
       <option name="emulateTerminal" value="false" />
@@ -179,10 +185,10 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="0" y="183" width="802" height="671" key="#Project_Structure/0.0.1600.860@0.0.1600.860" timestamp="1584187088106" />
-    <state x="0" y="100" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591179645450">
+    <state x="0" y="100" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591270998783">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="0" y="100" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860@0.0.1600.860" timestamp="1591179645450" />
+    <state x="0" y="100" width="1590" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860@0.0.1600.860" timestamp="1591270998783" />
     <state x="515" y="236" width="561" height="382" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1587021143267">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -199,22 +205,22 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="576" y="174" width="440" height="505" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1586766529416" />
-    <state width="1558" height="238" key="GridCell.Tab.0.bottom" timestamp="1591179116755">
+    <state width="1558" height="231" key="GridCell.Tab.0.bottom" timestamp="1591271521211">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="238" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1591179116755" />
-    <state width="1558" height="238" key="GridCell.Tab.0.center" timestamp="1591179116755">
+    <state width="1558" height="231" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1591271521211" />
+    <state width="1558" height="231" key="GridCell.Tab.0.center" timestamp="1591271521211">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="238" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1591179116755" />
-    <state width="1558" height="238" key="GridCell.Tab.0.left" timestamp="1591179116755">
+    <state width="1558" height="231" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1591271521211" />
+    <state width="1558" height="231" key="GridCell.Tab.0.left" timestamp="1591271521211">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="238" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1591179116755" />
-    <state width="1558" height="238" key="GridCell.Tab.0.right" timestamp="1591179116755">
+    <state width="1558" height="231" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1591271521211" />
+    <state width="1558" height="231" key="GridCell.Tab.0.right" timestamp="1591271521211">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="238" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1591179116755" />
+    <state width="1558" height="231" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1591271521211" />
     <state x="304" y="15" width="1026" height="839" key="SettingsEditor" timestamp="1590997614614">
       <screen x="0" y="0" width="1600" height="860" />
     </state>

@@ -11,7 +11,6 @@ pub struct MinMaxPatch1D {
     second_extreme_index: isize,
 
     compute_minima: bool,
-
     size: usize,
 }
 
@@ -30,7 +29,6 @@ impl MinMaxPatch1D {
             second_extreme_index: 0,
 
             compute_minima,
-
             size: length,
         };
     }

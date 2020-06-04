@@ -61,7 +61,7 @@ fn compute_gaussian_kernel(radius: i32) -> Kernel1D {
 fn set_pixel_values(pixel_value: &mut [u8; 4], original_pixel_value: &[u8; 4], patch: &AveragePatch1D, input_params: &FilterInput) {
     let new_value_red = if input_params.channels.red { patch.weighted_average_red() } else { original_pixel_value[0] };
     let new_value_green = if input_params.channels.green { patch.weighted_average_green() } else { original_pixel_value[1] };
-    let new_value_blue = if input_params.channels.green { patch.weighted_average_blue() } else { original_pixel_value[2] };
+    let new_value_blue = if input_params.channels.blue { patch.weighted_average_blue() } else { original_pixel_value[2] };
     let new_value_alpha = if input_params.channels.alpha { patch.weighted_average_alpha() } else { original_pixel_value[3] };
 
     pixel_value[0] = new_value_red;

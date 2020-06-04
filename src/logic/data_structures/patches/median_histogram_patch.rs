@@ -38,13 +38,13 @@ impl MedianHistogramPatch {
         self.histogram[new_value as usize] += 1;
     }
 
-    pub fn add_column(&mut self, values: [u32; NUM_OF_VALUES]) {
+    pub fn add_column(&mut self, values: &[u32; NUM_OF_VALUES]) {
         for i in 0..values.len() {
             self.histogram[i] += values[i];
         }
     }
 
-    pub fn replace_column(&mut self, old_values: [u32; NUM_OF_VALUES], new_values: [u32; NUM_OF_VALUES]) {
+    pub fn replace_column(&mut self, old_values: &[u32; NUM_OF_VALUES], new_values: &[u32; NUM_OF_VALUES]) {
         for i in 0..new_values.len() {
             self.histogram[i] -= old_values[i];
             self.histogram[i] += new_values[i];

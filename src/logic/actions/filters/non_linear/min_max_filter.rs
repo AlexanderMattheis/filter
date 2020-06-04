@@ -11,7 +11,7 @@ use crate::system::data::elementary::channels_input::RgbaChannelsInput;
 
 /// Hint: Same problem as with the Median Filter with multiple dimensions.
 /// As an approximation for multidimensional ranking a one dimensional ranking parameter (="sum") is used,
-/// since practically there is no big visual difference.
+/// since practically there was no big visual difference.
 pub fn run(image: &DynamicImage, empty_image: &mut DynamicImage, input_params: &MinMaxFilterInput, compute_minima: bool) {
     let mut lookup_table: LookupTable = [[0; NUM_OF_VALUES]; NUM_OF_VALUES_SUM];
 
@@ -68,14 +68,7 @@ fn get_vertical_extrema(image: &DynamicImage, border_handling: &BorderHandling, 
     let mut extrema = ([0; 4], if compute_minima { NUM_OF_VALUES_SUM as u16 } else { 0 });
 
     for i in -radius_vertical..=radius_vertical {
-        let pixel_value;
-
-        if position.0 + index < 0 || position.0 + index >= dimensions.0 || position.1 + i < 0 || position.1 + i >= dimensions.1 {
-            pixel_value = (border_handling.get_pixel)(image, position.0 + index, position.1 + i, &filter_params.background_color);
-        } else {
-            pixel_value = image.get_pixel((position.0 + index) as u32, (position.1 + i) as u32).0;
-        }
-
+        let pixel_value = _non_linear_filter::get_pixel_value(image, border_handling, i, index, position, dimensions, filter_params);
         let pixel_value_sum = get_sum(&pixel_value, &filter_params.channels, lookup_table);
 
         if compute_minima && pixel_value_sum < extrema.1 {
